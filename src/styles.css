@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+    --main-light-color:#B2B061:
+    --main-dark-color:#6E7930;
+    --main-darker-color:#789B59;
+    --text-color:#000;
+}
+html{
+    font-size:16px;
+}
+
+.input-font-size{
+    font-size: 1rem;
+}
+.question-font-size{
+    font-size:1.125rem;
+}
+.card-font-size{
+    font-size: 1.25rem;
+}
