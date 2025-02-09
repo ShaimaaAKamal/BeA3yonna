@@ -1,0 +1,16 @@
+button{
+    padding:1rem 1.2rem;
+    font-size:1rem;
+    font-weight: bold;
+    border:none;
+}
+button:disabled{
+    background-color: #E7E7EB !important; 
+    color:gray !important;
+}
+button:hover{
+    background-color: var(--main-light-color);
+}
+button{
+    background-color: var(--main-darker-color);
+}
