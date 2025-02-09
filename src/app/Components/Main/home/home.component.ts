@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-
+import { LanguageService } from '../../../Services/language.service';
+import { Language } from '../../../Interfaces/language';
+import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
-
+export class HomeComponent implements OnInit {
+ languages:Language[]=[]
+ disabled:boolean=true;
+ constructor(private __LanguageService:LanguageService){}
+ ngOnInit(): void {
+  this.__LanguageService.getLanguages().subscribe({
+    next:(data)=> {this.languages=data;} })
+ }
 }
