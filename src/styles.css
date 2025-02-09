@@ -1,13 +1,22 @@
+@import "../node_modules/@fontsource/poppins/index.css";
+
 :root{
-    --main-light-color:#B2B061:
-    --main-dark-color:#6E7930;
     --main-darker-color:#789B59;
+    --main-dark-color:#B2B061;
+    --main-light-color:#F4FFC3;
     --text-color:#000;
 }
 html{
     font-size:16px;
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav-font-size{
+    font-size:.875rem;
+}
 .input-font-size{
     font-size: 1rem;
 }
@@ -17,3 +26,43 @@ html{
 .card-font-size{
     font-size: 1.25rem;
 }
+
+.bg-green-light{
+    background-color: var(--main-light-color);
+}
+.bg-green-dark{
+    background-color: var(--main-dark-color);
+}
+.bg-green-darker{
+    background-color: var(--main-darker-color);
+}
+
+.bg-white{
+    background-color: #fff;
+}
+
+.select2-container {
+  width:100% !important;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.select2-container .select2-selection--single {
+    padding-left:10px;
+    padding-right:10px;
+    height:40px;
+}
+.select2-container .select2-selection--single .select2-selection__rendered{
+    padding-top:5px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top:5px;
+    right:10px;
+}
+.select2-results__option {
+    padding-left:10px;
+}
+option{
+    font-size:1rem;
+}
+
