@@ -1,7 +1,7 @@
 button{
     padding:1rem 1.2rem;
     font-size:1rem;
-    font-weight: bold;
+    font-weight: 500;
     border:none;
 }
 button:disabled{
@@ -10,7 +10,9 @@ button:disabled{
 }
 button:hover{
     background-color: var(--main-light-color);
+   color:var(--main-darker-color) !important ;
 }
 button{
     background-color: var(--main-darker-color);
+     color:var(--main-light-color) !important ;
 }

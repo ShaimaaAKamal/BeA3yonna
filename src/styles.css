@@ -2,7 +2,7 @@
 
 :root{
     --main-darker-color:#789B59;
-    --main-dark-color:#B2B061;
+    --main-dark-color:#b2b161cb;
     --main-light-color:#F4FFC3;
     --text-color:#000;
 }
@@ -66,3 +66,10 @@ option{
     font-size:1rem;
 }
 
+/* localization Style */
+
+html[dir='ltr'] .btnArrow{
+    transform: rotate(0deg);}
+
+html[dir='rtl'] .btnArrow{
+    transform: rotate(180deg);}
