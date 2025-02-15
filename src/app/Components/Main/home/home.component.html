@@ -3,18 +3,18 @@
     <div class="container-fluid h-100">
         <div class="row h-100">
             <div class="col-md-8 col-lg-6 col-xxl-5 rounded bg-white px-4 py-5 align-self-center">
-                <h4 class="mb-5">Please Choose your Language</h4>
+                <h4 class="mb-5">{{ 'Please Choose your Language' | translate }}</h4>
                <div class="pt-5">
                    <div class="py-5">
-                        <label for="language" class="mb-2 input-font-size">Language</label>
+                        <label for="language" class="mb-2 input-font-size">{{'Language' | translate}}</label>
                         <select class="form-select form-select-lg" appSelect2 aria-label="Select Language" id="language" (valueChange)="onLanguageChoose($event)">
-                            <option selected>Choose a Language</option>
-                            <option value="{{language.code}}" *ngFor="let language of languages$ | async">{{language.name}}</option>
+                            <option selected >{{ChooseLanguage | translate}}</option>
+                            <option value="{{language.code}}" *ngFor="let language of languages$ | async">{{language.name | translate}}</option>
                         </select>
                    </div>
                </div>
                <!-- <div class="pt-5 mt-5"> -->
-                <app-button-with-icon btnAction="Choose Country" [disabled]="disabled"></app-button-with-icon>
+                <app-button-with-icon btnAction="{{'Choose Country' | translate}}" [disabled]="disabled" (click)="navigateToChooseFlag()"></app-button-with-icon>
                <!-- </div> -->
              </div>
         </div>

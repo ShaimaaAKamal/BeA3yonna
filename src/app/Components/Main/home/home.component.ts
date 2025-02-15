@@ -1,19 +1,44 @@
-import { LanguageService } from '../../../Services/language.service';
+import { LanguageService } from '../../../Services/language/language.service';
 import { Language } from '../../../Interfaces/language';
-import { Component, OnInit } from '@angular/core';
+import {  Component } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { StyleService } from '../../../Services/style/style.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: false,
-  
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
- languages:Language[]=[]
+export class HomeComponent{
+ languages:Language[]=[];
  disabled:boolean=true;
- constructor(private __LanguageService:LanguageService){}
- ngOnInit(): void {
-  this.__LanguageService.getLanguages().subscribe({
-    next:(data)=> {this.languages=data;} })
+ languages$:Observable<Language[]>;
+ ChooseLanguage: string = 'Choose a Language';
+
+ constructor(private __LanguageService:LanguageService,
+  private __TranslationService:TranslateService,
+  private __StyleService:StyleService, 
+  private __Router:Router)
+  {
+      this.languages$ =this.__LanguageService.getLanguages();
  }
+
+ onLanguageChoose(selectedLanguage:string){
+      const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);
+      this.__StyleService.switchStyleToRTL(isRTL,selectedLanguage);
+      this.__TranslationService.use(selectedLanguage); // Switch language
+      localStorage.setItem('lang',selectedLanguage);
+      this.disabled=false;
+ }
+
+ navigateToChooseFlag(){
+     this.__Router.navigate(['/Choose_git Flag']);
+ }
+
 }
+
+
+
+
