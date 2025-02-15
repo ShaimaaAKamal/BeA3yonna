@@ -1,3 +1,8 @@
-{
-    "Choose a Language":"اختر لغة"
+{   "Please Choose your Language":"الرجاء اختيار اللغة الخاصة بك",
+    "Choose a Language":"اختر لغة",
+    "Language":"اللغة",
+    "Choose Country":"اختر البلد",
+    "English":"اللغة الإنجليزية",
+    "Arabic":"اللغة العربية",
+    "French":"اللغة الفرنسية"
 }
