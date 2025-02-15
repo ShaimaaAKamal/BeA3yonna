@@ -14,6 +14,7 @@ import { BackButtonComponent } from './Components/shared/back-button/back-button
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StyleService } from './Services/style/style.service';
+import { ChooseFlagComponent } from './Components/Main/flag-card/choose-flag/choose-flag.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -29,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     ButtonWithIconComponent,
     BackButtonComponent,
+    ChooseFlagComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +54,9 @@ export class AppModule {
     constructor(private __TranslateService: TranslateService,private __StyleService:StyleService) {
     this.__TranslateService.setDefaultLang('en'); // Default to English
     const savedLang = localStorage.getItem('lang') || 'en';
+    localStorage.setItem('lang',savedLang);
     this.__TranslateService.use(savedLang);
-    const isRTL:boolean=(savedLang == 'ar')?true:false;
+    const isRTL:boolean=this.__StyleService.isRtl(savedLang);
     this.__StyleService.switchStyleToRTL(isRTL,savedLang);
   }
 }

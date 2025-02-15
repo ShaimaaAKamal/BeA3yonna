@@ -4,13 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StyleService {
-
+  private rtlLanguages:string[]=['ar', 'he', 'fa', 'ur'];
   constructor() { }
   
    switchStyleToRTL(isRTL: boolean,lang:string) {
     const head = document.getElementsByTagName('head')[0];
     let existingLink = document.getElementById('bootstrap-style') as HTMLLinkElement;
-
     if (existingLink) {
       head.removeChild(existingLink);
     }
@@ -27,4 +26,10 @@ export class StyleService {
     document.documentElement.setAttribute('lang', isRTL ? 'ar' : lang);
 
   }
+
+  isRtl(lang:string):boolean{
+      return this.rtlLanguages.includes(lang) ?true:false;
+
+  }
+
 }
