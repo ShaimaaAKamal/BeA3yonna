@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonWithIconComponent {
 @Input() btnAction:string='';
-@Input() disabled:boolean=false;
+@Input() disabled:boolean=true;
 }
