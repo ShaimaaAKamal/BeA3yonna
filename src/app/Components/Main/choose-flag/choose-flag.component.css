@@ -1,0 +1,13 @@
+main{
+    background-color: #789b5974;
+    background-image:url("/assets/images/doctor.jpg");
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: right top;
+}
+
+@media screen and (min-width:768px){
+    main{
+        background-position: center center;
+    }
+}

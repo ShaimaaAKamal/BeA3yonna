@@ -14,7 +14,10 @@ import { BackButtonComponent } from './Components/shared/back-button/back-button
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StyleService } from './Services/style/style.service';
-import { ChooseFlagComponent } from './Components/Main/flag-card/choose-flag/choose-flag.component';
+import { ChooseFlagComponent } from './Components/Main/choose-flag/choose-flag.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
+import { PatientInfoComponent } from './Components/Main/PatientInfo/patient-info/patient-info.component'; 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,11 +34,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ButtonWithIconComponent,
     BackButtonComponent,
     ChooseFlagComponent,
+    PatientInfoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     Select2Directive,
+    NgxPaginationModule,
+    FormsModule,
       TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,0 +1,29 @@
+<main class="px-3 px-md-5 py-5">
+  <section id="chooseFlag">
+    <h3 class="pb-4 mb-2">Choose your Country</h3>
+
+    <form class="d-flex pb-5 px-2" role="search">
+        <input class="form-control me-2" type="search" name="search" placeholder="Search By Name" aria-label="Search" [(ngModel)]="searchKey" (keyup)="searchForCountry()">
+        <!-- <button class="btn btn-outline-success" (click)="searchForCountry()">Search</button> -->
+    </form>
+
+    <div class="container-fluid">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let Flag of( Flags$ | async ) ?? [] | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+          <div>
+            <app-flag-card [Flag]="Flag" (click)="chooseFlag(Flag)" [selected]="Flag === selectedFlag"></app-flag-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-center mt-5">
+      <pagination-controls (pageChange)="currentPage = $event" class="mb-0"></pagination-controls>
+    </div>
+    <div class="d-flex align-items-center justify-content-between"> 
+        <app-back-button (click)="BackToChooseLanguage()" [disabled]="false"></app-back-button>
+        <app-button-with-icon btnAction="{{'Next'}}" [disabled]="NextButtondisabled" (click)="navigateEnterPatientInfo()"></app-button-with-icon>
+    </div>
+  </section>
+</main>

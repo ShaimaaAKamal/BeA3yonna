@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-flag-card',
@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './flag-card.component.css'
 })
 export class FlagCardComponent {
-
+@Input() Flag:any;
+@Input() selected:boolean=false;
+constructor(){}
 }

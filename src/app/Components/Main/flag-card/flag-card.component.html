@@ -1,1 +1,8 @@
-<p>flag-card works!</p>
+<div class="d-flex align-items-center rounded-3 bg-white flag" [class.selected]="selected">
+    <div class="flagImage">
+        <img [src]="Flag.flags.png" [alt]="Flag.name + ' flag image'"  >
+    </div>
+    <div class="flex-grow-1">
+        <h6 class="text-center px-3">{{Flag.name}}</h6>
+    </div>
+</div>

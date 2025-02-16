@@ -1,0 +1,54 @@
+.flagImage{
+    width:50%;
+    height:150px;
+}
+.flag:hover{
+   background-color: var(--main-light-color) !important;
+}
+
+.flagImage img{
+    width:100%;
+    height: 100%;
+}
+
+ .flag h6{
+
+    color:var(--main-darker-color);
+}
+
+.flag {
+  transition: background-color 0.3s ease;
+}
+
+.flag.selected {
+  background-color: var(--main-darker-color) !important; /* Highlight color */
+}
+ .flag.selected h6{
+    color:var(--main-light-color);
+}
+
+@media screen and (min-width:768px) {
+   .flagImage{
+    height:120px;
+}
+}
+
+@media screen and (min-width:992px) {
+   .flagImage{
+    width: 55%;
+    height:115px;
+}
+ .flag h6{
+    font-size: 1.2rem ;
+    font-weight: 400;
+
+}
+}
+
+@media screen and (min-width:1400px) {
+   .flagImage{
+    width: 50%;
+    height: 130px;
+}
+}
+
