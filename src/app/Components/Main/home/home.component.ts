@@ -34,7 +34,7 @@ export class HomeComponent{
  }
 
  navigateToChooseFlag(){
-     this.__Router.navigate(['/Choose_git Flag']);
+     this.__Router.navigate(['/Choose_Flag']);
  }
 
 }
