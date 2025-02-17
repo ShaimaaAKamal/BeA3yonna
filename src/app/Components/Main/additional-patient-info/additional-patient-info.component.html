@@ -1,1 +1,58 @@
-<p>additional-patient-info works!</p>
+<main class="px-sm-2 px-md-5 py-5">
+  <section id="additionalPatientInfo" class="py-5">
+    <div class="container-fluid py-5">
+        <div class="row g-0">
+            <div class=" col-lg-8 col-xl-6 col-xxl-5">
+                 <div class="p-4 bg-white rounded-3">
+                    <h4>Additional Patient Info</h4>
+                    <form [formGroup]="additionalPatientInfo">
+                      <div class="py-4">
+                        <span>Are you pregnent ?</span>
+                        <div class="ps-1"> 
+                          <div class="form-check mt-2">
+                              <input class="form-check-input" type="radio" value="yes" id="yespregnant" formControlName="pregnant">
+                              <label class="form-check-label" for="yespregnant">
+                                Yes
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" id="Notpregnant" value="no" formControlName="pregnant">
+                              <label class="form-check-label" for="Notpregnant">
+                                No
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                      <div>
+                        <span>Do you have Period ?</span>
+                        <div class="ps-1"> 
+                          <div class="form-check mt-2">
+                              <input class="form-check-input" type="radio" value="yes" id="yeshavePeriod" formControlName="havePeriod">
+                              <label class="form-check-label" for="yeshavePeriod">
+                                Yes
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" id="noPeriod" value="no" formControlName="havePeriod">
+                              <label class="form-check-label" for="noPeriod">
+                                No
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-floating py-4">
+                        <span>Additional Information <small>(optional)</small></span>
+                        <textarea class="form-control"  id="additionalInfo" formControlName="additionalInfo"></textarea>
+                      </div>
+                    </form>
+                     <div class="d-flex align-items-center justify-content-between pt-4"> 
+                        <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>
+                        <app-button-with-icon btnAction="{{'Next'}}" [disabled]="additionalPatientInfo.invalid"  (click)="navigateNextPage()"></app-button-with-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+  </section>
+</main>
