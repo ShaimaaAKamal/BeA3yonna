@@ -4,6 +4,8 @@
     --main-darker-color:#789B59;
     --main-dark-color:#b2b161cb;
     --main-light-color:#F4FFC3;
+    --gray-color:#D2D2DC;
+    --gray-light-color:#d2d2dcc5;
     --text-color:#000;
 }
 html{
@@ -14,6 +16,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* start button styles */
 button{
     padding:.6rem 2.4rem;
     font-size:1rem;
@@ -33,6 +36,10 @@ button{
      color:var(--main-light-color) !important ;
 }
 
+/* end button styles */
+
+/* start font styles */
+
 .nav-font-size{
     font-size:.875rem;
 }
@@ -45,6 +52,9 @@ button{
 .card-font-size{
     font-size: 1.25rem;
 }
+/* end font styles */
+
+/* start background styles */
 
 .bg-green-light{
     background-color: var(--main-light-color);
@@ -59,6 +69,23 @@ button{
 .bg-white{
     background-color: #fff;
 }
+
+.bg-gray{
+    background-color: var(--gray-color);
+}
+.bg-light-gray{
+    background-color: var(--gray-light-color);
+}
+
+/* end background styles */
+
+/* start of text-color styles */
+.text-green-darker{
+    color: var(--main-darker-color);
+}
+/* end of text-color styles */
+
+/* start select2 styles */
 
 .select2-container {
   width:100% !important;
@@ -85,6 +112,10 @@ option{
     font-size:1rem;
 }
 
+/* end select2 styles */
+
+/* start ngx pagination style styles */
+
 .ngx-pagination .current {
     background-color: var(--main-darker-color) !important;
     color:var(--main-light-color) !important;
@@ -93,7 +124,33 @@ option{
     background-color: var(--main-light-color) !important;
     color:var(--main-darker-color) !important;
 }
-/* localization Style */
+
+/* end ngx pagination style styles */
+
+/* start input styles */
+input {
+  font-weight: 300 !important;
+  font-size: 14px !important; 
+}
+input::placeholder {
+  color:#D2D2DC !important;
+  font-weight: 300;
+  font-size: 14px;
+}
+input:focus{
+    border-color:var(--main-darker-color) !important;
+    box-shadow: none !important;
+}
+
+/* end of input style  */
+main{
+    background-color: #789b5974;
+    background-image:url("/assets/images/doctor.jpg");
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: right top;
+}
+/* start localization Style */
 
 html[dir='ltr'] .btnArrow{
     transform: rotate(0deg);}
