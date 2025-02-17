@@ -45,31 +45,35 @@ import { Country } from '../../../Interfaces/country';
 export class ChooseFlagComponent implements OnInit {
   Flags$!: Observable<Country[]>; 
   NextButtondisabled:boolean=true;
-  currentPage = 1;
-  pageSize = 24;
+  currentPage:number = 1;
+  pageSize:number = 24;
   searchKey:string='';
   selectedFlag:Country={name:'',flags:{},languages:{}};
-
-  constructor(private __FlagService: FlagService,private __Router:Router,private __SharedService:SharedService) {}
+  storedCountry:Country|null=null;
+  constructor(private __FlagService: FlagService,private __SharedService:SharedService) {}
 
   ngOnInit(): void {
       this.Flags$ =this.mapApiFlagsData(this.__FlagService.getCountries());
+      this.storedCountry=this.__SharedService.getItemFromLocalStorage('Country')?JSON.parse(this.__SharedService.getItemFromLocalStorage('Country')):null;
+      this.NextButtondisabled=!this.storedCountry ? true : false;
+      this.currentPage=this.__SharedService.getItemFromLocalStorage('CountrycurrentPage')?JSON.parse(this.__SharedService.getItemFromLocalStorage('CountrycurrentPage')):1;
   }
 
   searchForCountry(){
       this.Flags$ =this.mapApiFlagsData(this.__FlagService.searchByCountryName(this.searchKey));
   }
 
-  navigateEnterPatientInfo(){
-        this.__Router.navigate(['/Patient_Info'])
+  navigateNextPage(){
+        this.__SharedService.navigateToPage('/Patient_Info');
   }
   chooseFlag(Flag:Country){
     this.selectedFlag=Flag;
     this.NextButtondisabled=false;
     this.__SharedService.saveItemInLocalStorage('Country',JSON.stringify(Flag));
+    this.__SharedService.saveItemInLocalStorage('CountrycurrentPage',JSON.stringify(this.currentPage));
   }
-  BackToChooseLanguage(){
-    this.__Router.navigate(['/'])
+  BackToPreviousPage(){
+    this.__SharedService.navigateToPage('/');
   }
   mapApiFlagsData(flagData:Observable<any>){
     return flagData.pipe(

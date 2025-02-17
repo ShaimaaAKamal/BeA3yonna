@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { StyleService } from '../../../Services/style/style.service';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../Services/Shared/shared.service';
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -20,7 +21,7 @@ export class HomeComponent{
  constructor(private __LanguageService:LanguageService,
   private __TranslationService:TranslateService,
   private __StyleService:StyleService, 
-  private __Router:Router)
+  private __sharedService:SharedService)
   {
       this.languages$ =this.__LanguageService.getLanguages();
  }
@@ -34,7 +35,7 @@ export class HomeComponent{
  }
 
  navigateToChooseFlag(){
-     this.__Router.navigate(['/Choose_Flag']);
+     this.__sharedService.navigateToPage('/Choose_Flag');
  }
 
 }
