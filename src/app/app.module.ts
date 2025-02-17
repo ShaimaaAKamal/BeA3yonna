@@ -16,8 +16,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StyleService } from './Services/style/style.service';
 import { ChooseFlagComponent } from './Components/Main/choose-flag/choose-flag.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule } from '@angular/forms';
-import { PatientInfoComponent } from './Components/Main/PatientInfo/patient-info/patient-info.component'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PatientInfoComponent } from './Components/Main/PatientInfo/patient-info/patient-info.component';
+import { AdditionalPatientInfoComponent } from './Components/Main/additional-patient-info/additional-patient-info.component'; 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -35,12 +36,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackButtonComponent,
     ChooseFlagComponent,
     PatientInfoComponent,
+    AdditionalPatientInfoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     Select2Directive,
     NgxPaginationModule,
+    ReactiveFormsModule,
     FormsModule,
       TranslateModule.forRoot({
       loader: {

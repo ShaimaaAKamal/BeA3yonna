@@ -1,1 +1,75 @@
-<p>patient-info works!</p>
+<main class="px-sm-2 px-md-5 py-5">
+  <section id="patientInfo" class="py-5">
+    <div class="container-fluid">
+        <div class="row g-0">
+            <div class=" col-lg-8 col-xl-6 col-xxl-5">
+                 <div class="p-4 bg-white rounded-3">
+                    <h4>Patient Info</h4>
+                    <form [formGroup]="patientInfoForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" aria-describedby="name" formControlName="name" placeholder="Patient Name">
+                             <div class="text-danger" *ngIf="patientInfoForm.get('name')?.invalid && patientInfoForm.get('name')?.touched">
+                                    <small *ngIf="patientInfoForm.get('name')?.errors?.['required']">Name is required</small>
+                                    <small *ngIf="patientInfoForm.get('name')?.errors?.['minlength']">Minimum 3 characters required</small>
+                             </div>
+                        </div>
+                         <div class="mb-3">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="number" class="form-control form-control-lg" id="age" aria-describedby="age"  formControlName="age" placeholder="Patient Age">
+                            <div class="text-danger" *ngIf="patientInfoForm.get('age')?.invalid && patientInfoForm.get('age')?.touched">
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['required']">Age is required</small>
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['min']">Max Allowed Age is 1</small>
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['max']">Max Allowed Age is 100</small>
+                            </div>
+                        </div>
+                        <div class="mb-3 genderParent">
+                            <label  class="form-label">Gender</label>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" formControlName="gender"  hidden id="femaleGender" value="female" [checked]="selectedFemaleGender">
+                                    <label class="form-check-label bg-light-gray px-3 py-4 text-center rounded-3" for="femaleGender" [class.d-none]="selectedMaleGender" (click)="selectGender('female')">
+                                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 190" fill="none">
+                                            <path d="M32.2476 117.531H87.3398V32.2457L39.7037 62.0956L32.2476 117.531Z" fill="#2F2E41"/>
+                                            <path d="M77.1621 102.479C57.4079 102.479 41.394 84.1614 41.394 61.5659C41.394 38.9704 57.4079 20.6531 77.1621 20.6531C96.9163 20.6531 112.93 38.9704 112.93 61.5659C112.93 84.1614 96.9163 102.479 77.1621 102.479Z" fill="#FFB6B6"/>
+                                            <path d="M97.6954 108.529L99.3114 89.8448L67.0426 82.9431L47.9882 136.01L81.1263 179.6L104.737 126.533L97.6954 108.529Z" fill="#FFB6B6"/>
+                                            <path d="M0 151.664C0.401794 152.143 0.811874 152.617 1.22195 153.086C2.52263 154.573 3.84816 156.018 5.2027 157.421C25.4998 178.477 51.5423 190 79.134 190C104.572 190 128.692 180.206 148.206 162.178C148.219 162.168 148.227 162.159 148.24 162.145C148.832 161.6 149.416 161.046 150 160.482C149.896 160.141 149.785 159.804 149.673 159.473C143.397 140.771 131.004 131.622 123.481 127.618C119.753 125.633 117.222 124.908 117.222 124.908L108.391 106.714L102.173 119.981L97.5919 129.76L78.7943 169.877L62.5773 123.691L57.5527 109.372L56.2645 105.705L50.1381 111.158L44.3389 116.318L32.6618 119.265L23.1884 121.658L10.3225 124.908C5.11984 129.755 1.95514 138.976 0.186386 150.432C0.120117 150.84 0.0579681 151.252 0 151.664Z" fill="#5D8736" fill-opacity="0.85"/>
+                                            <path d="M95.9766 15.0717C91.6197 6.70051 83.6178 0.956863 75.1327 0.110315C66.6477 -0.736223 57.8972 3.33608 52.3391 10.7181C49.027 15.117 46.8553 20.5044 43.6268 24.9839C36.6793 34.6238 24.8324 40.2602 21.7974 52.2614C20.473 57.4984 21.1329 63.0894 21.8031 68.4869C22.3774 73.1132 22.9518 77.7395 23.5262 82.3658C23.9732 85.9661 24.4018 89.7616 23.2216 93.1382C21.8369 97.0996 18.5232 99.6942 16.3808 103.186C12.7352 109.129 13.0017 117.829 17.0019 123.465C18.7367 125.909 21.0367 127.752 22.8555 130.115C24.6742 132.478 26.0233 135.708 25.2616 138.734C23.8023 144.529 15.8567 145.919 14.9852 151.867C14.5396 154.908 16.376 157.945 18.7819 159.335C21.1879 160.726 24.0201 160.766 26.6961 160.394C36.8668 158.98 46.2837 151.711 51.2356 141.451C56.1875 131.192 56.5481 118.204 52.1752 107.605C48.5837 98.9009 41.9085 91.2091 41.9812 81.5842C42.0209 76.3406 44.1235 71.4432 46.1796 66.7564C50.3878 57.1638 54.5961 47.5712 58.8043 37.9786C61.0585 32.8402 63.6746 27.3029 68.3154 25.0955C71.9021 23.3895 75.9717 24.0512 79.8079 24.7489C83.6441 25.4467 87.7079 26.1259 91.3052 24.4496C94.9026 22.7732 97.6207 17.7927 95.9068 13.8055" fill="#2F2E41"/>
+                                            <path d="M89.7088 15.5088C96.6193 12.9069 104.371 17.0839 109.05 23.4567C113.728 29.8295 115.997 38.0054 118.159 45.9511C119.398 50.5024 120.636 55.0537 121.874 59.6051C123.039 63.8865 124.204 68.1679 125.369 72.4494C126.739 77.4853 128.121 82.8355 126.996 87.9504C126.183 91.6483 124.091 95.006 124.046 98.8187C123.999 102.801 126.18 106.298 128.091 109.627C130.002 112.957 131.795 116.913 130.885 120.758C129.5 126.605 122.392 129.82 122.782 135.861C122.912 137.878 123.931 139.743 123.913 141.765C123.889 144.337 122.129 146.56 120.066 147.585C118.003 148.61 115.683 148.665 113.434 148.62C106.536 148.481 99.6515 147.544 92.9181 145.828C90.3276 145.168 87.6932 144.358 85.5367 142.588C83.3803 140.818 81.7717 137.886 82.0523 134.867C82.4896 130.163 86.9116 127.494 89.1431 123.511C91.3349 119.598 91.2841 114.641 92.2292 110.122C93.5281 103.911 96.7361 98.4888 99.1443 92.7273C108.198 71.0667 105.029 43.4574 91.3932 25.2044C90.1876 23.5906 88.8704 21.967 88.3674 19.9237C87.8645 17.8804 88.5129 15.2769 90.2603 14.5621" fill="#2F2E41"/>
+                                        </svg>
+                                    </label>
+                                </div>
+                                <div class="px-4"></div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" formControlName="gender" hidden id="maleGender"  value="male" [checked]="selectedMaleGender">
+                                    <label class="form-check-label bg-light-gray p-3 text-center rounded-3  px-3 py-4" for="maleGender" [class.d-none]="selectedFemaleGender" (click)="selectGender('male')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 190" fill="none">
+                                            <path d="M75.7039 98.3184C53.4732 98.3184 35.4517 79.1302 35.4517 55.4604C35.4517 31.7905 53.4732 12.6023 75.7039 12.6023C97.9345 12.6023 115.956 31.7905 115.956 55.4604C115.956 79.1302 97.9345 98.3184 75.7039 98.3184Z" fill="#FFB6B6"/>
+                                            <path d="M98.8117 104.656L100.63 85.0838L64.316 77.854L42.8728 133.444L80.1654 179.106L106.736 123.517L98.8117 104.656Z" fill="#FFB6B6"/>
+                                            <path d="M101.213 94.8809L93.274 96.7908C93.274 96.7908 99.515 75.7191 97.3967 73.7074C95.2783 71.6957 90.0873 74.8655 90.0873 74.8655L84.6323 81.3774L77.9877 74.1744C77.9877 74.1744 70.774 64.6238 67.9495 61.9415C65.1251 59.2592 69.6618 49.303 69.6618 49.303C69.6618 49.303 27.7581 37.2722 43.3505 15.6318C43.3505 15.6318 52.4923 -1.33523 55.4694 4.19187C58.4464 9.71896 61.9963 0.940808 61.9963 0.940808L72.8362 3.13559C72.8362 3.13559 94.2302 -10.2955 114.536 18.4374C134.841 47.1703 101.213 94.8809 101.213 94.8809Z" fill="#2F2E41"/>
+                                            <path d="M0 160.691C21.9979 179.681 49.2122 190 77.9228 190C104.139 190 129.112 181.394 150 165.441C149.963 165.024 149.925 164.612 149.893 164.201C149.338 157.748 148.844 151.474 148.518 146.273C147.254 126.077 103.002 112.616 103.002 112.616C103.002 112.616 102.802 112.83 102.401 113.202C99.958 115.485 90.0429 123.764 72.6552 126.077C57.1509 128.142 52.0464 118.349 50.5035 113.659C50.0373 112.229 49.8974 111.271 49.8974 111.271L4.38188 134.157C1.41246 138.674 0.251709 148.402 0.0233002 159.336C0.0139923 159.788 0.00466919 160.235 0 160.691Z" fill="#5D8736"/>
+                                        </svg>
+                                    </label>
+                                    </div>
+                            </div>
+                             <div class="text-danger" *ngIf="patientInfoForm.get('gender')?.invalid && patientInfoForm.get('gender')?.touched">
+                                    <small *ngIf="patientInfoForm.get('gender')?.errors?.['required']">Must Choose a gender</small>
+                             </div>
+                        </div>
+                        
+                    </form>
+
+                    <div class="text-center" [class.d-none]="changeGender">
+                        <span class="text-green-darker" (click)="changeGenderSelection()">Change Gender</span>
+                    </div>
+                     <div class="d-flex align-items-center justify-content-between pt-4"> 
+                        <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>
+                        <app-button-with-icon btnAction="{{'Next'}}" [disabled]="patientInfoForm.invalid" type="submit" (click)="navigateNextPage()"></app-button-with-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+  </section>
+</main>
