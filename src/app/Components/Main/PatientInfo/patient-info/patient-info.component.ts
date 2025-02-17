@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../../../Services/Shared/shared.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientInfo } from '../../../../Interfaces/patient-info';
@@ -10,7 +10,7 @@ import { PatientInfo } from '../../../../Interfaces/patient-info';
   templateUrl: './patient-info.component.html',
   styleUrl: './patient-info.component.css'
 })
-export class PatientInfoComponent {
+export class PatientInfoComponent implements OnInit {
   NextButtondisabled:boolean=true;
   selectedFemaleGender:boolean=false;
   selectedMaleGender:boolean=false;
@@ -34,7 +34,9 @@ export class PatientInfoComponent {
   }
   navigateNextPage(){
     this.__sharedService.saveItemInLocalStorage('patientInfo',JSON.stringify(this.patientInfoForm.value));
-    this.__sharedService.navigateToPage('/Addtional_Patient_Info');
+    if(this.selectedFemaleGender)
+      this.__sharedService.navigateToPage('/Addtional_Patient_Info');
+    else this.__sharedService.navigateToPage('/Patient_Initial_Vitals');
   }
   selectGender(gender:string){
     this.selectedFemaleGender=(gender == 'female')? true : false;
