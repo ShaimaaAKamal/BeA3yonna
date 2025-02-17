@@ -18,7 +18,9 @@ import { ChooseFlagComponent } from './Components/Main/choose-flag/choose-flag.c
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PatientInfoComponent } from './Components/Main/PatientInfo/patient-info/patient-info.component';
-import { AdditionalPatientInfoComponent } from './Components/Main/additional-patient-info/additional-patient-info.component'; 
+import { AdditionalPatientInfoComponent } from './Components/Main/additional-patient-info/additional-patient-info.component';
+import { PatientInitialVitalsComponent } from './Components/Main/PatientInitialVitals/patient-initial-vitals/patient-initial-vitals.component';
+import { PatientVitalsComponent } from './Components/Main/PatientVitals/patient-vitals/patient-vitals.component'; 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +39,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChooseFlagComponent,
     PatientInfoComponent,
     AdditionalPatientInfoComponent,
+    PatientInitialVitalsComponent,
+    PatientVitalsComponent,
   ],
   imports: [
     BrowserModule,
