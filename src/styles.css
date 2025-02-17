@@ -137,11 +137,17 @@ input::placeholder {
   font-weight: 300;
   font-size: 14px;
 }
-input:focus{
+input:focus,textarea:focus{
     border-color:var(--main-darker-color) !important;
     box-shadow: none !important;
 }
-
+.form-floating > .form-control:not(:placeholder-shown) {
+     padding-top: 0.5rem !important; 
+    }
+.form-check-input:checked {
+    background-color: var(--main-darker-color) !important;
+    border-color: var(--main-darker-color) !important;
+}
 /* end of input style  */
 main{
     background-color: #789b5974;
