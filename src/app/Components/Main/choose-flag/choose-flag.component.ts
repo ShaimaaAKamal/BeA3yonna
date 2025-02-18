@@ -63,18 +63,14 @@ export class ChooseFlagComponent implements OnInit {
       this.Flags$ =this.mapApiFlagsData(this.__FlagService.searchByCountryName(this.searchKey));
   }
 
-  navigateNextPage(){
-        this.__SharedService.navigateToPage('/Patient_Info');
-  }
+ 
   chooseFlag(Flag:Country){
     this.selectedFlag=Flag;
     this.NextButtondisabled=false;
     this.__SharedService.saveItemInLocalStorage('Country',JSON.stringify(Flag));
     this.__SharedService.saveItemInLocalStorage('CountrycurrentPage',JSON.stringify(this.currentPage));
   }
-  BackToPreviousPage(){
-    this.__SharedService.navigateToPage('/');
-  }
+
   mapApiFlagsData(flagData:Observable<any>){
     return flagData.pipe(
           map(countries => (countries ? countries.map((country:any) => ({

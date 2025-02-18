@@ -45,10 +45,11 @@
                         <textarea class="form-control"  id="additionalInfo" formControlName="additionalInfo"></textarea>
                       </div>
                     </form>
-                     <div class="d-flex align-items-center justify-content-between pt-4"> 
-                        <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>
-                        <app-button-with-icon btnAction="{{'Next'}}" [disabled]="additionalPatientInfo.invalid"  (click)="navigateNextPage()"></app-button-with-icon>
-                    </div>
+                    <app-navigation-buttons 
+                    [PreviousPageUrl]="'/Patient_Info'" [NextPageUrl]="'/Patient_Initial_Vitals'"
+                     [MoreCLasses]="' pt-4'" [NextButtonDisabled]="additionalPatientInfo.invalid"
+                     [Key]="'additionalPatientInfo'" [value]="additionalPatientInfo.value">
+                    </app-navigation-buttons>
                 </div>
             </div>
         </div>

@@ -19,14 +19,7 @@ this.storedPatientAdditionalInfo=this.__sharedService.getItemFromLocalStorage('a
  this.additionalPatientInfo= new FormGroup({
      pregnant: new FormControl( this.storedPatientAdditionalInfo?.pregnant ?? '',[Validators.required]),
      havePeriod: new FormControl(this.storedPatientAdditionalInfo?.havePeriod ?? '', [Validators.required]),
-     additionalInfo:new FormControl( this.storedPatientAdditionalInfo?.pregnant ??''),
+     additionalInfo:new FormControl( this.storedPatientAdditionalInfo?.additionalInfo ??''),
    });
-}
-BackToPreviousPage(){
-this.__sharedService.navigateToPage('/Patient_Info');
-  }
-navigateNextPage(){
-this.__sharedService.saveItemInLocalStorage('additionalPatientInfo',JSON.stringify(this.additionalPatientInfo.value));
-this.__sharedService.navigateToPage('/Patient_Initial_Vitals');
 }
 }
