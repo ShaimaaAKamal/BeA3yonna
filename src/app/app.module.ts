@@ -20,7 +20,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PatientInfoComponent } from './Components/Main/PatientInfo/patient-info/patient-info.component';
 import { AdditionalPatientInfoComponent } from './Components/Main/additional-patient-info/additional-patient-info.component';
 import { PatientInitialVitalsComponent } from './Components/Main/PatientInitialVitals/patient-initial-vitals/patient-initial-vitals.component';
-import { PatientVitalsComponent } from './Components/Main/PatientVitals/patient-vitals/patient-vitals.component'; 
+import { PatientVitalsComponent } from './Components/Main/PatientVitals/patient-vitals/patient-vitals.component';
+import { ChooseSymptomsComponent } from './Components/Main/ChooseSymptoms/choose-symptoms/choose-symptoms.component';
+import { NavigationButtonsComponent } from './Components/Shared/NavigationButtons/navigation-buttons/navigation-buttons.component';
+import { RatePainComponent } from './Components/Main/RatePain/rate-pain/rate-pain.component'; 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,6 +44,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdditionalPatientInfoComponent,
     PatientInitialVitalsComponent,
     PatientVitalsComponent,
+    ChooseSymptomsComponent,
+    NavigationButtonsComponent,
+    RatePainComponent,
   ],
   imports: [
     BrowserModule,
