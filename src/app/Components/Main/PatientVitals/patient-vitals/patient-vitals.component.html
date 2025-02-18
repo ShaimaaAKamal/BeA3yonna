@@ -1,0 +1,37 @@
+<main class="px-sm-2 px-md-5 py-5">
+  <section id="patientVitals" class="py-5">
+    <div class="container-fluid py-5">
+        <div class="row g-0">
+            <div class=" col-lg-9 col-xl-7 col-xxl-6">
+                 <div class="p-4 bg-white rounded-3">
+                      <h4>Patient Vitals</h4>
+                      <form [formGroup]="patientVitals">
+                        <div class="container-fluid py-4">
+                          <div class="row g-4 align-items-center">
+                            <div class="col-md-6" *ngFor="let vital of vitals">
+                                <div>
+                                    <label [for]="vital" class="form-label mb-0 d-flex align-items-center">
+                                      <span>{{vital}}</span>
+                                      <img [src]="'assets/images/Vitals/'+vital+'.svg'" [alt]="vital + ' image'" width="60px;">
+                                      <small  class="text-danger"
+                                      *ngIf="patientVitals.get(vital)?.invalid && patientVitals.get(vital)?.touched && patientVitals.get(vital)?.errors?.['required']">(required)</small>
+
+                                    </label>
+                                    <input type="text" class=" form-control form-control-lg" [id]="vital" [formControlName]="vital">
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    <app-navigation-buttons 
+                        [PreviousPageUrl]="'/Patient_Initial_Vitals'" [NextPageUrl]="'/Choose_Symptoms'"
+                        [MoreCLasses]="' pt-4'" [NextButtonDisabled]="patientVitals.invalid"
+                        [Key]="'patientVitals'" [value]="patientVitals.value">
+                    </app-navigation-buttons>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+  </section>
+</main>
