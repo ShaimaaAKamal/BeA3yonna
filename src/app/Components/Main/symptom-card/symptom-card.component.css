@@ -1,0 +1,20 @@
+.symptom{
+    background-color: var(--main-dark-color);
+}
+.symptom h6{
+    color: #fff;
+}
+
+
+.symptom:hover{
+    background-color: var(--main-light-color);
+}
+.symptom:hover h6{
+    color: var(--main-darker-color);
+}
+.symptom.selected{
+        background-color: var(--main-darker-color);
+}
+.symptom.selected h6{
+        color: var(--main-light-color);
+}

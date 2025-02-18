@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-symptom-card',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './symptom-card.component.css'
 })
 export class SymptomCardComponent {
-
+@Input() Symptom:string='';
+@Input() selected:boolean=false;
 }

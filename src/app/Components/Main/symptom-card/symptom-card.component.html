@@ -1,1 +1,6 @@
-<p>symptom-card works!</p>
+<div class="px-2 py-4 rounded-3 symptom text-center" [class.selected]="selected">
+<div>
+<img [src]="'assets/images/Symptoms/'+Symptom+'.svg'" [alt]="Symptom + 'image'" width="60%">
+</div>
+<h6 class="pt-3 mb-0">{{Symptom}}</h6>
+</div>
