@@ -8,6 +8,7 @@ import { PatientInitialVitalsComponent } from './Components/Main/PatientInitialV
 import { PatientVitalsComponent } from './Components/Main/PatientVitals/patient-vitals/patient-vitals.component';
 import { ChooseSymptomsComponent } from './Components/Main/ChooseSymptoms/choose-symptoms/choose-symptoms.component';
 import { RatePainComponent } from './Components/Main/RatePain/rate-pain/rate-pain.component';
+import { PainedBodyPartComponent } from './Components/Main/PainedBodyPart/pained-body-part/pained-body-part.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent ,pathMatch:'full'},
@@ -18,6 +19,9 @@ const routes: Routes = [
     {path:'Patient_Vitals',component:PatientVitalsComponent},
     {path:'Choose_Symptoms',component:ChooseSymptomsComponent},
      {path:'Pain_Scale',component:RatePainComponent},
+    {path:'Choose_Pained_Body_Part',component:PainedBodyPartComponent},
+
+     
 
 ];
 
