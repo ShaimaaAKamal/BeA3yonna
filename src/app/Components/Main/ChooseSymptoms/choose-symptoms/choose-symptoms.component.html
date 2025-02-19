@@ -1,32 +1,6 @@
-<main class="px-3 px-md-5 py-5">
-  <section id="chooseSymptoms">
-    <h3 class="pb-4 mb-2">Do yoy have any of the following symptoms ?</h3>
-
-    <form class="d-flex pb-5 px-2" role="search">
-        <input class="form-control me-2" type="search" name="search" placeholder="Search By Name" aria-label="Search" [(ngModel)]="searchKey" (keyup)="searchForSymptoms()">
-    </form>
-
- <div class="container-fluid">
-   <div class="row g-4 justify-content-center align-items-center">
-     <div 
-       class="col-6 col-md-4 col-lg-3 col-xl-2" 
-       *ngFor="let Symptom of symptoms | paginate: { itemsPerPage: pageSize, currentPage: currentPage }"
-       (click)="chooseSymptom(Symptom)">
-       <div>
-         <app-symptom-card [Symptom]="Symptom"  [selected]="isSelected(Symptom) || (storedSymptoms.includes(Symptom))"></app-symptom-card>
-       </div>
-     </div>
-   </div>
- </div>
-    <!-- Pagination Controls -->
-    <div class="d-flex justify-content-center mt-5">
-      <pagination-controls (pageChange)="currentPage = $event" class="mb-0"></pagination-controls>
-    </div>
-      <app-navigation-buttons 
-        [PreviousPageUrl]="'/Patient_Vitals'" [NextPageUrl]="'/Pain_Scale'"
-        [MoreCLasses]="' px-3'" [NextButtonDisabled]="NextButtonDisabled"
-        [Key]="'Symptoms'" [value]="selectedSymptoms">
-       </app-navigation-buttons>
-  </section>
-</main>
-
+ <app-display-symptoms [heading]="'Do yoy have any of the following symptoms ?'" [pageSize]="24"
+[currentPage]="1" [symptoms]="AllSymptoms" [(NextButtonDisabled)] = "NextButtonDisabled"
+[NextPageUrl]="'/Pain_Scale'" [PreviousPageUrl]="'/Patient_Vitals'" 
+ [MoreCLasses]="'px-3'" [Key]="'Symptoms'"
+[value]="selectedSymptoms">
+</app-display-symptoms>
