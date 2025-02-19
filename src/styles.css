@@ -8,6 +8,9 @@
     --gray-light-color:#d2d2dcc5;
     --text-color:#000;
 }
+/* html,body{
+  height: 100%; 
+} */
 html{
     font-size:16px;
 }
@@ -15,6 +18,14 @@ html{
 body {
   font-family: 'Poppins', sans-serif;
 }
+/* app-root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content{
+    flex:1
+} */
 
 /* start button styles */
 button{
@@ -163,3 +174,16 @@ html[dir='ltr'] .btnArrow{
 
 html[dir='rtl'] .btnArrow{
     transform: rotate(180deg);}
+
+html[dir='ltr'] .backBtnArrow{
+    transform: rotate(0deg);}
+
+html[dir='rtl'] .backBtnArrow{
+    transform: rotate(180deg);}
+
+ html[dir='rtl'] #painScaleChart{
+    transform: rotateZ(180deg) rotateX(180deg);}
+
+html[dir='ltr'] #PainScaleslevelValues{
+    transform:scale(.93);
+}
