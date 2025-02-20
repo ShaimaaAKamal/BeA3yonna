@@ -27,7 +27,8 @@ import { RatePainComponent } from './Components/Main/RatePain/rate-pain/rate-pai
 import { PainedBodyPartComponent } from './Components/Main/PainedBodyPart/pained-body-part/pained-body-part.component';
 import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/permanent-diseases/permanent-diseases.component';
 import { DisplaySymptomsComponent } from './Components/Shared/DisplaySymptoms/display-symptoms/display-symptoms.component';
-import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component'; 
+import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
+import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component'; 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PermanentDiseasesComponent,
     DisplaySymptomsComponent,
     PatientComplainDetailsComponent,
+    AssesmentComponent,
   ],
   imports: [
     BrowserModule,

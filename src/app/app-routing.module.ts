@@ -9,6 +9,9 @@ import { PatientVitalsComponent } from './Components/Main/PatientVitals/patient-
 import { ChooseSymptomsComponent } from './Components/Main/ChooseSymptoms/choose-symptoms/choose-symptoms.component';
 import { RatePainComponent } from './Components/Main/RatePain/rate-pain/rate-pain.component';
 import { PainedBodyPartComponent } from './Components/Main/PainedBodyPart/pained-body-part/pained-body-part.component';
+import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/permanent-diseases/permanent-diseases.component';
+import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
+import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent ,pathMatch:'full'},
@@ -20,6 +23,10 @@ const routes: Routes = [
     {path:'Choose_Symptoms',component:ChooseSymptomsComponent},
      {path:'Pain_Scale',component:RatePainComponent},
     {path:'Choose_Pained_Body_Part',component:PainedBodyPartComponent},
+     {path:'Permanent Diseases',component:PermanentDiseasesComponent},
+     {path:'Patient_History',component:PatientComplainDetailsComponent},
+      {path:'Assesment',component:AssesmentComponent},
+
 
      
 
