@@ -12,14 +12,14 @@ import { PatientAdditionalInfo } from '../../../Interfaces/patient-additional-in
 })
 export class AdditionalPatientInfoComponent implements OnInit{
 additionalPatientInfo!:FormGroup;
-storedPatientAdditionalInfo:PatientAdditionalInfo|null=null;
+storedPatientAdditionalInfo!:PatientAdditionalInfo;
 constructor(private __sharedService:SharedService){}
 ngOnInit(): void {
-this.storedPatientAdditionalInfo=this.__sharedService.getItemFromLocalStorage('additionalPatientInfo')?JSON.parse(this.__sharedService.getItemFromLocalStorage('additionalPatientInfo')):null;
+this.storedPatientAdditionalInfo=this.__sharedService.getGenericStoredDataValue('additionalPatientInfo');
  this.additionalPatientInfo= new FormGroup({
-     pregnant: new FormControl( this.storedPatientAdditionalInfo?.pregnant ?? '',[Validators.required]),
-     havePeriod: new FormControl(this.storedPatientAdditionalInfo?.havePeriod ?? '', [Validators.required]),
-     additionalInfo:new FormControl( this.storedPatientAdditionalInfo?.additionalInfo ??''),
+     pregnant: new FormControl( this.storedPatientAdditionalInfo.pregnant ,[Validators.required]),
+     havePeriod: new FormControl(this.storedPatientAdditionalInfo.havePeriod , [Validators.required]),
+     additionalInfo:new FormControl( this.storedPatientAdditionalInfo.additionalInfo ),
    });
 }
 }

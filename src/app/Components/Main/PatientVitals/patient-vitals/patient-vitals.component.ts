@@ -13,11 +13,11 @@ import { PatientVitals } from '../../../../Interfaces/patient-vitals';
 export class PatientVitalsComponent implements OnInit {
   patientVitals!:FormGroup;
   vitals:string[]=['Weight','Height','Blood_Pressure','Blood_Sugar','Temperature','Heart_Rate','Breathe_Rate','Oxgyen_Rate'];
-  storedPatientVitals:PatientVitals|null=null;
+  storedPatientVitals!:PatientVitals;
   constructor(private __SharedService:SharedService){}
 
   ngOnInit(): void {
-    this.storedPatientVitals=this.__SharedService.getItemFromLocalStorage('patientVitals')?JSON.parse(this.__SharedService.getItemFromLocalStorage('patientVitals')):null;
+    this.storedPatientVitals=this.__SharedService.getGenericStoredDataValue('patientVitals');
     this.patientVitals = new FormGroup({
         Weight: new FormControl(this.storedPatientVitals?.Weight ?? '',[Validators.required]),
         Height: new FormControl(this.storedPatientVitals?.Height ?? '', [Validators.required]),

@@ -15,16 +15,16 @@ export class PatientInfoComponent implements OnInit {
   selectedFemaleGender:boolean=false;
   selectedMaleGender:boolean=false;
   changeGender:boolean=true;
-  storedPatientInfo:PatientInfo|null=null;
+  storedPatientInfo!:PatientInfo;
   patientInfoForm !:FormGroup;
 
   constructor(private __sharedService:SharedService){}
   ngOnInit(): void {
-     this.storedPatientInfo=this.__sharedService.getItemFromLocalStorage('patientInfo')?JSON.parse(this.__sharedService.getItemFromLocalStorage('patientInfo')):null;
+         this.storedPatientInfo=this.__sharedService.getGenericStoredDataValue('patientInfo');
      this.patientInfoForm = new FormGroup({
-    name: new FormControl(this.storedPatientInfo?.name ?? '',[Validators.required, Validators.minLength(3)]),
-    age: new FormControl(this.storedPatientInfo?.age ?? '', [Validators.required,Validators.min(1),Validators.max(100)]),
-    gender: new FormControl(this.storedPatientInfo?.gender ?? '', [Validators.required]),
+    name: new FormControl(this.storedPatientInfo.name ,[Validators.required, Validators.minLength(3)]),
+    age: new FormControl(this.storedPatientInfo.age , [Validators.required,Validators.min(1),Validators.max(100)]),
+    gender: new FormControl(this.storedPatientInfo.gender , [Validators.required]),
   });
   if(this.storedPatientInfo?.gender)
         this.selectGender(this.storedPatientInfo?.gender)
@@ -38,11 +38,13 @@ export class PatientInfoComponent implements OnInit {
       this.__sharedService.navigateToPage('/Addtional_Patient_Info');
     else this.__sharedService.navigateToPage('/Patient_Initial_Vitals');
   }
+
   selectGender(gender:string){
     this.selectedFemaleGender=(gender == 'female')? true : false;
     this.selectedMaleGender=(gender == 'female')? false : true;
     this.changeGender=false;
   }
+
   changeGenderSelection(){
     this.selectedFemaleGender=!this.selectedFemaleGender;
     this.selectedMaleGender=! this.selectedMaleGender;

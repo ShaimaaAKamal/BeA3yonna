@@ -30,7 +30,7 @@ constructor(private __SharedService:SharedService){}
 
 ngOnInit(): void {
   this.AllSymptoms=this.symptoms;
-   this.storedSymptoms=this.__SharedService.getStoredDataValue(this.Key);
+   this.storedSymptoms=this.__SharedService.getGenericStoredDataValue(this.Key);
    this.NextButtonDisabled=( this.storedSymptoms.length !=0)?false:true;
    this.selectedSymptoms=this.storedSymptoms;
 }

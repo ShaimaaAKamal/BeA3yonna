@@ -12,22 +12,22 @@ import { SharedService } from '../../../../Services/Shared/shared.service';
 })
 export class PatientInitialVitalsComponent {
 PatientInitialVitals!:FormGroup;
-storedPatientVital:PatientInitialVitals|null=null;
+storedPatientVital!:PatientInitialVitals;
 constructor(private __sharedService:SharedService){}
 ngOnInit(): void {
-this.storedPatientVital=this.__sharedService.getItemFromLocalStorage('patientInitialVitals')?JSON.parse(this.__sharedService.getItemFromLocalStorage('patientInitialVitals')):null;
- this.PatientInitialVitals= new FormGroup({
-     haveAllergy: new FormControl( this.storedPatientVital?.haveAllergy ?? '',[Validators.required]),
-     havePeramentDiseases: new FormControl(this.storedPatientVital?.havePeramentDiseases ?? '', [Validators.required]),
-     haveInfectiousDiseases: new FormControl(this.storedPatientVital?.haveInfectiousDiseases ?? '', [Validators.required]),
-     presubscribedMedication:new FormControl( this.storedPatientVital?.presubscribedMedication ??''),
+this.storedPatientVital=this.__sharedService.getGenericStoredDataValue('patientInitialVitals');
+this.PatientInitialVitals= new FormGroup({
+     haveAllergy: new FormControl( this.storedPatientVital.haveAllergy ,[Validators.required]),
+     havePeramentDiseases: new FormControl(this.storedPatientVital.havePeramentDiseases , [Validators.required]),
+     haveInfectiousDiseases: new FormControl(this.storedPatientVital.haveInfectiousDiseases , [Validators.required]),
+     presubscribedMedication:new FormControl( this.storedPatientVital.presubscribedMedication),
    });
 }
 BackToPreviousPage(){ 
-const patientInfo=this.__sharedService.getItemFromLocalStorage('patientInfo')?JSON.parse(this.__sharedService.getItemFromLocalStorage('patientInfo')):null;
+  const patientInfo=this.__sharedService.getGenericStoredDataValue('patientInfo');
 if(patientInfo.gender === 'male')
     this.__sharedService.navigateToPage('/Patient_Info');
-else  this.__sharedService.navigateToPage('/Addtional_Patient_Info');
+else  if (patientInfo.gender === 'female') this.__sharedService.navigateToPage('/Addtional_Patient_Info');
   }
   
 navigateNextPage(){

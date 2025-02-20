@@ -39,7 +39,7 @@
                                         </svg>
                                     </label>
                                 </div>
-                                <div class="px-4"></div>
+                                <div class="px-4"  [class.d-none]="selectedFemaleGender || selectedMaleGender"></div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" formControlName="gender" hidden id="maleGender"  value="male" [checked]="selectedMaleGender">
                                     <label class="form-check-label bg-light-gray p-3 text-center rounded-3  px-3 py-4" for="maleGender" [class.d-none]="selectedFemaleGender" (click)="selectGender('male')">
