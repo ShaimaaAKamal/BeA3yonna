@@ -12,6 +12,7 @@ import { PainedBodyPartComponent } from './Components/Main/PainedBodyPart/pained
 import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/permanent-diseases/permanent-diseases.component';
 import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
 import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
+import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent ,pathMatch:'full'},
@@ -21,11 +22,13 @@ const routes: Routes = [
     {path:'Patient_Initial_Vitals',component:PatientInitialVitalsComponent},
     {path:'Patient_Vitals',component:PatientVitalsComponent},
     {path:'Choose_Symptoms',component:ChooseSymptomsComponent},
-     {path:'Pain_Scale',component:RatePainComponent},
+    {path:'Pain_Scale',component:RatePainComponent},
     {path:'Choose_Pained_Body_Part',component:PainedBodyPartComponent},
-     {path:'Permanent Diseases',component:PermanentDiseasesComponent},
-     {path:'Patient_History',component:PatientComplainDetailsComponent},
-      {path:'Assesment',component:AssesmentComponent},
+    {path:'Permanent Diseases',component:PermanentDiseasesComponent},
+    {path:'Patient_History',component:PatientComplainDetailsComponent},
+    {path:'Assesment',component:AssesmentComponent},
+    {path:'Report',component:FinalReportComponent},
+
 
 
      

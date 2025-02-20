@@ -1,1 +1,59 @@
-<p>assesment works!</p>
+<main class="px-sm-2 px-md-5 py-5">
+  <section id="patientInfo" class="py-5">
+    <div class="container-fluid py-5">
+        <div class="row g-0">
+            <div class=" col-lg-8 col-xl-6 col-xxl-5">
+                 <div class="p-4 bg-white rounded-3">
+                    <h4>Assessment Info</h4>
+                    <div id="patientInfoSection">
+                        <app-patient-header></app-patient-header>
+                    </div>
+                    <form [formGroup]="patientAssessmentInfo">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Examiner Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" aria-describedby="name" formControlName="Examiner_Name" placeholder="Examiner Name">
+                             <div class="text-danger" *ngIf="patientAssessmentInfo.get('Examiner_Name')?.invalid && patientAssessmentInfo.get('Examiner_Name')?.touched">
+                                    <small *ngIf="patientAssessmentInfo.get('Examiner_Name')?.errors?.['required']">Name is required</small>
+                                    <small *ngIf="patientAssessmentInfo.get('Examiner_Name')?.errors?.['minlength']">Minimum 3 characters required</small>
+                             </div>
+                        </div>
+                         <div class="mb-3">
+                            <label for="age" class="form-label">Examination Location</label>
+                            <input type="text" class="form-control form-control-lg" id="age" aria-describedby="age"  formControlName="Examination_Location" placeholder="Examination Location">
+                            <div class="text-danger" *ngIf="patientAssessmentInfo.get('Examination_Location')?.invalid && patientAssessmentInfo.get('Examination_Location')?.touched">
+                                    <small *ngIf="patientAssessmentInfo.get('Examination_Location')?.errors?.['required']">Examination_Location is required</small>
+                            </div>
+                        </div>
+                        <div class="mb-3 genderParent">
+                            <label  class="form-label">Treatment Location</label>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" value="At Examination Point" id="At_Examination_Point" formControlName="Treatment_Location">
+                              <label class="form-check-label" for="At_Examination_Point">
+                              At Examination Point
+                              </label>
+                            </div>
+                            <div class="form-check mt-2">
+                              <input class="form-check-input" type="radio" value="Nearest Medical Center " id="Nearest_Medical_Center " formControlName="Treatment_Location">
+                              <label class="form-check-label" for="Nearest_Medical_Center">
+                              Nearest Medical Center 
+                              </label>
+                            </div>
+                              <div class="form-check mt-2">
+                              <input class="form-check-input" type="radio" value="Nearest Hospital" id="Nearest_Hospital" formControlName="Treatment_Location">
+                              <label class="form-check-label" for="Nearest_Hospital">
+                             Nearest Hospital
+                              </label>
+                            </div>
+                        </div>
+                    </form>
+                    <app-navigation-buttons 
+                            [PreviousPageUrl]="'/Patient_History'" [NextPageUrl]="'/Report'"
+                            [NextButtonDisabled]="patientAssessmentInfo.invalid"   [MoreCLasses]="' pt-4'" 
+                            [Key]="'AssessmentInfo'" [value]="patientAssessmentInfo.value" [actionName]="'Finish & Save'">
+                    </app-navigation-buttons>
+                    </div>
+                </div>
+            </div>
+        </div>   
+  </section>
+</main>
