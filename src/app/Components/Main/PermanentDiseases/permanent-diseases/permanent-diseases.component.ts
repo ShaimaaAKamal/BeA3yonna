@@ -14,9 +14,10 @@ NextButtonDisabled:boolean=true;
 selectedSymptoms:string[]=[];
 
 constructor(private __SharedService:SharedService){}
+
 ngOnInit(): void {
-  const PatientInitialVitals=this.__SharedService.getStoredDataValue('patientInitialVitals')
-  if(PatientInitialVitals.length == 0  || PatientInitialVitals.havePeramentDiseases === 'no')  
+  const PatientInitialVitals:PatientInitialVitals=this.__SharedService.getGenericStoredDataValue('patientInitialVitals');
+  if(PatientInitialVitals.havePeramentDiseases === 'no' || !PatientInitialVitals.havePeramentDiseases)  
     this.__SharedService.navigateToPage('/Patient_History');
 }
 }

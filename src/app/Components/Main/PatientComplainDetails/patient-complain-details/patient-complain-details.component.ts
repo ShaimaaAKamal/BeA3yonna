@@ -27,7 +27,7 @@ export class PatientComplainDetailsComponent implements OnInit {
 
   getPreviousPage(){
   const PatientInitialVitals=this.__SharedService.getGenericStoredDataValue('patientInitialVitals');
-  this.PreviousPageUrl=(PatientInitialVitals.havePeramentDiseases === 'no')
+  this.PreviousPageUrl=(PatientInitialVitals.havePeramentDiseases === 'no' || !PatientInitialVitals.havePeramentDiseases)
                               ?'Choose_Pained_Body_Part':'Permanent Diseases';
  
   }

@@ -12,8 +12,8 @@ import { SharedService } from '../../../../Services/Shared/shared.service';
 export class RatePainComponent implements OnInit {
 selectedColor:string='#fff;'
 painLevel:string='';
-painScale:PainScale={name:'',color:''};
-stortedPainScale:PainScale|null=null
+painScale!:PainScale;
+stortedPainScale!:PainScale;
 painScaleValues:PainScale[]=[
   {name:'noPain',color:'#308A45'},
   {name:'mild',color:'#91BE32'},
@@ -26,13 +26,15 @@ NextButtonDisabled:boolean=true;
 
 constructor(private __SharedService:SharedService){}
 ngOnInit(): void {
-      this.stortedPainScale=this.__SharedService.getItemFromLocalStorage('painScale')?JSON.parse(this.__SharedService.getItemFromLocalStorage('painScale')):null;
-      if(this.stortedPainScale) {
+      this.stortedPainScale=this.__SharedService.getGenericStoredDataValue('painScale');
+      if(this.stortedPainScale.name && this.stortedPainScale.color) {
           this.painLevel=this.stortedPainScale.name;
           this.selectedColor=this.stortedPainScale.color;
           this.NextButtonDisabled=false;
       }
+      this.painScale=   this.stortedPainScale;
 }
+
 scalePain(painLevel: string) {
   this.NextButtonDisabled=false;
   this.painLevel=painLevel;

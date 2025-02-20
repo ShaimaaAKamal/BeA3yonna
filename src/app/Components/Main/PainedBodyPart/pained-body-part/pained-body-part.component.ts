@@ -18,7 +18,8 @@ constructor(private __SharedService:SharedService){}
 ngOnInit(): void {
 const paths=document.getElementsByTagName('path');
 const pathsArray=Array.from(paths);
-this.storedPainedParts=this.__SharedService.getItemFromLocalStorage('painedParts')?JSON.parse(this.__SharedService.getItemFromLocalStorage('painedParts')):[];
+// this.storedPainedParts=this.__SharedService.getItemFromLocalStorage('painedParts')?JSON.parse(this.__SharedService.getItemFromLocalStorage('painedParts')):[];
+this.storedPainedParts=this.__SharedService.getGenericStoredDataValue('painedParts');
 if(this.storedPainedParts) this.displayStoryedPainedParts(pathsArray);
 pathsArray.forEach((path,index) => {
   path.addEventListener('click',()=>{
