@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { StyleService } from '../../../Services/style/style.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../Services/Shared/shared.service';
+import { Selec2 } from '../../../Interfaces/selec2';
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -26,11 +27,13 @@ export class HomeComponent{
       this.languages$ =this.__LanguageService.getLanguages();
  }
 
- onLanguageChoose(selectedLanguage:string){
+ onLanguageChoose(event:Selec2){
+      const selectedLanguage=event.value
       const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);
       this.__StyleService.switchStyleToRTL(isRTL,selectedLanguage);
       this.__TranslationService.use(selectedLanguage); // Switch language
       localStorage.setItem('lang',selectedLanguage);
+      localStorage.setItem('language',event.text);
       this.disabled=false;
  }
 

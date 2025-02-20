@@ -11,7 +11,7 @@
       <div class="row g-4">
         <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let Flag of( Flags$ | async ) ?? [] | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
           <div>
-            <app-flag-card [Flag]="Flag" (click)="chooseFlag(Flag)" [selected]="!!(Flag === selectedFlag || (storedCountry && Flag.name === storedCountry.name))"></app-flag-card>
+            <app-flag-card [Flag]="Flag" (click)="chooseFlag(Flag)" [selected]="!!(Flag.name === selectedFlag.name)"></app-flag-card>
           </div>
         </div>
       </div>

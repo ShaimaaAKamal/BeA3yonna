@@ -1,64 +1,6 @@
-// import { Directive, ElementRef, AfterViewInit, OnDestroy , Output,EventEmitter} from '@angular/core';
 
-// declare var window: any; // Declare window as a global object
-
-// @Directive({
-//   selector: '[appSelect2]',
-//   standalone: true
-// })
-// export class Select2Directive implements AfterViewInit, OnDestroy {
-//   @Output() valueChange = new EventEmitter<string>(); // Emits when value changes
-//   constructor(private el: ElementRef) {}
-
-
-//   ngAfterViewInit(): void {
-//     this.initializeSelect2();
-
-//     setTimeout(() => {
-//       const savedValue = localStorage.getItem('lang');
-//       if (savedValue)
-//                 window.$(this.el.nativeElement).val(savedValue).trigger('change'); 
-//     }, 200);
-//      window.$(this.el.nativeElement).on('change', (event:any) => {
-//       this.valueChange.emit(event.target.value);
-//       this.updateDirection(event.target.value);
-
-//     });
-//   }
-
-//   initializeSelect2(): void {
-//    setTimeout(() => {
-//       const currentLang = localStorage.getItem('lang') || 'en';
-//       const isRtl = this.isRtlLanguage(currentLang);
-//       console.log('isRtl',isRtl);
-//       window.$(this.el.nativeElement).select2({
-//         dir: isRtl ? 'rtl' : 'ltr' // Set direction dynamically
-//       });
-//       // window.$(this.el.nativeElement).val(currentLang).trigger('change'); 
-
-//     }, 100);
-//   }
-//     updateDirection(lang: string): void {
-//     const isRtl = this.isRtlLanguage(lang);
-//     window.$(this.el.nativeElement).select2('destroy');
-//     window.$(this.el.nativeElement).select2({
-//       dir: isRtl ? 'rtl' : 'ltr'
-//     });
-//   }
-
-//    isRtlLanguage(lang: string): boolean {
-//     const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
-//     return rtlLanguages.includes(lang);
-//   }
-
-//   ngOnDestroy(): void {
-//     window.$(this.el.nativeElement).select2('destroy');
-//   }
-// }
-
-
-// #########################
 import { Directive, ElementRef, AfterViewInit, OnDestroy, Output, EventEmitter, NgZone } from '@angular/core';
+import { Selec2 } from '../Interfaces/selec2';
 
 declare var window: any; // Global jQuery
 
@@ -67,7 +9,7 @@ declare var window: any; // Global jQuery
   standalone: true
 })
 export class Select2Directive implements AfterViewInit, OnDestroy {
-  @Output() valueChange = new EventEmitter<string>(); 
+  @Output() valueChange = new EventEmitter<Selec2>(); 
   private isSelect2Active = false; // Track if Select2 is initialized
 
   constructor(private el: ElementRef, private ngZone: NgZone) {}
@@ -98,8 +40,13 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
       // Attach change event only if not already attached
       window.$(this.el.nativeElement).off('change').on('change', (event: any) => {
         if (this.isSelect2Active) {
+        const selectedOption = event.target.selectedOptions[0]; 
+        const optionInnerHTML = selectedOption ? selectedOption.innerHTML : '';
           this.ngZone.run(() => {
-            this.valueChange.emit(event.target.value);
+            this.valueChange.emit({
+                value: event.target.value, 
+                text: optionInnerHTML 
+            });
             this.updateDirection(event.target.value);
           });
         }

@@ -63,6 +63,9 @@ button{
 .card-font-size{
     font-size: 1.25rem;
 }
+.small-font-size{
+    font-size:.8rem;
+}
 /* end font styles */
 
 /* start background styles */
@@ -93,6 +96,9 @@ button{
 /* start of text-color styles */
 .text-green-darker{
     color: var(--main-darker-color);
+}
+.text-gray{
+    color:rgb(83, 83, 83);
 }
 /* end of text-color styles */
 

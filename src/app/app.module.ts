@@ -28,7 +28,9 @@ import { PainedBodyPartComponent } from './Components/Main/PainedBodyPart/pained
 import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/permanent-diseases/permanent-diseases.component';
 import { DisplaySymptomsComponent } from './Components/Shared/DisplaySymptoms/display-symptoms/display-symptoms.component';
 import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
-import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component'; 
+import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
+import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
+import { PatientHeaderComponent } from './Components/Shared/PatientHeader/patient-header/patient-header.component'; 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -57,6 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DisplaySymptomsComponent,
     PatientComplainDetailsComponent,
     AssesmentComponent,
+    FinalReportComponent,
+    PatientHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,9 @@ export class AppModule {
     constructor(private __TranslateService: TranslateService,private __StyleService:StyleService) {
     this.__TranslateService.setDefaultLang('en'); // Default to English
     const savedLang = localStorage.getItem('lang') || 'en';
+    const savedLanguage = localStorage.getItem('language') || 'english';
     localStorage.setItem('lang',savedLang);
+    localStorage.setItem('language',savedLanguage);
     this.__TranslateService.use(savedLang);
     const isRTL:boolean=this.__StyleService.isRtl(savedLang);
     this.__StyleService.switchStyleToRTL(isRTL,savedLang);
