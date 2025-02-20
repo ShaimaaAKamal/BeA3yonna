@@ -15,6 +15,7 @@ export class NavigationButtonsComponent {
 @Input() MoreCLasses:string='';
 @Input() Key:string='';
 @Input() value:any;
+@Input() actionName:string='Next';
 constructor(private __SharedService:SharedService){}
 BackToPreviousPage(){
  this.__SharedService.navigateToPage(this.PreviousPageUrl);

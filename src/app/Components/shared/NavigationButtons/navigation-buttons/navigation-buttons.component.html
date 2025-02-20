@@ -1,4 +1,5 @@
  <div [ngClass]="'d-flex align-items-center justify-content-between' + MoreCLasses" > 
     <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>
-    <app-button-with-icon btnAction="{{'Next'}}" [disabled]="NextButtonDisabled"  (click)="navigateNextPage()"></app-button-with-icon>
+       <app-button-with-icon [btnAction]="actionName" [disabled]="NextButtonDisabled"  (click)="navigateNextPage()"></app-button-with-icon>
+    <!-- <app-button-with-icon btnAction="{{'Next'}}" [disabled]="NextButtonDisabled"  (click)="navigateNextPage()"></app-button-with-icon> -->
 </div>
