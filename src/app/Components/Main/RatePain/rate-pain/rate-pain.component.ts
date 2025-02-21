@@ -15,12 +15,12 @@ painLevel:string='';
 painScale!:PainScale;
 stortedPainScale!:PainScale;
 painScaleValues:PainScale[]=[
-  {name:'noPain',color:'#308A45'},
-  {name:'mild',color:'#91BE32'},
-  {name:'moderate',color:'#F3F320'},
-  {name:'severe',color:'#F3B210'},
-  {name:'verySevere',color:'#F37100'},
-  {name:'worstPain',color:'#D30000'},
+{name:'no Pain',color:'#308A45',textColor:"#fff"},
+  {name:'mild',color:'#91BE32',textColor:"#fff"},
+  {name:'moderate',color:'#F3F320',textColor:"#000"},
+  {name:'severe',color:'#F3B210',textColor:"#fff"},
+  {name:'very Severe',color:'#F37100',textColor:"#fff"},
+  {name:'worst Pain',color:'#D30000',textColor:"#fff"},
 ];
 NextButtonDisabled:boolean=true;
 
