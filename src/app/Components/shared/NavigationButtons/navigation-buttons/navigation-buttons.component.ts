@@ -21,7 +21,9 @@ BackToPreviousPage(){
  this.__SharedService.navigateToPage(this.PreviousPageUrl);
 }
 navigateNextPage()
-{ if(this.Key)
+{ if(this.actionName == 'Done')
+      this.__SharedService.clearLocalStorage();
+  if(this.Key)
     this.__SharedService.saveItemInLocalStorage(this.Key,JSON.stringify(this.value));
  this.__SharedService.navigateToPage(this.NextPageUrl);
 }
