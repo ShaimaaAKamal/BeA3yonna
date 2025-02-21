@@ -92,6 +92,9 @@ button{
     background-color: var(--gray-light-color);
 }
 
+.bg-svg-body{
+    background-color: #F2F2F2;
+}
 /* end background styles */
 
 /* start of border */

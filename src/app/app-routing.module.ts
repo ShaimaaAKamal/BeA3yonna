@@ -13,6 +13,7 @@ import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/
 import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
 import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
 import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
+import { ReportComponent } from './Components/Main/Report/report/report.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent ,pathMatch:'full'},
@@ -27,7 +28,8 @@ const routes: Routes = [
     {path:'Permanent Diseases',component:PermanentDiseasesComponent},
     {path:'Patient_History',component:PatientComplainDetailsComponent},
     {path:'Assesment',component:AssesmentComponent},
-    {path:'Report',component:FinalReportComponent},
+    // {path:'Report',component:FinalReportComponent},
+    {path:'Report',component:ReportComponent},
 
 
 

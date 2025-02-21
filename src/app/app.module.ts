@@ -30,7 +30,8 @@ import { DisplaySymptomsComponent } from './Components/Shared/DisplaySymptoms/di
 import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
 import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
 import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
-import { PatientHeaderComponent } from './Components/Shared/PatientHeader/patient-header/patient-header.component'; 
+import { PatientHeaderComponent } from './Components/Shared/PatientHeader/patient-header/patient-header.component';
+import { ReportComponent } from './Components/Main/Report/report/report.component'; 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssesmentComponent,
     FinalReportComponent,
     PatientHeaderComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
