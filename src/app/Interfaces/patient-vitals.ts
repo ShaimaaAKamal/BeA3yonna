@@ -7,4 +7,5 @@ export interface PatientVitals {
             Blood_Sugar: string,
             Heart_Rate: string,
             Breathe_Rate: string,
+              [key: string]: string;
 }

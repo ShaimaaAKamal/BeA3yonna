@@ -1,4 +1,5 @@
 export interface PainScale {
     name:string,
-    color:string
+    color:string,
+    textColor:string
 }
