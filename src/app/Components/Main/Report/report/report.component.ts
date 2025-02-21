@@ -33,13 +33,14 @@ export class ReportComponent {
     @HostListener('window:resize', ['$event'])
      onResize() {
       this.isSmallScreen = window.innerWidth < 1200;
-      this.isLargeScreen = window.innerWidth < 1200 && window.innerWidth < 768;
+      this.isLargeScreen = window.innerWidth < 1200 && window.innerWidth < 578;
     }
   
   ngOnInit(): void {
     this.onResize(); 
     this.patientReportData=this.__SharedService.getAllLocalStorage();
     this.patientVitals=this.patientReportData['patientVitals'];
+    this.patientVitals=this.__SharedService.formatPatientVitalsValuesByAddingUnits(this.patientVitals);
     this.painLevel=this.patientReportData['painScale'];
     this.fullPatientHistory=this.getPatientHistory();
     this.fullPatientHistoryBeforeRename=this.fullPatientHistory;
@@ -57,10 +58,8 @@ export class ReportComponent {
       additionalInfo:"More Info",
       presubscribedMedication:'Medication'
     };
-    console.log(this.fullPatientHistoryBeforeRename);
-    this.fullPatientHistory = this.renameKeys(this.fullPatientHistory, keyMappings);
-    this.displayStoryedPainedParts(Array.from(document.getElementsByTagName('path')));
-        console.log(this.patientReportData);
+    this.fullPatientHistory = this.__SharedService.renameKeys(this.fullPatientHistory, keyMappings,['More Info','Medication']);
+    this.__SharedService.displayStoryedPainedParts(Array.from(document.getElementsByTagName('path')),this.patientReportData);
   }
   
   getPatientHistory(){
@@ -81,23 +80,8 @@ export class ReportComponent {
       return Object.keys(obj);
     }
   
-  renameKeys(obj: any, keyMap: { [key: string]: string }): any {
-    return Object.keys(obj).reduce((newObj: any, key: string) => {
-      const newKey = keyMap[key] || key; 
-      if(newKey == "More Info" || newKey == "Medication") 
-        return newObj;
-      newObj[newKey] = obj[key];
-      return newObj;
-    }, {});}
-  
   getTodayDate(){
           return new Intl.DateTimeFormat('en-GB').format(new Date(Date.now()));
     }
-  displayStoryedPainedParts(pathsArray:any){
-  pathsArray.forEach((path:any,index:number) => {
-      const existedIndex = this.patientReportData['painedParts'].indexOf(index);
-      if(existedIndex != -1){
-          path.setAttribute('fill','red');
-      }
-});}
+
 }

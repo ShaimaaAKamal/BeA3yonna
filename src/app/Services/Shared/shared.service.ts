@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { PatientReportData } from '../../Interfaces/patient-report-data';
+import { PatientVitals } from '../../Interfaces/patient-vitals';
 
 @Injectable({
   providedIn: 'root'
@@ -44,33 +45,6 @@ export class SharedService {
     return storedData;
   }
 
-  // getDefaultValue(key:string){
-  //  if(key == 'AssessmentInfo')
-  //     return { Examiner_Name:'', Examination_Location:'',Treatment_Location:''}
-  //  else if(key == 'patientHistory')
-  //     return { complainTime:'', lastMealTime:''}
-  //  else if(key == 'patientInitialVitals')
-  //     return { haveAllergy: "",haveInfectiousDiseases: "",havePeramentDiseases:"",presubscribedMedication: ""}
-  //   else if(key == 'painedParts' || 'Symptoms' ||'PermanentDiseases')
-  //     return [];
-  //   else if(key == 'painScale')
-  //     return {name:'',color:'',textColor:''};
-  //     else if(key == 'CountrycurrentPage')
-  //     return 1;
-  //    else if(key == 'patientInfo')
-  //     return { name:'', age:'',gender:''}
-  //    else if(key == 'additionalPatientInfo')
-  //     return { pregnant: '', havePeriod:'', additionalInfo:''}
-  //     else if(key == 'Country')
-  //     return  { name:'',flags:{},languages:{}}
-  //   else if(key == 'patientVitals')
-  //       return {Weight:'',Height: '',Temperature: '',Blood_Pressure: '',Oxgyen_Rate: '',Blood_Sugar: '',Heart_Rate: '',Breathe_Rate: '',}
-  //   else if(key == 'lang')
-  //       return 'en'
-  //   else if(key == 'language')
-  //       return 'english'
-  //   else return '';
-  // }
   getDefaultValue(key: string) {
     switch (key) {
         case 'AssessmentInfo':
@@ -103,12 +77,11 @@ export class SharedService {
             return '';
     }
 }
-
   navigateToPage(pageUrl:string){
     this.__Router.navigate([pageUrl])
   }
 
-  getAllLocalStorage(): PatientReportData {
+getAllLocalStorage(): PatientReportData {
   let storageData!:PatientReportData
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -124,4 +97,44 @@ export class SharedService {
 clearLocalStorage(){
   localStorage.clear();
 }
+
+formatPatientVitalsValuesByAddingUnits(patientVitals:PatientVitals):PatientVitals{
+const Units:PatientVitals= {
+  Weight: ' Kg',
+  Height: ' Cm',
+  Temperature: ' deg',
+  Blood_Pressure: ' mmHg',
+  Oxgyen_Rate: ' %',
+  Blood_Sugar: ' mg/dL',
+  Heart_Rate: ' bpm',
+  Breathe_Rate: ' bpm'
+};
+
+// Update values based on the substring mapping
+  const updatedObj = Object.keys(Units).reduce((acc, key) => {
+    acc[key as keyof PatientVitals] = patientVitals[key as keyof PatientVitals] 
+      ? `${patientVitals[key as keyof PatientVitals]}${Units[key as keyof PatientVitals]}`
+      : '';
+    return acc;
+  }, {} as PatientVitals);
+return updatedObj;
+ }
+
+displayStoryedPainedParts(pathsArray:any,Data:any){
+  pathsArray.forEach((path:any,index:number) => {
+      const existedIndex = Data['painedParts'].indexOf(index);
+      if(existedIndex != -1){
+          path.setAttribute('fill','red');
+      }
+});}
+
+  
+renameKeys(obj: any, keyMap: { [key: string]: string },ExcludedKeys:string[]): any {
+    return Object.keys(obj).reduce((newObj: any, key: string) => {
+      const newKey = keyMap[key] || key; 
+      if(ExcludedKeys.includes(newKey)) 
+        return newObj;
+      newObj[newKey] = obj[key];
+      return newObj;
+    }, {});}
 }
