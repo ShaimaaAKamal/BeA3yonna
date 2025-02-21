@@ -18,9 +18,9 @@
 <div class="ps-2 text-right">
     <span class="fw-semibold">{{patientInfo.name | titlecase}}</span>
    <div class="small-font-size d-flex align-items-start flex-column justify-content-center">
-         <span>{{country.name}}</span>
+         <span>{{country.name | titlecase}}</span>
          <div class="d-flex">
-            <span class="pe-1"> {{language}},</span>
+            <span class="pe-1"> {{language |titlecase}},</span>
             <span>{{patientInfo.age}} years Old</span>
          </div>
    </div>

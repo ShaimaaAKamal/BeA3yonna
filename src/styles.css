@@ -66,6 +66,7 @@ button{
 .small-font-size{
     font-size:.8rem;
 }
+
 /* end font styles */
 
 /* start background styles */
@@ -93,6 +94,9 @@ button{
 
 /* end background styles */
 
+/* start of border */
+
+/* end of border */
 /* start of text-color styles */
 .text-green-darker{
     color: var(--main-darker-color);
