@@ -62,10 +62,11 @@
                         <textarea class="form-control"  id="presubscribedMedication" formControlName="presubscribedMedication"></textarea>
                       </div>
                     </form>
-                     <div class="d-flex align-items-center justify-content-between pt-4"> 
-                        <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>
-                        <app-button-with-icon btnAction="{{'Next'}}" [disabled]="PatientInitialVitals.invalid"  (click)="navigateNextPage()"></app-button-with-icon>
-                    </div>
+                     <app-navigation-buttons 
+                            [PreviousPageUrl]="previousPageUrl" [NextPageUrl]="'/Patient_Vitals'"
+                            [NextButtonDisabled]="PatientInitialVitals.invalid"   [MoreCLasses]="' pt-4'" 
+                            [Key]="'patientInitialVitals'" [value]="PatientInitialVitals.value" [actionName]="'Next'">
+                        </app-navigation-buttons>
                 </div>
             </div>
         </div>
