@@ -200,3 +200,6 @@ html[dir='rtl'] .backBtnArrow{
 html[dir='ltr'] #PainScaleslevelValues{
     transform:scale(.93);
 }
+html[dir='rtl'] h3{
+    font-size: 3rem;
+}

@@ -4,44 +4,44 @@
         <div class="row g-0">
             <div class=" col-lg-8 col-xl-6 col-xxl-5">
                  <div class="p-4 bg-white rounded-3">
-                    <h4>Assessment Info</h4>
+                    <h4>{{'Assessment Info' | translate }}</h4>
                     <div id="patientInfoSection">
                         <app-patient-header></app-patient-header>
                     </div>
                     <form [formGroup]="patientAssessmentInfo">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Examiner Name</label>
-                            <input type="text" class="form-control form-control-lg" id="name" aria-describedby="name" formControlName="Examiner_Name" placeholder="Examiner Name">
+                            <label for="name" class="form-label">{{'Examiner Name' | translate}}</label>
+                            <input type="text" class="form-control form-control-lg" id="name" aria-describedby="name" formControlName="Examiner_Name" placeholder="{{'Examiner Name' | translate}}">
                              <div class="text-danger" *ngIf="patientAssessmentInfo.get('Examiner_Name')?.invalid && patientAssessmentInfo.get('Examiner_Name')?.touched">
-                                    <small *ngIf="patientAssessmentInfo.get('Examiner_Name')?.errors?.['required']">Name is required</small>
-                                    <small *ngIf="patientAssessmentInfo.get('Examiner_Name')?.errors?.['minlength']">Minimum 3 characters required</small>
+                                    <small *ngIf="patientAssessmentInfo.get('Examiner_Name')?.errors?.['required']">{{'Name is required' | translate}}</small>
+                                    <small *ngIf="patientAssessmentInfo.get('Examiner_Name')?.errors?.['minlength']">{{'Minimum 3 characters required' | translate}}</small>
                              </div>
                         </div>
                          <div class="mb-3">
-                            <label for="age" class="form-label">Examination Location</label>
-                            <input type="text" class="form-control form-control-lg" id="age" aria-describedby="age"  formControlName="Examination_Location" placeholder="Examination Location">
+                            <label for="age" class="form-label">{{'Examination Location' | translate}}</label>
+                            <input type="text" class="form-control form-control-lg" id="age" aria-describedby="age"  formControlName="Examination_Location" placeholder="{{'Examination Location' | translate}}">
                             <div class="text-danger" *ngIf="patientAssessmentInfo.get('Examination_Location')?.invalid && patientAssessmentInfo.get('Examination_Location')?.touched">
-                                    <small *ngIf="patientAssessmentInfo.get('Examination_Location')?.errors?.['required']">Examination_Location is required</small>
+                                    <small *ngIf="patientAssessmentInfo.get('Examination_Location')?.errors?.['required']">{{'Examination_Location is required' | translate}}</small>
                             </div>
                         </div>
                         <div class="mb-3 genderParent">
-                            <label  class="form-label">Treatment Location</label>
+                            <label  class="form-label">{{'Treatment Location' | translate}}</label>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" value="At Examination Point" id="At_Examination_Point" formControlName="Treatment_Location">
                               <label class="form-check-label" for="At_Examination_Point">
-                              At Examination Point
+                              {{'At Examination Point' | translate}}
                               </label>
                             </div>
                             <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="Nearest Medical Center " id="Nearest_Medical_Center " formControlName="Treatment_Location">
                               <label class="form-check-label" for="Nearest_Medical_Center">
-                              Nearest Medical Center 
+                              {{'Nearest Medical Center' | translate }}
                               </label>
                             </div>
                               <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="Nearest Hospital" id="Nearest_Hospital" formControlName="Treatment_Location">
                               <label class="form-check-label" for="Nearest_Hospital">
-                             Nearest Hospital
+                             {{'Nearest Hospital' | translate}}
                               </label>
                             </div>
                         </div>

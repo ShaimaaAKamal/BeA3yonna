@@ -23,7 +23,7 @@ export class PatientInfoComponent implements OnInit {
          this.storedPatientInfo=this.__sharedService.getGenericStoredDataValue('patientInfo');
      this.patientInfoForm = new FormGroup({
     name: new FormControl(this.storedPatientInfo.name ,[Validators.required, Validators.minLength(3)]),
-    age: new FormControl(this.storedPatientInfo.age , [Validators.required,Validators.min(1),Validators.max(100)]),
+    age: new FormControl(this.storedPatientInfo.age , [Validators.required,Validators.min(1),Validators.max(100),Validators.pattern('^[0-9]+$')]),
     gender: new FormControl(this.storedPatientInfo.gender , [Validators.required]),
   });
   if(this.storedPatientInfo?.gender)

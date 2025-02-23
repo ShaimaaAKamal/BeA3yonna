@@ -4,27 +4,28 @@
         <div class="row g-0">
             <div class=" col-lg-8 col-xl-6 col-xxl-5">
                  <div class="p-4 bg-white rounded-3">
-                    <h4>Patient Info</h4>
+                    <h4>{{'Patient Info' | translate}}</h4>
                     <form [formGroup]="patientInfoForm">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control form-control-lg" id="name" aria-describedby="name" formControlName="name" placeholder="Patient Name">
+                            <label for="name" class="form-label">{{'Name' | translate}}</label>
+                            <input type="text" class="form-control form-control-lg" id="name" aria-describedby="name" formControlName="name" placeholder="{{'Patient Name' | translate }}">
                              <div class="text-danger" *ngIf="patientInfoForm.get('name')?.invalid && patientInfoForm.get('name')?.touched">
-                                    <small *ngIf="patientInfoForm.get('name')?.errors?.['required']">Name is required</small>
-                                    <small *ngIf="patientInfoForm.get('name')?.errors?.['minlength']">Minimum 3 characters required</small>
+                                    <small *ngIf="patientInfoForm.get('name')?.errors?.['required']">{{'Name is required' | translate}}</small>
+                                    <small *ngIf="patientInfoForm.get('name')?.errors?.['minlength']">{{'Minimum 3 characters required' | translate}}</small>
                              </div>
                         </div>
                          <div class="mb-3">
-                            <label for="age" class="form-label">Age</label>
-                            <input type="number" class="form-control form-control-lg" id="age" aria-describedby="age"  formControlName="age" placeholder="Patient Age">
+                            <label for="age" class="form-label">{{'Age' | translate}}</label>
+                            <input type="text" class="form-control form-control-lg" id="age" aria-describedby="age"  formControlName="age" placeholder="{{'Patient Age' | translate}}">
                             <div class="text-danger" *ngIf="patientInfoForm.get('age')?.invalid && patientInfoForm.get('age')?.touched">
-                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['required']">Age is required</small>
-                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['min']">Max Allowed Age is 1</small>
-                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['max']">Max Allowed Age is 100</small>
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['required']">{{'Age is required' | translate}}</small>
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['pattern']">{{'Must be a number' | translate}}</small>
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['min']">{{'Max Allowed Age is 1' | translate}}</small>
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['max']">{{'Max Allowed Age is 100' | translate}}</small>
                             </div>
                         </div>
                         <div class="mb-3 genderParent">
-                            <label  class="form-label">Gender</label>
+                            <label  class="form-label">{{'Gender' | translate}}</label>
                             <div class="d-flex align-items-center justify-content-center">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" formControlName="gender"  hidden id="femaleGender" value="female" [checked]="selectedFemaleGender">
@@ -53,14 +54,14 @@
                                     </div>
                             </div>
                              <div class="text-danger" *ngIf="patientInfoForm.get('gender')?.invalid && patientInfoForm.get('gender')?.touched">
-                                    <small *ngIf="patientInfoForm.get('gender')?.errors?.['required']">Must Choose a gender</small>
+                                    <small *ngIf="patientInfoForm.get('gender')?.errors?.['required']">{{'Must Choose a gender' | translate}}</small>
                              </div>
                         </div>
                         
                     </form>
 
                     <div class="text-center" [class.d-none]="changeGender">
-                        <span class="text-green-darker" (click)="changeGenderSelection()">Change Gender</span>
+                        <span class="text-green-darker" (click)="changeGenderSelection()">{{'Change Gender' | translate}}</span>
                     </div>
                      <div class="d-flex align-items-center justify-content-between pt-4"> 
                         <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>

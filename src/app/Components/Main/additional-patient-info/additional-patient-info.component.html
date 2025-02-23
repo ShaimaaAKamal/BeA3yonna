@@ -4,44 +4,44 @@
         <div class="row g-0">
             <div class=" col-lg-8 col-xl-6 col-xxl-5">
                  <div class="p-4 bg-white rounded-3">
-                    <h4>Additional Patient Info</h4>
+                    <h4>{{'Additional Patient Info' | translate}}</h4>
                     <form [formGroup]="additionalPatientInfo">
                       <div class="py-4">
-                        <span>Are you pregnent ?</span>
+                        <span>{{'Are you pregnent ?' | translate}}</span>
                         <div class="ps-1"> 
                           <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="yes" id="yespregnant" formControlName="pregnant">
                               <label class="form-check-label" for="yespregnant">
-                                Yes
+                                {{'Yes' | translate}}
                               </label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" id="Notpregnant" value="no" formControlName="pregnant">
                               <label class="form-check-label" for="Notpregnant">
-                                No
+                                {{'No' | translate}}
                               </label>
                             </div>
                         </div>
                       </div>
                       <div>
-                        <span>Do you have Period ?</span>
+                        <span>{{'Do you have Period ?' | translate}}</span>
                         <div class="ps-1"> 
                           <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="yes" id="yeshavePeriod" formControlName="havePeriod">
                               <label class="form-check-label" for="yeshavePeriod">
-                                Yes
+                                {{'Yes' | translate}}
                               </label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" id="noPeriod" value="no" formControlName="havePeriod">
                               <label class="form-check-label" for="noPeriod">
-                                No
+                                {{'No' | translate}}
                               </label>
                             </div>
                         </div>
                       </div>
                       <div class="form-floating py-4">
-                        <span>Additional Information <small>(optional)</small></span>
+                        <span>{{'Additional Information' | translate}} <small>({{'optional' | translate}})</small></span>
                         <textarea class="form-control"  id="additionalInfo" formControlName="additionalInfo"></textarea>
                       </div>
                     </form>

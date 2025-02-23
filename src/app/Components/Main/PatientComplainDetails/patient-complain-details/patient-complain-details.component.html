@@ -4,92 +4,92 @@
         <div class="row g-0">
             <div class=" col-lg-8 col-xl-6 col-xxl-5">
                  <div class=" p-4 bg-white rounded-3 ">
-                    <h4>More Details</h4>
+                    <h4>{{'More Details' | translate}}</h4>
                     <form [formGroup]="PatientHistory">
                       <div class="py-4">
-                        <span>How long has this been troubling you ?</span>
+                        <span>{{'How long has this been troubling you ?' | translate}}</span>
                         <div class="ps-1"> 
                           <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="From Morning" id="From Morning" formControlName="complainTime">
                               <label class="form-check-label" for="From Morning">
-                                From Morning
+                                {{'From Morning' | translate}}
                               </label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" id="From Evening" value="From Evening" formControlName="complainTime">
                               <label class="form-check-label" for="From Evening">
-                                From Evening
+                                {{'From Evening' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="Less_than_24hours" value="Less than 24 hours" formControlName="complainTime">
                               <label class="form-check-label" for="Less_than_24hours">
-                                Less than 24 hours
+                                {{'Less than 24 hours' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="After_taking_medicine" value="After taking medicine" formControlName="complainTime">
                               <label class="form-check-label" for="After_taking_medicine">
-                                After taking medicine
+                                {{'After taking medicine' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="After_eating" value="After eating" formControlName="complainTime">
                               <label class="form-check-label" for="After_eating">
-                                After eating
+                               {{'After eating' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="2hours_before" value="2 hours before" formControlName="complainTime">
                               <label class="form-check-label" for="2hours_before">
-                                2 hours before
+                                {{'2 hours before' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="4hours_before" value="4 hours before" formControlName="complainTime">
                               <label class="form-check-label" for="4hours_before">
-                                4 hours before
+                                {{'4 hours before' | translate}}
                               </label>
                             </div>
                         </div>
                       </div>
                       <div>
-                        <span>When was your last meal ?</span>
+                        <span>{{'When was your last meal ?' | translate}}</span>
                         <div class="ps-1"> 
                           <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="From Morning" id="morningMeal" formControlName="lastMealTime">
                               <label class="form-check-label" for="morningMeal">
-                                From Morning
+                               {{ 'From Morning' | translate}}
                               </label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" id="eveningMeal" value="From Evening" formControlName="lastMealTime">
                               <label class="form-check-label" for="eveningMeal">
-                                From Evening
+                                {{'From Evening' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="Less_than_24hoursMeals" value="Less than 24 hours" formControlName="lastMealTime">
                               <label class="form-check-label" for="noPeramentDiseases">
-                                Less than 24 hours
+                                {{'Less than 24 hours' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="More_than_24hoursMeals" value=" More than 4 hours" formControlName="lastMealTime">
                               <label class="form-check-label" for="More_than_24hoursMeals">
-                                More than 4 hours
+                                {{'More than 4 hours' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="More_than_12hoursMeals" value="More Than 12 Hours" formControlName="lastMealTime">
                               <label class="form-check-label" for="More_than_12hoursMeals">
-                                More Than 12 Hours
+                                {{'More Than 12 Hours' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="More_than_4hoursMeals" value="More Than 4 Hours" formControlName="lastMealTime">
                               <label class="form-check-label" for="More_than_12hoursMeals">
-                                More Than 4 Hours
+                                {{'More Than 4 Hours' | translate}}
                               </label>
                             </div>
                         </div>
@@ -100,10 +100,6 @@
                             [NextButtonDisabled]="PatientHistory.invalid"   [MoreCLasses]="' pt-4'" 
                             [Key]="'patientHistory'" [value]="PatientHistory.value" [actionName]="'Assesment'">
                         </app-navigation-buttons>
-                     <!-- <div class="d-flex align-items-center justify-content-between pt-4"> 
-                        <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>
-                        <app-button-with-icon btnAction="{{'Next'}}" [disabled]="PatientInitialVitals.invalid"  (click)="navigateNextPage()"></app-button-with-icon>
-                    </div> -->
                 </div>
             </div>
         </div>

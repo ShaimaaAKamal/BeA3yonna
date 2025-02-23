@@ -19,14 +19,14 @@ export class PatientVitalsComponent implements OnInit {
   ngOnInit(): void {
     this.storedPatientVitals=this.__SharedService.getGenericStoredDataValue('patientVitals');
     this.patientVitals = new FormGroup({
-        Weight: new FormControl(this.storedPatientVitals?.Weight ?? '',[Validators.required]),
-        Height: new FormControl(this.storedPatientVitals?.Height ?? '', [Validators.required]),
-        Temperature: new FormControl(this.storedPatientVitals?.Temperature ?? '', [Validators.required]),
-        Blood_Pressure: new FormControl(this.storedPatientVitals?.Blood_Pressure ?? '', [Validators.required]),
-        Oxgyen_Rate: new FormControl(this.storedPatientVitals?.Oxgyen_Rate ?? '', [Validators.required]),
-        Blood_Sugar: new FormControl(this.storedPatientVitals?.Blood_Sugar ?? '', [Validators.required]),
-        Heart_Rate: new FormControl(this.storedPatientVitals?.Heart_Rate ?? '', [Validators.required]),
-        Breathe_Rate: new FormControl(this.storedPatientVitals?.Breathe_Rate ?? '', [Validators.required]),
+        Weight: new FormControl(this.storedPatientVitals?.Weight ?? '',[Validators.required,Validators.pattern('^[0-9]+$')]),
+        Height: new FormControl(this.storedPatientVitals?.Height ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        Temperature: new FormControl(this.storedPatientVitals?.Temperature ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        Blood_Pressure: new FormControl(this.storedPatientVitals?.Blood_Pressure ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        Oxgyen_Rate: new FormControl(this.storedPatientVitals?.Oxgyen_Rate ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        Blood_Sugar: new FormControl(this.storedPatientVitals?.Blood_Sugar ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        Heart_Rate: new FormControl(this.storedPatientVitals?.Heart_Rate ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        Breathe_Rate: new FormControl(this.storedPatientVitals?.Breathe_Rate ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
       });
   }
 }

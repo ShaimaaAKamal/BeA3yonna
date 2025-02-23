@@ -1,10 +1,9 @@
 import { LanguageService } from '../../../Services/language/language.service';
 import { Language } from '../../../Interfaces/language';
 import {  Component } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import {  Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { StyleService } from '../../../Services/style/style.service';
-import { Router } from '@angular/router';
 import { SharedService } from '../../../Services/Shared/shared.service';
 import { Selec2 } from '../../../Interfaces/selec2';
 @Component({

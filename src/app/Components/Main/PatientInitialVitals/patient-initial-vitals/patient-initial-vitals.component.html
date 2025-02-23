@@ -4,61 +4,61 @@
         <div class="row g-0">
             <div class=" col-lg-8 col-xl-6 col-xxl-5">
                  <div class="p-4 bg-white rounded-3">
-                    <h4>Patient Initial Vitals</h4>
+                    <h4>{{'Patient Initial Vitals' | translate}}</h4>
                     <form [formGroup]="PatientInitialVitals">
                       <div class="py-4">
-                        <span>Do  you any allergy ?</span>
+                        <span>{{'Do you any allergy ?' | translate}}</span>
                         <div class="ps-1"> 
                           <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="yes" id="yeshaveAllergy" formControlName="haveAllergy">
                               <label class="form-check-label" for="yeshaveAllergy">
-                                Yes
+                                {{'Yes' | translate}}
                               </label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" id="noAllergy" value="no" formControlName="haveAllergy">
                               <label class="form-check-label" for="noAllergy">
-                                No
+                               {{'No' | translate}}
                               </label>
                             </div>
                         </div>
                       </div>
                       <div>
-                        <span>Do  you have any permanent diseases ?</span>
+                        <span>{{'Do you have any permanent diseases ?' | translate}}</span>
                         <div class="ps-1"> 
                           <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="yes" id="yeshavePeramentDiseases" formControlName="havePeramentDiseases">
                               <label class="form-check-label" for="yeshavePeramentDiseases">
-                                Yes
+                                {{'Yes' | translate}}
                               </label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" id="noPeramentDiseases" value="no" formControlName="havePeramentDiseases">
                               <label class="form-check-label" for="noPeramentDiseases">
-                                No
+                                {{'No' | translate}}
                               </label>
                             </div>
                         </div>
                       </div>
                       <div class="py-4">
-                        <span>Do  you have any Infectious diseases ?</span>
+                        <span>{{'Do you have any Infectious diseases ?' | translate}}</span>
                         <div class="ps-1"> 
                           <div class="form-check mt-2">
                               <input class="form-check-input" type="radio" value="yes" id="yeshaveInfectiousDiseases" formControlName="haveInfectiousDiseases">
                               <label class="form-check-label" for="yeshaveInfectiousDiseases">
-                                Yes
+                                {{'Yes' | translate}}
                               </label>
                             </div>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" id="noInfectiousDiseases" value="no" formControlName="haveInfectiousDiseases">
                               <label class="form-check-label" for="noInfectiousDiseases">
-                                No
+                                {{'No' | translate}}
                               </label>
                             </div>
                         </div>
                       </div>
                       <div class="form-floating">
-                        <span>Presubscribed Medications <small>(optional)</small></span>
+                        <span>{{'Presubscribed Medications' | translate}} <small>({{'optional' | translate}})</small></span>
                         <textarea class="form-control"  id="presubscribedMedication" formControlName="presubscribedMedication"></textarea>
                       </div>
                     </form>

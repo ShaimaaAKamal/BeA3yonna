@@ -18,10 +18,10 @@
 <div class="ps-2 text-right">
     <span class="fw-semibold">{{patientInfo.name | titlecase}}</span>
    <div class="small-font-size d-flex align-items-start flex-column justify-content-center">
-         <span>{{country.name | titlecase}}</span>
+         <span>{{country.name| translate | titlecase}}</span>
          <div class="d-flex">
-            <span class="pe-1"> {{language |titlecase}},</span>
-            <span>{{patientInfo.age}} years Old</span>
+            <span class="pe-1"> {{language | translate |titlecase}},</span>
+            <span>{{patientInfo.age}} {{'years Old' | translate}}</span>
          </div>
    </div>
 </div>

@@ -4,26 +4,26 @@
         <div class="row g-0">
             <div class="col-12">
                  <div class="p-4 bg-white rounded-3">
-                    <h4 class="px-3">Patient Report</h4>
+                    <h4 class="px-3">{{'Patient Report' | translate}}</h4>
                     <div id="patientInfoSection" class="d-flex align-items-start justify-content-between px-3">
                         <app-patient-header></app-patient-header>
                         <div [ngStyle]="{'background-color':painLevel.color ,'color':painLevel.textColor}" class="px-3 py-4 rounded-3 painLevel">{{painLevel.name | titlecase}}</div>
                     </div>
                      <div class="d-md-flex justify-content-between d-xl-block px-3 py-2">
                         <div class="flex-md-grow-1 ps-md-1 ps-xl-0"> 
-                            <h5>Examination Result</h5>
+                            <h5>{{'Examination Result' | translate}}</h5>
                             <div class="table-responsive">
                                 <table id="emaninationResult" class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
                                 <thead>
                                         <tr>
                                         <th class="p-2"  >{{"Date"}}</th>
-                                        <th class="p-2"   *ngFor="let key of getObjectKeys(fullAssesmentData);">{{key.replace("_", " ") | titlecase}}</th>
+                                        <th class="p-2"   *ngFor="let key of getObjectKeys(fullAssesmentData);">{{key.replace("_", " ")| translate| titlecase}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                         <td class="p-2"  >{{getTodayDate()}}</td>
-                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullAssesmentData) ;">{{(fullAssesmentData[key] ? fullAssesmentData[key] :'-----') | titlecase}}</td>
+                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullAssesmentData) ;">{{(fullAssesmentData[key] ? fullAssesmentData[key] :'-----') | translate | titlecase}}</td>
                                         </tr>
                                     </tbody>
                                     </table>
@@ -35,36 +35,36 @@
                             <div class="row">
                                 <div class="col-12">
                                          <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='patientVitals'>
-                                                <h5>Patient Vitals</h5>
+                                                <h5>{{'Patient Vitals' | translate}}</h5>
                                                 <div class="table-responsive" >
                                                     <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen">
                                                     <thead>
                                                             <tr>
-                                                            <th class="p-2"   *ngFor="let key of getObjectKeys(patientVitals) ;">{{key.replace("_", " ") | titlecase}}</th>
+                                                            <th class="p-2"   *ngFor="let key of getObjectKeys(patientVitals) ;">{{key.replace("_", " ") | translate | titlecase}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                            <td class="p-2 " *ngFor="let key of getObjectKeys(patientVitals) ;">{{patientVitals[key]}}</td>
+                                                            <td class="p-2 " *ngFor="let key of getObjectKeys(patientVitals) ;">{{patientVitals[key] | translate}}</td>
                                                             </tr>
                                                         </tbody>
                                                         </table>
                                                 </div>
                                           </div>
                                            <div class="flex-md-grow-1 ps-md-1 ps-xl-0 py-2 py-md-0 py-xl-2"  id="patientHistory"> 
-                            <h5>Patient History</h5>
+                            <h5>{{'Patient History' | translate}}</h5>
                             <div class="table-responsive">
                                 <table  class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen">
                                 <thead>
                                         <tr >
-                                        <th class="p-2"   *ngFor="let key of getObjectKeys(fullPatientHistory);">{{key.replace("_", " ") | titlecase}}</th>
-                                        <th class="p-2"  >{{"Prescription" | titlecase}}</th>
+                                        <th class="p-2"   *ngFor="let key of getObjectKeys(fullPatientHistory);">{{key.replace("_", " ") | translate | titlecase}}</th>
+                                        <th class="p-2"  >{{"Prescription" | translate | titlecase}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr >
-                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullPatientHistory) ;">{{(fullPatientHistory[key] ? fullPatientHistory[key] :'-----') | titlecase}}</td>
-                                        <td class="p-2 ">{{(fullPatientHistoryBeforeRename['presubscribedMedication'] ? 'Yes' :'no') | titlecase}}</td>
+                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullPatientHistory) ;">{{(fullPatientHistory[key] ? fullPatientHistory[key] :'-----') | translate | titlecase}}</td>
+                                        <td class="p-2 ">{{(fullPatientHistoryBeforeRename['presubscribedMedication'] ? 'Yes' :'no') | translate | titlecase}}</td>
                                         </tr>
                                     </tbody>
                                     </table>
@@ -79,19 +79,19 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-6">
                                         <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='symptoms'>
-                                                <h5>Symptoms</h5>
+                                                <h5>{{'Symptoms' | translate}}</h5>
                                                 <div class="table-responsive" >
                                                     <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
                                                     <thead>
                                                             <tr>
-                                                            <th class="p-2" >{{'Symptoms' | titlecase}}</th>
+                                                            <th class="p-2" >{{'Symptoms' | translate | titlecase}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
                                                              <td class="p-2" >
                                                                     <span *ngFor="let symptom of symptoms ; let last=last;">
-                                                                        {{ symptom ? symptom : '----' }}{{ last ? '' : ',' }}
+                                                                        {{ symptom ? symptom : '----'  | translate}}{{ last ? '' : ','}}
                                                                     </span>
                                                              </td> 
                                                             </tr>
@@ -100,12 +100,12 @@
                                                 </div>
                                         </div>
                                          <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='permanentDiseases'>
-                                                <h5>Permanent Diseases</h5>
+                                                <h5>{{'Permanent Diseases' | translate}}</h5>
                                                 <div class="table-responsive" >
                                                     <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
                                                     <thead>
                                                             <tr>
-                                                            <th class="p-2" >{{'Permanent Diseases' | titlecase}}</th>
+                                                            <th class="p-2" >{{'Permanent Diseases' | translate | titlecase}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -114,7 +114,7 @@
                                                                     
                                                                     <div *ngIf="patientReportData.hasOwnProperty('PermanentDiseases') ; else noDiseases">
                                                                         <span *ngFor="let symptom of permanentDiseases ; let last=last;">
-                                                                        {{ symptom ? symptom : '----' }}{{ last ? '' : ',' }}
+                                                                        {{ symptom ? symptom : '----'  | translate}}{{ last ? '' : ',' }}
                                                                        </span>
                                                                     </div>
                                                                       <ng-template #noDiseases>
@@ -131,12 +131,12 @@
                                                 </div>
                                         </div>
                                           <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='Prescription'>
-                                                <h5>Prescription</h5>
+                                                <h5>{{'Prescription' | translate}}</h5>
                                                 <div class="table-responsive" >
                                                     <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
                                                     <thead>
                                                             <tr>
-                                                            <th class="p-2" >{{'Prescription' | titlecase}}</th>
+                                                            <th class="p-2" >{{'Prescription' | translate | titlecase}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -152,12 +152,12 @@
                                                 </div>
                                         </div>
                                           <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='moreInfo'>
-                                                <h5>More Info</h5>
+                                                <h5>{{'More Info' | translate}}</h5>
                                                 <div class="table-responsive" >
                                                     <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
                                                     <thead>
                                                             <tr>
-                                                            <th class="p-2" >{{'More Info' | titlecase}}</th>
+                                                            <th class="p-2" >{{'More Info' | translate | titlecase}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
