@@ -8,7 +8,7 @@
                    <div class="py-5">
                         <label for="language" class="mb-2 input-font-size">{{'Language' | translate}}</label>
                         <select class="form-select form-select-lg" appSelect2 aria-label="Select Language" id="language" (valueChange)="onLanguageChoose($event)">
-                            <option selected >{{ChooseLanguage | translate}}</option>
+                            <option >{{ChooseLanguage | translate}}</option>
                             <option value="{{language.code}}" *ngFor="let language of languages$ | async">{{language.name | translate}}</option>
                         </select>
                    </div>

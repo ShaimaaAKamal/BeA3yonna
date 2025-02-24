@@ -4,13 +4,14 @@ import { catchError, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { PatientReportData } from '../../Interfaces/patient-report-data';
 import { PatientVitals } from '../../Interfaces/patient-vitals';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  constructor(private __HttpClient:HttpClient,private __Router:Router) { }
+  constructor(private __HttpClient:HttpClient,private __Router:Router,private __TranslateService:TranslateService) { }
 
   sendGetRequest(url:string):Observable<any>{
     return this.__HttpClient.get(url);

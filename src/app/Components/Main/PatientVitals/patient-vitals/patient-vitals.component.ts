@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../../../Services/Shared/shared.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientVitals } from '../../../../Interfaces/patient-vitals';
-import { LiveTranslationsService } from '../../../../Services/LiveTranslationService/live-translations.service';
 
 @Component({
   selector: 'app-patient-vitals',
@@ -15,11 +14,9 @@ export class PatientVitalsComponent implements OnInit {
   patientVitals!:FormGroup;
   vitals:string[]=['Weight','Height','Blood_Pressure','Blood_Sugar','Temperature','Heart Rate','Breathe_Rate','Oxygen Rate'];
   storedPatientVitals!:PatientVitals;
-  textsToTranslate:string[]=["patient's vital signs",...this.vitals];
-  constructor(private __SharedService:SharedService,private __LiveTranslationsService:LiveTranslationsService){}
+  constructor(private __SharedService:SharedService){}
 
   ngOnInit(): void {
-    this.__LiveTranslationsService.loadTranslations(this.__SharedService.getSiteLanguage(),this.textsToTranslate);
     this.storedPatientVitals=this.__SharedService.getGenericStoredDataValue('patientVitals');
     this.patientVitals = new FormGroup({
         Weight: new FormControl(this.storedPatientVitals?.Weight ?? '',[Validators.required,Validators.pattern('^[0-9]+$')]),

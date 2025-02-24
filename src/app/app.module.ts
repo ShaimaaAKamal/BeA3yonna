@@ -32,9 +32,12 @@ import { AssesmentComponent } from './Components/Main/Assessment/assesment/asses
 import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
 import { PatientHeaderComponent } from './Components/Shared/PatientHeader/patient-header/patient-header.component';
 import { ReportComponent } from './Components/Main/Report/report/report.component'; 
+import { SharedService } from './Services/Shared/shared.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  // return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http);
+
 }
 
 @NgModule({
@@ -86,14 +89,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-    constructor(private __TranslateService: TranslateService,private __StyleService:StyleService) {
-    this.__TranslateService.setDefaultLang('en'); // Default to English
-    const savedLang = localStorage.getItem('lang') || 'en';
-    const savedLanguage = localStorage.getItem('language') || 'english';
-    localStorage.setItem('lang',savedLang);
-    localStorage.setItem('language',savedLanguage);
-    this.__TranslateService.use(savedLang);
-    const isRTL:boolean=this.__StyleService.isRtl(savedLang);
-    this.__StyleService.switchStyleToRTL(isRTL,savedLang);
-  }
 }
