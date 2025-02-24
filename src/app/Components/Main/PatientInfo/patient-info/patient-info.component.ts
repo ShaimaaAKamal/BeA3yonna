@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../../../Services/Shared/shared.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientInfo } from '../../../../Interfaces/patient-info';
+import { LiveTranslationsService } from '../../../../Services/LiveTranslationService/live-translations.service';
 
 @Component({
   selector: 'app-patient-info',
@@ -17,10 +18,20 @@ export class PatientInfoComponent implements OnInit {
   changeGender:boolean=true;
   storedPatientInfo!:PatientInfo;
   patientInfoForm !:FormGroup;
+ textsToTranslate:string[]=[
+   'Patient Info',
+   'Name','Patient Name','Name is required' ,'Minimum 3 characters required',
+   'Age','Patient Age','Age is required','Must be a number','Min Allowed Age is 1','Max Allowed Age is 100',
+   'Gender','Must Choose a gender','Change Gender'
 
-  constructor(private __sharedService:SharedService){}
+ ]
+   
+
+  
+  constructor(private __sharedService:SharedService,private __LiveTranslationsService:LiveTranslationsService){}
   ngOnInit(): void {
-         this.storedPatientInfo=this.__sharedService.getGenericStoredDataValue('patientInfo');
+      this.__LiveTranslationsService.loadTranslations(this.__sharedService.getSiteLanguage(),this.textsToTranslate);
+     this.storedPatientInfo=this.__sharedService.getGenericStoredDataValue('patientInfo');
      this.patientInfoForm = new FormGroup({
     name: new FormControl(this.storedPatientInfo.name ,[Validators.required, Validators.minLength(3)]),
     age: new FormControl(this.storedPatientInfo.age , [Validators.required,Validators.min(1),Validators.max(100),Validators.pattern('^[0-9]+$')]),

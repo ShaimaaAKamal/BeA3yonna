@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PainScale } from '../../../../Interfaces/pain-scale';
 import { SharedService } from '../../../../Services/Shared/shared.service';
+import { LiveTranslationsService } from '../../../../Services/LiveTranslationService/live-translations.service';
 
 @Component({
   selector: 'app-rate-pain',
@@ -23,9 +24,10 @@ painScaleValues:PainScale[]=[
   {name:'worst Pain',color:'#D30000',textColor:"#fff"},
 ];
 NextButtonDisabled:boolean=true;
-
-constructor(private __SharedService:SharedService){}
+textsToTranslate:string[]=['How strong is your pain ?' ];
+constructor(private __SharedService:SharedService,private __LiveTranslationsService:LiveTranslationsService){}
 ngOnInit(): void {
+  this.__LiveTranslationsService.loadTranslations(this.__SharedService.getSiteLanguage(),this.textsToTranslate);
       this.stortedPainScale=this.__SharedService.getGenericStoredDataValue('painScale');
       if(this.stortedPainScale.name && this.stortedPainScale.color) {
           this.painLevel=this.stortedPainScale.name;

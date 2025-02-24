@@ -16,7 +16,7 @@
                                 <table id="emaninationResult" class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
                                 <thead>
                                         <tr>
-                                        <th class="p-2"  >{{"Date"}}</th>
+                                        <th class="p-2"  >{{"Date" | translate}}</th>
                                         <th class="p-2"   *ngFor="let key of getObjectKeys(fullAssesmentData);">{{key.replace("_", " ")| translate| titlecase}}</th>
                                         </tr>
                                     </thead>
@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="col-12">
                                          <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='patientVitals'>
-                                                <h5>{{'Patient Vitals' | translate}}</h5>
+                                                <h5>{{"Patient's vital signs" | translate}}</h5>
                                                 <div class="table-responsive" >
                                                     <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen">
                                                     <thead>
@@ -63,8 +63,8 @@
                                     </thead>
                                     <tbody>
                                         <tr >
-                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullPatientHistory) ;">{{(fullPatientHistory[key] ? fullPatientHistory[key] :'-----') | translate | titlecase}}</td>
-                                        <td class="p-2 ">{{(fullPatientHistoryBeforeRename['presubscribedMedication'] ? 'Yes' :'no') | translate | titlecase}}</td>
+                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullPatientHistory) ;">{{(fullPatientHistory[key] ? (fullPatientHistory[key] | translate) :'-----')  | titlecase}}</td>
+                                        <td class="p-2 ">{{(fullPatientHistoryBeforeRename['presubscribedMedication'] ? ('Yes' | translate) :('no' | translate))  | titlecase}}</td>
                                         </tr>
                                     </tbody>
                                     </table>
@@ -91,7 +91,7 @@
                                                             <tr>
                                                              <td class="p-2" >
                                                                     <span *ngFor="let symptom of symptoms ; let last=last;">
-                                                                        {{ symptom ? symptom : '----'  | translate}}{{ last ? '' : ','}}
+                                                                        {{ symptom ? (symptom | translate) : '----' }}{{ last ? '' : ','}}
                                                                     </span>
                                                              </td> 
                                                             </tr>
@@ -114,7 +114,7 @@
                                                                     
                                                                     <div *ngIf="patientReportData.hasOwnProperty('PermanentDiseases') ; else noDiseases">
                                                                         <span *ngFor="let symptom of permanentDiseases ; let last=last;">
-                                                                        {{ symptom ? symptom : '----'  | translate}}{{ last ? '' : ',' }}
+                                                                        {{ symptom ? (symptom | translate) : '----' }}{{ last ? '' : ',' }}
                                                                        </span>
                                                                     </div>
                                                                       <ng-template #noDiseases>

@@ -1,4 +1,4 @@
-<main class="px-sm-2 px-md-5 py-5">
+ <main class="px-sm-2 px-md-5 py-5">
   <section id="additionalPatientInfo" class="py-5">
     <div class="container-fluid py-5">
         <div class="row g-0">
@@ -30,7 +30,7 @@
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="After_taking_medicine" value="After taking medicine" formControlName="complainTime">
                               <label class="form-check-label" for="After_taking_medicine">
-                                {{'After taking medicine' | translate}}
+                                {{'After taking the treatment' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
@@ -42,13 +42,13 @@
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="2hours_before" value="2 hours before" formControlName="complainTime">
                               <label class="form-check-label" for="2hours_before">
-                                {{'2 hours before' | translate}}
+                                {{'2 hours ago' | translate}}
                               </label>
                             </div>
                              <div class="form-check">
                               <input class="form-check-input" type="radio" id="4hours_before" value="4 hours before" formControlName="complainTime">
                               <label class="form-check-label" for="4hours_before">
-                                {{'4 hours before' | translate}}
+                                {{'4 hours ago' | translate}}
                               </label>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                       <app-navigation-buttons 
                             [PreviousPageUrl]="PreviousPageUrl" [NextPageUrl]="'/Assesment'"
                             [NextButtonDisabled]="PatientHistory.invalid"   [MoreCLasses]="' pt-4'" 
-                            [Key]="'patientHistory'" [value]="PatientHistory.value" [actionName]="'Assesment'">
+                            [Key]="'patientHistory'" [value]="PatientHistory.value" [actionName]="'Case evaluation'">
                         </app-navigation-buttons>
                 </div>
             </div>

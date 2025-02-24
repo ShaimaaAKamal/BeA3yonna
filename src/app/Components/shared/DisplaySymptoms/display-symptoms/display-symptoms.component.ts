@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedService } from '../../../../Services/Shared/shared.service';
+import { LiveTranslationsService } from '../../../../Services/LiveTranslationService/live-translations.service';
 
 @Component({
   selector: 'app-display-symptoms',
@@ -24,11 +25,13 @@ storedSymptoms:string[]=[];
 @Output() NextButtonDisabledChange = new EventEmitter<boolean>(); // Emit value changes
 searchKey:string='';
 AllSymptoms:string[]=[];
+textsToTranslate!:string[];
 
-
-constructor(private __SharedService:SharedService){}
+constructor(private __SharedService:SharedService,private  __LiveTranslationsService:LiveTranslationsService){}
 
 ngOnInit(): void {
+  this.textsToTranslate=[this.heading,...this.symptoms];
+  this.__LiveTranslationsService.loadTranslations(this.__SharedService.getSiteLanguage(),this.textsToTranslate);
   this.AllSymptoms=this.symptoms;
    this.storedSymptoms=this.__SharedService.getGenericStoredDataValue(this.Key);
    this.NextButtonDisabled=( this.storedSymptoms.length !=0)?false:true;

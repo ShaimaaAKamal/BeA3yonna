@@ -20,7 +20,7 @@
                             <div class="text-danger" *ngIf="patientInfoForm.get('age')?.invalid && patientInfoForm.get('age')?.touched">
                                     <small *ngIf="patientInfoForm.get('age')?.errors?.['required']">{{'Age is required' | translate}}</small>
                                     <small *ngIf="patientInfoForm.get('age')?.errors?.['pattern']">{{'Must be a number' | translate}}</small>
-                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['min']">{{'Max Allowed Age is 1' | translate}}</small>
+                                    <small *ngIf="patientInfoForm.get('age')?.errors?.['min']">{{'Min Allowed Age is 1' | translate}}</small>
                                     <small *ngIf="patientInfoForm.get('age')?.errors?.['max']">{{'Max Allowed Age is 100' | translate}}</small>
                             </div>
                         </div>

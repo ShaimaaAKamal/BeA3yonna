@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../../Services/Shared/shared.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientAdditionalInfo } from '../../../Interfaces/patient-additional-info';
+import { LiveTranslationsService } from '../../../Services/LiveTranslationService/live-translations.service';
 
 @Component({
   selector: 'app-additional-patient-info',
@@ -13,8 +14,15 @@ import { PatientAdditionalInfo } from '../../../Interfaces/patient-additional-in
 export class AdditionalPatientInfoComponent implements OnInit{
 additionalPatientInfo!:FormGroup;
 storedPatientAdditionalInfo!:PatientAdditionalInfo;
-constructor(private __sharedService:SharedService){}
+textsToTranslate:string[]=[
+  'Additional Patient Info',
+  'Are you pregnent ?','Yes','No',
+  'Do you have female period ?' ,
+  'Additional Information','optional'
+]
+constructor(private __sharedService:SharedService,private __LiveTranslationsService:LiveTranslationsService){}
 ngOnInit(): void {
+        this.__LiveTranslationsService.loadTranslations(this.__sharedService.getSiteLanguage(),this.textsToTranslate);
 this.storedPatientAdditionalInfo=this.__sharedService.getGenericStoredDataValue('additionalPatientInfo');
  this.additionalPatientInfo= new FormGroup({
      pregnant: new FormControl( this.storedPatientAdditionalInfo.pregnant ,[Validators.required]),

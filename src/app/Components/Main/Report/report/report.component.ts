@@ -7,6 +7,7 @@ import { SharedService } from '../../../../Services/Shared/shared.service';
 import { PatientHistory } from '../../../../Interfaces/patient-history';
 import { PatientInitialVitals } from '../../../../Interfaces/patient-initial-vitals';
 import { PatientAdditionalInfo } from '../../../../Interfaces/patient-additional-info';
+import { LiveTranslationsService } from '../../../../Services/LiveTranslationService/live-translations.service';
 
 @Component({
   selector: 'app-report',
@@ -28,7 +29,19 @@ export class ReportComponent {
   permanentDiseases:string[]=[];
   painLevel!:PainScale;
   fullAssesmentData:any;
-  constructor(private __SharedService:SharedService){}
+  textsToTranslate:string[]=[
+    'Patient Report' ,
+    'Examination Result',"Date",
+    'Examiner Name','Examination Location','Treatment Location',
+    'Patient Pain Level','mild','no pain','moderate','severe' , 'veru severe' , 'worst pain',
+    "Patient's vital signs",'Weight','Height','Temperature','Blood Pressure','Oxygen Rate'
+    ,'Blood Sugar',"Heart Rate",'Breathe Rate','Patient History','Pregnancy Status'
+,"In Period","Has Allergy",'Permanent Condition','Contagious Condition','Pain Duration',
+'Last Meal Time','Prescription','Symptoms','More Info','Permanent Diseases','Armache','Back Pain','Vomit','Toothache','Diabetic','Dizznies','Sneezing','Blood Pressure','Eye Pain'
+  ,'Pulse Measurment','Nausea','Allgery','HandAche','Weight Scale','Stomach Pain','Heart  Rate','Heart Attack','Shoulder Pain','Temperature'
+   ,'yes','no']
+
+  constructor(private __SharedService:SharedService,private __LiveTranslationsService:LiveTranslationsService){}
   
     @HostListener('window:resize', ['$event'])
      onResize() {
@@ -37,6 +50,7 @@ export class ReportComponent {
     }
   
   ngOnInit(): void {
+    this.__LiveTranslationsService.loadTranslations(this.__SharedService.getSiteLanguage(),this.textsToTranslate);
     this.onResize(); 
     this.patientReportData=this.__SharedService.getAllLocalStorage();
     this.patientVitals=this.patientReportData['patientVitals'];

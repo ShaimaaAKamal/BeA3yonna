@@ -97,16 +97,18 @@ getAllLocalStorage(): PatientReportData {
 clearLocalStorage(){
   localStorage.clear();
 }
-
+getSiteLanguage(){
+ return  this.getItemFromLocalStorage('lang');
+}
 formatPatientVitalsValuesByAddingUnits(patientVitals:PatientVitals):PatientVitals{
 const Units:PatientVitals= {
   Weight: ' Kg',
   Height: ' Cm',
   Temperature: ' deg',
   Blood_Pressure: ' mmHg',
-  Oxgyen_Rate: ' %',
+  'Oxygen Rate': ' %',
   Blood_Sugar: ' mg/dL',
-  Heart_Rate: ' bpm',
+  'Heart Rate': ' bpm',
   Breathe_Rate: ' bpm'
 };
 
@@ -137,4 +139,6 @@ renameKeys(obj: any, keyMap: { [key: string]: string },ExcludedKeys:string[]): a
       newObj[newKey] = obj[key];
       return newObj;
     }, {});}
+
+  
 }
