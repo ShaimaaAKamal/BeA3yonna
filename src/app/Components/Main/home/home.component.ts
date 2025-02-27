@@ -7,6 +7,9 @@ import { StyleService } from '../../../Services/style/style.service';
 import { SharedService } from '../../../Services/Shared/shared.service';
 import { Selec2 } from '../../../Interfaces/selec2';
 import { LiveTranslationsService } from '../../../Services/LiveTranslationService/live-translations.service';
+
+declare var window: any; // Global jQuery
+
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -18,7 +21,7 @@ export class HomeComponent{
  disabled:boolean=true;
  languages$!:Observable<Language[]>;
  ChooseLanguage: string = 'Choose a Language';
- noLanguageSelected:boolean=true;
+ chooseenLanguage:string='';
  constructor(private __LanguageService:LanguageService,
   private __TranslationService:TranslateService,
   private __StyleService:StyleService, 
@@ -30,13 +33,13 @@ export class HomeComponent{
     this.languages$=this.__LanguageService.getLanguages();
   else
       this.languages$ =this.getLanguagesTranslation(this.__sharedService.getSiteLanguage());
-  // this.noLanguageSelected=this.__sharedService.getSiteLanguage()?false:true;
-  // console.log('noLanguageSelected', this.noLanguageSelected)
  }
+
 
  onLanguageChoose(event:Selec2){
       console.log('vent',event);
       const selectedLanguage=event.value
+      this.chooseenLanguage=selectedLanguage;
       const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);
       this.__StyleService.switchStyleToRTL(isRTL,selectedLanguage);
       console.log('selectedLanguage',selectedLanguage);
@@ -45,8 +48,8 @@ export class HomeComponent{
       localStorage.setItem('language',event.text);
       this.languages$ = this.getLanguagesTranslation(selectedLanguage);
       this.__LiveTranslation.loadTranslations(selectedLanguage);
-      // this.noLanguageSelected=this.__sharedService.getSiteLanguage()?false:true;
       this.disabled=false;
+      
  }
 
  navigateToChooseFlag(){
