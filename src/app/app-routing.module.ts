@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Components/Main/home/home.component';
 import { ChooseFlagComponent } from './Components/Main/choose-flag/choose-flag.component';
@@ -14,6 +14,7 @@ import { PatientComplainDetailsComponent } from './Components/Main/PatientCompla
 import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
 import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
 import { ReportComponent } from './Components/Main/Report/report/report.component';
+import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-found.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent ,pathMatch:'full'},
@@ -30,6 +31,7 @@ const routes: Routes = [
     {path:'Assesment',component:AssesmentComponent},
     // {path:'Report',component:FinalReportComponent},
     {path:'Report',component:ReportComponent},
+    {path:'**',component:NotFoundComponent}
 
 
 

@@ -180,7 +180,12 @@ main{
     background-size: cover;
     background-position: right top;
 }
+
+.parentContainer {
+ min-height: 77cvh !important;
+}
 /* start localization Style */
+
 
 html[dir='ltr'] .btnArrow{
     transform: rotate(0deg);}
@@ -202,4 +207,10 @@ html[dir='ltr'] #PainScaleslevelValues{
 }
 html[dir='rtl'] h3{
     font-size: 3rem;
+}
+
+@media screen and (min-width:768px) {
+    .parentContainer {
+ min-height: 81vh !important;
+}
 }

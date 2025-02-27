@@ -33,6 +33,7 @@ import { FinalReportComponent } from './Components/Main/FinalReport/final-report
 import { PatientHeaderComponent } from './Components/Shared/PatientHeader/patient-header/patient-header.component';
 import { ReportComponent } from './Components/Main/Report/report/report.component'; 
 import { SharedService } from './Services/Shared/shared.service';
+import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-found.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   // return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FinalReportComponent,
     PatientHeaderComponent,
     ReportComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
