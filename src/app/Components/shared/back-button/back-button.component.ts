@@ -9,5 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class BackButtonComponent {
 @Input() disabled:boolean=true;
+@Input() message:string='Previous'
 constructor(){}
 }
