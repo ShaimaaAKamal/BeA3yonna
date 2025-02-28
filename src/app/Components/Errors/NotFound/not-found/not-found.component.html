@@ -1,8 +1,8 @@
 <div class="errorPage bg-white">
 <div class="container-fluid ">
-    <div class="row justify-content-center align-items-center  py-3">
+    <div class="row justify-content-center align-items-center">
         <div class="col-xl-6">
-          <div class="py-3 parentContainer d-flex">
+          <div class="parentContainer d-flex">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 3000 2000" style="enable-background:new 0 0 3000 2000;" xml:space="preserve">
 <rect style="fill:#FFFFFF;" width="3000" height="2000"/>
 <path style="fill:#F6F9FF;" d="M1031.559,1601.612c-108.754-32.288-213.431-74.261-304.096-132.103  c-391.644-249.86-305.557-828.636,1.768-1109.862c96.37-88.186,221.229-149.719,352.346-160.626  c146.748-12.207,300.375,33.84,410.826,132.476c100.358,89.623,159.307,212.598,289.85,265.708  c151.412,61.601,319.332,37.474,478.029,55.723c311.944,35.871,515.8,309.2,446.898,621.096  c-79.853,361.473-412.106,441.927-734.157,454.52c-186.72,7.301-373.44-11.434-557.278-43.185  C1292.803,1664.127,1159.366,1639.557,1031.559,1601.612z"/>
@@ -225,5 +225,8 @@
           </div>
         </div>
     </div>
+</div>
+<div class="text-end d-flex pb-3 ps-3" >
+	<app-back-button  [disabled]="false" (click)="navigateToHome()" [message]="'Back To Home'"></app-back-button>
 </div>
 </div>

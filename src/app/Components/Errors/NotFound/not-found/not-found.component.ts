@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from '../../../../Services/Shared/shared.service';
 
 @Component({
   selector: 'app-not-found',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './not-found.component.css'
 })
 export class NotFoundComponent {
-
+constructor(private __SharedService:SharedService){}
+navigateToHome(){
+this.__SharedService.navigateToPage('/');
+}
 }
