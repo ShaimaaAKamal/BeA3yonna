@@ -1,26 +1,53 @@
-<main class="px-3 px-md-5 py-5">
+ <main class="px-3 px-md-5 py-5">
   <section id="chooseFlag">
     <h3 class="pb-4 mb-2">{{'Choose your Country' | translate}}</h3>
 
-    <form class="d-flex pb-5 px-2" role="search">
-        <input class="form-control me-2" type="search" name="search" placeholder="{{'Search By Name' | translate}}" aria-label="Search" [(ngModel)]="searchKey" (keyup)="searchForCountry()">
-        <!-- <button class="btn btn-outline-success" (click)="searchForCountry()">Search</button> -->
-    </form>
+      <form class="d-flex pb-5 px-2" role="search">
+            <input class="form-control me-2" type="search" name="search" placeholder="{{'Search By Name' | translate}}" aria-label="Search" [(ngModel)]="searchKey" (keyup)="searchForCountry()">
+      </form>
 
-    <div class="container-fluid">
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let Flag of( Flags$ | async ) ?? [] | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-          <div>
-            <app-flag-card [Flag]="Flag" (click)="chooseFlag(Flag)" [selected]="!!(Flag.name === selectedFlag.name)"></app-flag-card>
+      <div *ngIf="(Flags$ | async)?.length ;else NoCountries;">
+          <div class="container-fluid">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let Flag of( Flags$ | async ) ?? [] | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+              <div>
+                <app-flag-card [Flag]="Flag" (click)="chooseFlag(Flag)" [selected]="!!(Flag.name === selectedFlag.name)"></app-flag-card>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <!-- Pagination Controls -->
+          <div class="d-flex justify-content-center mt-5">
+            <pagination-controls (pageChange)="currentPage = $event" class="mb-0"></pagination-controls>
+          </div>
+      </div>
+
+  
+    <ng-template #NoCountries>
+      
+      <div class="parentContainer justify-content-center align-items-center" *ngIf="!displayed ; else NoSerarchResult ">
+          <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+      </div>
+      
+      <ng-template #NoSerarchResult>
+       <div class="container-fluid">
+          <div class="row g-4 justify-content-center">
+              <div class="bg-green-light col-lg-8 py-3  text-center rounded-3 text-green-darker my-5 px-5">
+                  <span>{{('No Countries Matched for this value :' | translate)}} {{searchKey}}</span>
+              </div>
           </div>
         </div>
-      </div>
-    </div>
+     </ng-template>
+    </ng-template>
+    
 
-    <!-- Pagination Controls -->
-    <div class="d-flex justify-content-center mt-5">
-      <pagination-controls (pageChange)="currentPage = $event" class="mb-0"></pagination-controls>
-    </div>
+   
+     
     <app-navigation-buttons [PreviousPageUrl]="'/'" [NextPageUrl]="'/Patient_Info'" [MoreCLasses]="' px-3'" [NextButtonDisabled]="NextButtondisabled"></app-navigation-buttons>
   </section>
 </main>
+
+
