@@ -48,6 +48,23 @@ export class SharedService {
 
   getDefaultValue(key: string) {
     switch (key) {
+        case 'patientReport':
+          return {
+                    AssessmentInfo:{ Examiner_Name: '', Examination_Location: '', Treatment_Location: '' },
+                    Country:{ name: '', flags: {}, languages: {} },
+                    CountrycurrentPage:1,
+                    PermanentDiseases:[],
+                    Symptoms:[],
+                    additionalPatientInfo:{ pregnant: '', havePeriod: '', additionalInfo: '' } ,
+                    lang:'en', 
+                    language: 'english',
+                    painScale:{ name: '', color: '', textColor: '' },
+                    painedParts:[],
+                    patientHistory:{ complainTime: '', lastMealTime: '' },
+                    patientInfo: { name: '', age: 10, gender: ''},
+                    patientInitialVitals:{ haveAllergy: "", haveInfectiousDiseases: "", havePeramentDiseases: "", presubscribedMedication: "" },
+                    patientVitals:{ Weight: '', Height: '', Temperature: '', 'Blood Pressure': '','Oxygen Rate': '', 'Blood Sugar': '', 'Heart Rate': '', 'Breathe Rate': '' }
+                  };
         case 'AssessmentInfo':
             return { Examiner_Name: '', Examination_Location: '', Treatment_Location: '' };
         case 'patientHistory':
@@ -63,13 +80,13 @@ export class SharedService {
         case 'CountrycurrentPage':
             return 1;
         case 'patientInfo':
-            return { name: '', age: '', gender: '' };
+            return { name: '', age: 10, gender: '' };
         case 'additionalPatientInfo':
             return { pregnant: '', havePeriod: '', additionalInfo: '' };
         case 'Country':
             return { name: '', flags: {}, languages: {} };
         case 'patientVitals':
-            return { Weight: '', Height: '', Temperature: '', Blood_Pressure: '', Oxygen_Rate: '', Blood_Sugar: '', Heart_Rate: '', Breathe_Rate: '' };
+            return { Weight: '', Height: '', Temperature: '', 'Blood Pressure': '', 'Oxygen Rate': '', 'Blood Sugar': '', 'Heart Rate': '', 'Breathe Rate': '' };
         case 'lang':
             return 'en';
         case 'language':
@@ -106,11 +123,11 @@ const Units:PatientVitals= {
   Weight: ' Kg',
   Height: ' Cm',
   Temperature: ' deg',
-  Blood_Pressure: ' mmHg',
+  'Blood Pressure': ' mmHg',
   'Oxygen Rate': ' %',
-  Blood_Sugar: ' mg/dL',
+  'Blood Sugar': ' mg/dL',
   'Heart Rate': ' bpm',
-  Breathe_Rate: ' bpm'
+  'Breathe Rate': ' bpm'
 };
 
 // Update values based on the substring mapping
