@@ -37,17 +37,16 @@ export class HomeComponent{
 
 
  onLanguageChoose(event:Selec2){
-      console.log('vent',event);
       const selectedLanguage=event.value
       this.chooseenLanguage=selectedLanguage;
       const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);
       this.__StyleService.switchStyleToRTL(isRTL,selectedLanguage);
-      console.log('selectedLanguage',selectedLanguage);
       this.__TranslationService.use(selectedLanguage); // Switch language
       localStorage.setItem('lang',selectedLanguage);
       localStorage.setItem('language',event.text);
-      this.languages$ = this.getLanguagesTranslation(selectedLanguage);
-      this.__LiveTranslation.loadTranslations(selectedLanguage);
+      if(selectedLanguage != 'en')
+      {this.languages$ = this.getLanguagesTranslation(selectedLanguage);
+      this.__LiveTranslation.loadTranslations(selectedLanguage);}
       this.disabled=false;
       
  }
@@ -58,7 +57,7 @@ export class HomeComponent{
 
   getLanguagesTranslation(targetLang:string): Observable<Language[]> {
     // const targetLang=this.__sharedService.getSiteLanguage();
-    console.log('targetLang',targetLang);
+    // console.log('targetLang',targetLang);
       //  console.log(`Fetching languages from API...`); // Log API request start
 
        return this.__LanguageService.getLanguages().pipe(
