@@ -12,7 +12,7 @@ import { PatientVitals } from '../../../../Interfaces/patient-vitals';
 })
 export class PatientVitalsComponent implements OnInit {
   patientVitals!:FormGroup;
-  vitals:string[]=['Weight','Height','Blood_Pressure','Blood_Sugar','Temperature','Heart Rate','Breathe_Rate','Oxygen Rate'];
+  vitals:string[]=['Weight','Height','Blood Pressure','Blood Sugar','Temperature','Heart Rate','Breathe Rate','Oxygen Rate'];
   storedPatientVitals!:PatientVitals;
   constructor(private __SharedService:SharedService){}
 
@@ -22,11 +22,11 @@ export class PatientVitalsComponent implements OnInit {
         Weight: new FormControl(this.storedPatientVitals?.Weight ?? '',[Validators.required,Validators.pattern('^[0-9]+$')]),
         Height: new FormControl(this.storedPatientVitals?.Height ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
         Temperature: new FormControl(this.storedPatientVitals?.Temperature ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        Blood_Pressure: new FormControl(this.storedPatientVitals?.Blood_Pressure ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        'Blood Pressure': new FormControl(this.storedPatientVitals?.['Blood Pressure'] ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
        'Oxygen Rate': new FormControl(this.storedPatientVitals?.['Oxygen Rate']?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        Blood_Sugar: new FormControl(this.storedPatientVitals?.Blood_Sugar ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        'Blood Sugar': new FormControl(this.storedPatientVitals?.['Blood Sugar'] ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
         'Heart Rate': new FormControl(this.storedPatientVitals?.['Heart Rate']?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        Breathe_Rate: new FormControl(this.storedPatientVitals?.Breathe_Rate ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        'Breathe Rate': new FormControl(this.storedPatientVitals?.['Breathe Rate'] ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
       });
   }
 }

@@ -44,7 +44,9 @@ th{
   flex-basis: 120px;
   text-align: center;
 }
-
+th,td{
+  vertical-align: middle;
+}
 /* @media screen and (min-width:992px){
   #patientVitals,#patientHistory{
   flex-basis:100% !important;

@@ -2,10 +2,10 @@ export interface PatientVitals {
            Weight:string,
             Height: string,
             Temperature: string,
-            Blood_Pressure: string,
+            'Blood Pressure': string,
             'Oxygen Rate': string,
-            Blood_Sugar: string,
+            'Blood Sugar': string,
             'Heart Rate': string,
-            Breathe_Rate: string,
+            'Breathe Rate': string,
               [key: string]: string;
 }
