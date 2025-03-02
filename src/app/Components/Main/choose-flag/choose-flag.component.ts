@@ -1,11 +1,11 @@
 
-import { SharedService } from '../../../Services/Shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import {  catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
+import {  catchError, map, switchMap, tap } from 'rxjs/operators';
 import { FlagService } from '../../../Services/Flag/flag.service';
 import { Country } from '../../../Interfaces/country';
 import { LiveTranslationsService } from '../../../Services/LiveTranslationService/live-translations.service';
+import { PatientReportInfoService } from '../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 @Component({
   selector: 'app-choose-flag',
@@ -25,15 +25,15 @@ export class ChooseFlagComponent implements OnInit {
   targetLang!:string;
   isLoading:boolean=false;
   displayed:boolean=false;
-  constructor(private __FlagService: FlagService,private __SharedService:SharedService,private __LiveTranslationsService:LiveTranslationsService) {}
+  constructor(private __FlagService: FlagService,private __LiveTranslationsService:LiveTranslationsService,private __PatientReportInfoService:PatientReportInfoService) {}
 
   ngOnInit(): void {
-       this.targetLang=this.__SharedService.getSiteLanguage();
+      this.targetLang=this.__PatientReportInfoService.getPatientLanguage().lang;
       this.Flags$ =this.mapApiFlagsData(this.__FlagService.getCountries());
       this.AllFlags$=this.Flags$;
-      this.storedCountry=this.__SharedService.getGenericStoredDataValue('Country');
+      this.storedCountry=this.__PatientReportInfoService.getPatientFieldValueByKey('Country');
       this.NextButtondisabled=!this.storedCountry ? true : false;
-      this.currentPage=this.__SharedService.getGenericStoredDataValue('CountrycurrentPage');
+      this.currentPage=this.__PatientReportInfoService.getPatientFieldValueByKey('CountrycurrentPage');
       this.selectedFlag=this.storedCountry;
     }
 
@@ -49,30 +49,25 @@ export class ChooseFlagComponent implements OnInit {
   chooseFlag(Flag:Country){
     this.selectedFlag=Flag;
     this.NextButtondisabled=false;
-    this.__SharedService.saveItemInLocalStorage('Country',JSON.stringify(Flag));
+    this.__PatientReportInfoService.updatePatientDataByKey(['Country'],[JSON.stringify(Flag)])
     let currentPage:number=this.currentPage;
     if (this.searchKey) {
     this.AllFlags$.pipe(
       map(Flags => Flags.findIndex(item => item.name === Flag.name)), 
-      // tap(index => console.log(index)),
       map(index => {
         const pageNumberCalculateDivation = (index + 1) / this.pageSize;
         const pageNumberCalculateReminder = (index + 1) % this.pageSize;
-
-        // console.log(pageNumberCalculateDivation, pageNumberCalculateReminder);
 
         return pageNumberCalculateReminder > 0 
           ? Math.ceil(pageNumberCalculateDivation) 
           : pageNumberCalculateDivation;
       }),
       tap(currentPage => {
-        // console.log(currentPage);
-        this.__SharedService.saveItemInLocalStorage('CountrycurrentPage', JSON.stringify(currentPage));
+            this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
       })
     ).subscribe();
-  } else {
-    this.__SharedService.saveItemInLocalStorage('CountrycurrentPage', JSON.stringify(currentPage));
-  }
+  } else 
+                this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
   }
 
 

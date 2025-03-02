@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../../../Services/Shared/shared.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientAdditionalInfo } from '../../../Interfaces/patient-additional-info';
+import { PatientReportInfoService } from '../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 @Component({
   selector: 'app-additional-patient-info',
@@ -14,9 +14,9 @@ export class AdditionalPatientInfoComponent implements OnInit{
 additionalPatientInfo!:FormGroup;
 storedPatientAdditionalInfo!:PatientAdditionalInfo;
 
-constructor(private __sharedService:SharedService){}
+constructor(private __PatientReportInfoService:PatientReportInfoService){}
 ngOnInit(): void {
-this.storedPatientAdditionalInfo=this.__sharedService.getGenericStoredDataValue('additionalPatientInfo');
+  this.storedPatientAdditionalInfo=this.__PatientReportInfoService.getPatientFieldValueByKey('additionalPatientInfo');
  this.additionalPatientInfo= new FormGroup({
      pregnant: new FormControl( this.storedPatientAdditionalInfo.pregnant ,[Validators.required]),
      havePeriod: new FormControl(this.storedPatientAdditionalInfo.havePeriod , [Validators.required]),

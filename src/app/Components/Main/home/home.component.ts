@@ -7,6 +7,7 @@ import { StyleService } from '../../../Services/style/style.service';
 import { SharedService } from '../../../Services/Shared/shared.service';
 import { Selec2 } from '../../../Interfaces/selec2';
 import { LiveTranslationsService } from '../../../Services/LiveTranslationService/live-translations.service';
+import { PatientReportInfoService } from '../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 declare var window: any; // Global jQuery
 
@@ -26,24 +27,24 @@ export class HomeComponent{
   private __TranslationService:TranslateService,
   private __StyleService:StyleService, 
   private __sharedService:SharedService,
-  private __LiveTranslation:LiveTranslationsService,){}
+  private __LiveTranslation:LiveTranslationsService,
+  private __PatientReportInfoService:PatientReportInfoService){}
 
  ngOnInit(): void {
-  if(this.__sharedService.getSiteLanguage() == 'en' || !this.__sharedService.getSiteLanguage())
+  
+  if(this.__PatientReportInfoService.getPatientLanguage().lang == 'en' || !this.__PatientReportInfoService.getPatientLanguage().lang)
     this.languages$=this.__LanguageService.getLanguages();
   else
-      this.languages$ =this.getLanguagesTranslation(this.__sharedService.getSiteLanguage());
+      this.languages$ =this.getLanguagesTranslation(this.__PatientReportInfoService.getPatientLanguage().lang);
  }
 
-
  onLanguageChoose(event:Selec2){
-      const selectedLanguage=event.value
+      const selectedLanguage=event.value;
       this.chooseenLanguage=selectedLanguage;
       const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);
       this.__StyleService.switchStyleToRTL(isRTL,selectedLanguage);
-      this.__TranslationService.use(selectedLanguage); // Switch language
-      localStorage.setItem('lang',selectedLanguage);
-      localStorage.setItem('language',event.text);
+      this.__TranslationService.use(selectedLanguage);
+      this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],[selectedLanguage,event.text]);
       if(selectedLanguage != 'en')
       {this.languages$ = this.getLanguagesTranslation(selectedLanguage);
       this.__LiveTranslation.loadTranslations(selectedLanguage);}
