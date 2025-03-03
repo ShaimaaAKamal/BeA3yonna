@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SharedService } from '../../../../Services/Shared/shared.service';
+import { PatientReportInfoService } from '../../../../Services/Shared/PatientReportInfo/patient-report-info.service';
+import { PatientReportData } from '../../../../Interfaces/patient-report-data';
 
 @Component({
   selector: 'app-navigation-buttons',
@@ -16,15 +18,19 @@ export class NavigationButtonsComponent {
 @Input() Key:string='';
 @Input() value:any;
 @Input() actionName:string='Next';
-constructor(private __SharedService:SharedService){}
+constructor(private __SharedService:SharedService,private __PatientReportInfoService:PatientReportInfoService){}
 BackToPreviousPage(){
  this.__SharedService.navigateToPage(this.PreviousPageUrl);
 }
 navigateNextPage()
-{ if(this.actionName == 'Done')
-      this.__SharedService.clearLocalStorage();
-  if(this.Key)
-    this.__SharedService.saveItemInLocalStorage(this.Key,JSON.stringify(this.value));
+{ if(this.Key)
+    this.__PatientReportInfoService.updatePatientDataByKey([this.Key],[JSON.stringify(this.value)]);
+   if(this.actionName == 'Done'){
+ this.__PatientReportInfoService.addNewPatientReport(this.value);
+ this.__SharedService.removeItemFromLocalStorage('patientReport');
+ const emptyReport:PatientReportData=this.__SharedService.getDefaultValue('patientReport');
+ this.__PatientReportInfoService.patientReport.next(emptyReport);
+}    
  this.__SharedService.navigateToPage(this.NextPageUrl);
 }
 }

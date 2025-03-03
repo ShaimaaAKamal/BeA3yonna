@@ -1,6 +1,7 @@
 
 import { Directive, ElementRef, AfterViewInit, OnDestroy, Output, EventEmitter, NgZone } from '@angular/core';
 import { Selec2 } from '../Interfaces/selec2';
+import { PatientReportInfoService } from '../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 declare var window: any; // Global jQuery
 
@@ -12,14 +13,14 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
   @Output() valueChange = new EventEmitter<Selec2>(); 
   private isSelect2Active = false; // Track if Select2 is initialized
 
-  constructor(private el: ElementRef, private ngZone: NgZone) {}
+  constructor(private el: ElementRef, private ngZone: NgZone,private __PatientReportInfoService:PatientReportInfoService) {}
 
   ngAfterViewInit(): void {
     this.ngZone.runOutsideAngular(() => {
       this.initializeSelect2();
 
       setTimeout(() => {
-        const savedValue = localStorage.getItem('lang');
+        const savedValue=this.__PatientReportInfoService.getPatientLanguage().lang;
         if (savedValue) {
           this.applyValue(savedValue);
         }

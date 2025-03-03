@@ -1,5 +1,5 @@
 import {  Component, OnInit} from '@angular/core';
-import { SharedService } from '../../../../Services/Shared/shared.service';
+import { PatientReportInfoService } from '../../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 @Component({
   selector: 'app-pained-body-part',
@@ -13,12 +13,13 @@ NextButtonDisabled:boolean=true;
 selectedPartsIndexes:number[]=[];
 storedPainedParts:number[]=[];
 
-constructor(private __SharedService:SharedService){}
+constructor(private __PatientReportInfoService:PatientReportInfoService){}
 
 ngOnInit(): void {
 const paths=document.getElementsByTagName('path');
 const pathsArray=Array.from(paths);
-this.storedPainedParts=this.__SharedService.getGenericStoredDataValue('painedParts');
+this.storedPainedParts=this.__PatientReportInfoService.getPatientFieldValueByKey('painedParts');
+
 if(this.storedPainedParts) this.displayStoryedPainedParts(pathsArray);
 pathsArray.forEach((path,index) => {
   path.addEventListener('click',()=>{

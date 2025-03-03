@@ -7,6 +7,7 @@ import { SharedService } from '../../../../Services/Shared/shared.service';
 import { PatientHistory } from '../../../../Interfaces/patient-history';
 import { PatientInitialVitals } from '../../../../Interfaces/patient-initial-vitals';
 import { PatientAdditionalInfo } from '../../../../Interfaces/patient-additional-info';
+import { PatientReportInfoService } from '../../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 @Component({
   selector: 'app-report',
@@ -30,7 +31,7 @@ export class ReportComponent {
   fullAssesmentData:any;
 
 
-  constructor(private __SharedService:SharedService){}
+  constructor(private __SharedService:SharedService,private __PatientReportInfoService:PatientReportInfoService){}
   
     @HostListener('window:resize', ['$event'])
      onResize() {
@@ -40,7 +41,7 @@ export class ReportComponent {
   
   ngOnInit(): void {
     this.onResize(); 
-    this.patientReportData=this.__SharedService.getAllLocalStorage();
+    this.patientReportData=this.__PatientReportInfoService.getReportData();
     this.patientVitals=this.patientReportData['patientVitals'];
     this.patientVitals=this.__SharedService.formatPatientVitalsValuesByAddingUnits(this.patientVitals);
     this.painLevel=this.patientReportData['painScale'];
@@ -73,7 +74,8 @@ export class ReportComponent {
   }
   
   getAssessmentInfo(){
-      const AssessmentInfo:AssessmentInfo=this.__SharedService.getGenericStoredDataValue('AssessmentInfo');
+            const AssessmentInfo:AssessmentInfo=this.__PatientReportInfoService.getPatientFieldValueByKey('AssessmentInfo');
+
       return {...AssessmentInfo,"Patient Pain Level":this.painLevel.name}
   }
   

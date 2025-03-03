@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SharedService } from '../../../../Services/Shared/shared.service';
+import { PatientReportInfoService } from '../../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 @Component({
   selector: 'app-display-symptoms',
@@ -21,16 +21,17 @@ storedSymptoms:string[]=[];
 @Input() value:any;
 @Input() symptoms:string[]=[];
 @Input() selectedSymptoms:string[]=[];
-@Output() NextButtonDisabledChange = new EventEmitter<boolean>(); // Emit value changes
+@Output() NextButtonDisabledChange = new EventEmitter<boolean>();
 searchKey:string='';
 AllSymptoms:string[]=[];
 
-constructor(private __SharedService:SharedService){}
+constructor(private __PatientReportInfoService:PatientReportInfoService){}
 
 ngOnInit(): void {
 
   this.AllSymptoms=this.symptoms;
-   this.storedSymptoms=this.__SharedService.getGenericStoredDataValue(this.Key);
+  this.storedSymptoms=this.__PatientReportInfoService.getPatientFieldValueByKey(this.Key);
+
    this.NextButtonDisabled=( this.storedSymptoms.length !=0)?false:true;
    this.selectedSymptoms=this.storedSymptoms;
 }

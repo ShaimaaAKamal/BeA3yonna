@@ -23,4 +23,5 @@ patientHistory:PatientHistory
 patientInfo:PatientInfo,
 patientInitialVitals:PatientInitialVitals,
 patientVitals:PatientVitals,
+[key: string]: any;
 }

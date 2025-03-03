@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PainScale } from '../../../../Interfaces/pain-scale';
-import { SharedService } from '../../../../Services/Shared/shared.service';
+import { PatientReportInfoService } from '../../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 @Component({
   selector: 'app-rate-pain',
@@ -23,9 +23,9 @@ painScaleValues:PainScale[]=[
   {name:'worst Pain',color:'#D30000',textColor:"#fff"},
 ];
 NextButtonDisabled:boolean=true;
-constructor(private __SharedService:SharedService){}
+constructor(private __PatientReportInfoService:PatientReportInfoService){}
 ngOnInit(): void {
-      this.stortedPainScale=this.__SharedService.getGenericStoredDataValue('painScale');
+      this.stortedPainScale=this.__PatientReportInfoService.getPatientFieldValueByKey('painScale');
       if(this.stortedPainScale.name && this.stortedPainScale.color) {
           this.painLevel=this.stortedPainScale.name;
           this.selectedColor=this.stortedPainScale.color;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SharedService } from '../../../../Services/Shared/shared.service';
 import { PatientHistory } from '../../../../Interfaces/patient-history';
+import { PatientReportInfoService } from '../../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 
 @Component({
   selector: 'app-patient-complain-details',
@@ -15,11 +15,11 @@ export class PatientComplainDetailsComponent implements OnInit {
   stortedPatientHistory!:PatientHistory;
   PreviousPageUrl!:string;
  
-  constructor(private __SharedService:SharedService){}
+  constructor(private __PatientReportInfoService:PatientReportInfoService){}
 
   ngOnInit(): void {
     this.getPreviousPage();
-    this.stortedPatientHistory=this.__SharedService.getGenericStoredDataValue('patientHistory');
+    this.stortedPatientHistory=this.__PatientReportInfoService.getPatientFieldValueByKey('patientHistory');
     this.PatientHistory= new FormGroup({
          complainTime: new FormControl( this.stortedPatientHistory?.complainTime ?? '',[Validators.required]),
          lastMealTime: new FormControl(this.stortedPatientHistory?.lastMealTime ?? '', [Validators.required]),
@@ -27,9 +27,8 @@ export class PatientComplainDetailsComponent implements OnInit {
   }
 
   getPreviousPage(){
-  const PatientInitialVitals=this.__SharedService.getGenericStoredDataValue('patientInitialVitals');
+   const PatientInitialVitals=this.__PatientReportInfoService.getPatientFieldValueByKey('patientInitialVitals');
   this.PreviousPageUrl=(PatientInitialVitals.havePeramentDiseases === 'no' || !PatientInitialVitals.havePeramentDiseases)
                               ?'Choose_Pained_Body_Part':'Permanent Diseases';
- 
   }
 }
