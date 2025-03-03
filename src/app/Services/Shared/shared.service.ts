@@ -46,7 +46,8 @@ export class SharedService {
     return storedData;
   }
 
-  getDefaultValue(key: string) {
+  
+  getDefaultValue(key: string):any {
     switch (key) {
         case 'patientReport':
           return {
@@ -114,6 +115,9 @@ getAllLocalStorage(): PatientReportData {
 }
 clearLocalStorage(){
   localStorage.clear();
+}
+removeItemFromLocalStorage(key:string){
+localStorage.removeItem(key);
 }
 getSiteLanguage(){
  return  this.getItemFromLocalStorage('lang');
