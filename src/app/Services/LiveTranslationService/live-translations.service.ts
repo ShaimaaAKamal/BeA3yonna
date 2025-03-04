@@ -68,10 +68,10 @@ textsToTranslate: string[] = [
     "Done","Finish & Save","Back","Next","Previous"
     ,'Please Choose your Language' ,'Language','Choose a Language','Choose Country','No Countries Matched for this value :' ,
 
-    'Patient Pain Level',"Patient's vital signs","yes",'no',
+    'Patient Pain Level',"Patient's vital signs","yes","no",
 
-    'years Old','Allergy'
-
+    'years Old','Allergy','Unknown',
+    'Kg','Cm','deg','mmHg','mg/dL','%','Bpm'
 ];
   constructor(private http: HttpClient, private __TranslateService: TranslateService) {}
 
