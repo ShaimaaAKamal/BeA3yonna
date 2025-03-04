@@ -19,14 +19,14 @@ export class PatientVitalsComponent implements OnInit {
   ngOnInit(): void {
     this.storedPatientVitals=this.__PatientReportInfoService.getPatientFieldValueByKey('patientVitals');
     this.patientVitals = new FormGroup({
-        Weight: new FormControl(this.storedPatientVitals?.Weight ?? '',[Validators.required,Validators.pattern('^[0-9]+$')]),
-        Height: new FormControl(this.storedPatientVitals?.Height ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        Temperature: new FormControl(this.storedPatientVitals?.Temperature ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        'Blood Pressure': new FormControl(this.storedPatientVitals?.['Blood Pressure'] ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-       'Oxygen Rate': new FormControl(this.storedPatientVitals?.['Oxygen Rate']?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        'Blood Sugar': new FormControl(this.storedPatientVitals?.['Blood Sugar'] ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        'Heart Rate': new FormControl(this.storedPatientVitals?.['Heart Rate']?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
-        'Breathe Rate': new FormControl(this.storedPatientVitals?.['Breathe Rate'] ?? '', [Validators.required,Validators.pattern('^[0-9]+$')]),
+        Weight: new FormControl(this.storedPatientVitals?.Weight ?? '',[Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
+        Height: new FormControl(this.storedPatientVitals?.Height ?? '', [Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
+        Temperature: new FormControl(this.storedPatientVitals?.Temperature ?? '', [Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
+       'Blood Pressure': new FormControl(this.storedPatientVitals?.['Blood Pressure'] ?? '', [Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
+       'Oxygen Rate': new FormControl(this.storedPatientVitals?.['Oxygen Rate']?? '', [Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
+        'Blood Sugar': new FormControl(this.storedPatientVitals?.['Blood Sugar'] ?? '', [Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
+        'Heart Rate': new FormControl(this.storedPatientVitals?.['Heart Rate']?? '', [Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
+        'Breathe Rate': new FormControl(this.storedPatientVitals?.['Breathe Rate'] ?? '', [Validators.required,Validators.pattern('^[0-9٠-٩]+$')]),
       });
   }
 }
