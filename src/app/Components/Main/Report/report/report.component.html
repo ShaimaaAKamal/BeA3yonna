@@ -45,7 +45,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                            <td class="p-2 " *ngFor="let key of getObjectKeys(patientVitals) ;">{{patientVitals[key] | translate}}</td>
+                                                            <td class="p-2 " *ngFor="let key of getObjectKeys(patientVitals) ;">{{patientVitals[key] | translate}} {{vitalUnits[key] | translate | titlecase}}</td>
                                                             </tr>
                                                         </tbody>
                                                         </table>

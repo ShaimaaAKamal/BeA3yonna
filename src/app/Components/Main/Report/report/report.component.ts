@@ -29,8 +29,7 @@ export class ReportComponent {
   permanentDiseases:string[]=[];
   painLevel!:PainScale;
   fullAssesmentData:any;
-
-
+  vitalUnits!:PatientVitals;
   constructor(private __SharedService:SharedService,private __PatientReportInfoService:PatientReportInfoService){}
   
     @HostListener('window:resize', ['$event'])
@@ -40,10 +39,10 @@ export class ReportComponent {
     }
   
   ngOnInit(): void {
+    this.vitalUnits=this.__SharedService.vitalUnits;
     this.onResize(); 
     this.patientReportData=this.__PatientReportInfoService.getReportData();
     this.patientVitals=this.patientReportData['patientVitals'];
-    this.patientVitals=this.__SharedService.formatPatientVitalsValuesByAddingUnits(this.patientVitals);
     this.painLevel=this.patientReportData['painScale'];
     this.fullPatientHistory=this.getPatientHistory();
     this.fullPatientHistoryBeforeRename=this.fullPatientHistory;

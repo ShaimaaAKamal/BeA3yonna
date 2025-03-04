@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { PatientReportData } from '../../Interfaces/patient-report-data';
 import { PatientVitals } from '../../Interfaces/patient-vitals';
 import { TranslateService } from '@ngx-translate/core';
+import { LiveTranslationsService } from '../LiveTranslationService/live-translations.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  constructor(private __HttpClient:HttpClient,private __Router:Router,private __TranslateService:TranslateService) { }
+  vitalUnits:PatientVitals= {
+  Weight: 'Kg',
+  Height: 'Cm',
+  Temperature: 'deg',
+  'Blood Pressure': 'mmHg',
+  'Oxygen Rate': '%',
+  'Blood Sugar': 'mg/dL',
+  'Heart Rate': 'Bpm',
+  'Breathe Rate': 'Bpm'
+};
+  constructor(private __HttpClient:HttpClient,private __Router:Router,private __LiveTranslationsService:LiveTranslationsService) { }
 
   sendGetRequest(url:string):Observable<any>{
     return this.__HttpClient.get(url);
@@ -64,7 +75,7 @@ export class SharedService {
                     painScale:{ name: '', color: '', textColor: '' },
                     painedParts:[],
                     patientHistory:{ complainTime: '', lastMealTime: '' },
-                    patientInfo: { name: '', age: 10, gender: ''},
+                    patientInfo: { name: '', age:'', gender: ''},
                     patientInitialVitals:{ haveAllergy: "", haveInfectiousDiseases: "", havePeramentDiseases: "", presubscribedMedication: "" },
                     patientVitals:{ Weight: '', Height: '', Temperature: '', 'Blood Pressure': '','Oxygen Rate': '', 'Blood Sugar': '', 'Heart Rate': '', 'Breathe Rate': '' }
                   };
@@ -124,27 +135,63 @@ localStorage.removeItem(key);
 getSiteLanguage(){
  return  this.getItemFromLocalStorage('lang');
 }
-formatPatientVitalsValuesByAddingUnits(patientVitals:PatientVitals):PatientVitals{
-const Units:PatientVitals= {
-  Weight: ' Kg',
-  Height: ' Cm',
-  Temperature: ' deg',
-  'Blood Pressure': ' mmHg',
-  'Oxygen Rate': ' %',
-  'Blood Sugar': ' mg/dL',
-  'Heart Rate': ' bpm',
-  'Breathe Rate': ' bpm'
-};
 
-// Update values based on the substring mapping
-  const updatedObj = Object.keys(Units).reduce((acc, key) => {
-    acc[key as keyof PatientVitals] = patientVitals[key as keyof PatientVitals] 
-      ? `${patientVitals[key as keyof PatientVitals]}${Units[key as keyof PatientVitals]}`
-      : '';
-    return acc;
-  }, {} as PatientVitals);
-return updatedObj;
- }
+// formatPatientVitalsValuesByAddingUnits(patientVitals:PatientVitals):PatientVitals{
+// const Units:PatientVitals= {
+//   Weight: ' Kg',
+//   Height: ' Cm',
+//   Temperature: ' deg',
+//   'Blood Pressure': ' mmHg',
+//   'Oxygen Rate': ' %',
+//   'Blood Sugar': ' mg/dL',
+//   'Heart Rate': ' bpm',
+//   'Breathe Rate': ' bpm'
+// };
+
+// // Update values based on the substring mapping
+//   const updatedObj = Object.keys(Units).reduce((acc, key) => {
+//     acc[key as keyof PatientVitals] = patientVitals[key as keyof PatientVitals] 
+//       ? `${patientVitals[key as keyof PatientVitals]}${Units[key as keyof PatientVitals]}`
+//       : '';
+//     return acc;
+//   }, {} as PatientVitals);
+// return updatedObj;
+//  }
+// formatPatientVitalsValuesByAddingUnits(patientVitals: PatientVitals, targetLang: string): Observable<PatientVitals> {
+//   const units: { [key: string]: string } = {
+//     Weight: 'Kg',
+//     Height: 'Cm',
+//     Temperature: 'deg',
+//     'Blood Pressure': 'mmHg',
+//     'Oxygen Rate': '%',
+//     'Blood Sugar': ' mg/dL',
+//     'Heart Rate': ' BPM',
+//     'Breathe Rate': ' BPM'
+//   };
+
+//   const translationObservables = Object.keys(units).map((key) => 
+//     this.__LiveTranslationsService.translateText(units[key], targetLang).pipe(
+//       map((translatedUnit) => ({ key, translatedUnit }))
+//     )
+//   );
+
+//   return forkJoin(translationObservables).pipe(
+//     map((translatedUnitsArray) => {
+//       const translatedUnits: { [key: string]: string } = {};
+//       translatedUnitsArray.forEach(({ key, translatedUnit }) => {
+//         translatedUnits[key] = translatedUnit;
+//       });
+
+//       const formattedVitals: PatientVitals = { ...patientVitals };
+//       for (const key in formattedVitals) {
+//         if (translatedUnits[key] && formattedVitals[key] !== undefined) {
+//           formattedVitals[key] += ` ${translatedUnits[key]}`;
+//         }
+//       }
+//       return formattedVitals;
+//     })
+//   );
+// }
 
 displayStoryedPainedParts(pathsArray:any,Data:any){
   pathsArray.forEach((path:any,index:number) => {
