@@ -10,7 +10,7 @@ import { PatientReportInfoService } from '../../../../Services/Shared/PatientRep
   styleUrl: './permanent-diseases.component.css'
 })
 export class PermanentDiseasesComponent{
-PermanentDiseases:string[]=['Blood Pressure','Diabetic','Back Pain','Allgery','Stomach Pain','Shoulder Pain','Temperature'];
+PermanentDiseases:string[]=['Blood Pressure','Diabetic','Back Pain','Allergy','Stomach Pain','Shoulder Pain','Temperature'];
 NextButtonDisabled:boolean=true;
 selectedSymptoms:string[]=[];
 
