@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { SharedService } from '../Shared/shared.service';
 import { HttpClient } from '@angular/common/http';
+import { Country } from '../../Interfaces/country';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class FlagService {
 
   constructor(private __SharedService:SharedService) { }
-  getCountries():Observable<any>{
+  getCountries():Observable<Country[]>{
     // return this.__SharedService.sendGetRequest('https://restcountries.com/v3.1/all');
      return this.__SharedService.sendGetRequest('https://restcountries.com/v3.1/all').pipe(
     catchError(error => {
@@ -21,7 +22,7 @@ export class FlagService {
   }
 
  
-  searchByCountryName(name: string): Observable<any> {
+  searchByCountryName(name: string): Observable<Country[]> {
   return this.__SharedService.sendGetRequest(`https://restcountries.com/v3.1/translation/${name}`).pipe(
     catchError(error => {
       console.error(`Error fetching country data for "${name}":`, error);
