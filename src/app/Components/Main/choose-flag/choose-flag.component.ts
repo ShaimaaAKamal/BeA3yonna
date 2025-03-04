@@ -6,6 +6,7 @@ import { FlagService } from '../../../Services/Flag/flag.service';
 import { Country } from '../../../Interfaces/country';
 import { LiveTranslationsService } from '../../../Services/LiveTranslationService/live-translations.service';
 import { PatientReportInfoService } from '../../../Services/Shared/PatientReportInfo/patient-report-info.service';
+import { StyleService } from '../../../Services/style/style.service';
 
 @Component({
   selector: 'app-choose-flag',
@@ -14,8 +15,8 @@ import { PatientReportInfoService } from '../../../Services/Shared/PatientReport
   styleUrls: ['./choose-flag.component.css']
 })
 export class ChooseFlagComponent implements OnInit {
-  Flags$!: Observable<any[]>; 
-  AllFlags$!: Observable<any[]>; 
+  Flags$!: Observable<Country[]>; 
+  AllFlags$!: Observable<Country[]>; 
   NextButtondisabled:boolean=true;
   currentPage:number = 1;
   pageSize:number = 24;
@@ -25,10 +26,15 @@ export class ChooseFlagComponent implements OnInit {
   targetLang!:string;
   isLoading:boolean=false;
   displayed:boolean=false;
-  constructor(private __FlagService: FlagService,private __LiveTranslationsService:LiveTranslationsService,private __PatientReportInfoService:PatientReportInfoService) {}
+  isRtl!:boolean;
+  constructor(private __FlagService: FlagService,
+    private __LiveTranslationsService:LiveTranslationsService,
+    private __PatientReportInfoService:PatientReportInfoService,
+    private __StyleService:StyleService) {}
 
   ngOnInit(): void {
       this.targetLang=this.__PatientReportInfoService.getPatientLanguage().lang;
+      this.isRtl=this.__StyleService.isRtl(this.targetLang);
       this.Flags$ =this.mapApiFlagsData(this.__FlagService.getCountries());
       this.AllFlags$=this.Flags$;
       this.storedCountry=this.__PatientReportInfoService.getPatientFieldValueByKey('Country');
@@ -38,13 +44,12 @@ export class ChooseFlagComponent implements OnInit {
     }
 
   searchForCountry(){
+      this.currentPage = 1;
     if(this.searchKey)
             this.Flags$ =this.mapApiFlagsData(this.__FlagService.searchByCountryName(this.searchKey)); 
     else  
             this.Flags$=this.AllFlags$;
-      
   }
-
   
   chooseFlag(Flag:Country){
     this.selectedFlag=Flag;
@@ -71,7 +76,7 @@ export class ChooseFlagComponent implements OnInit {
   }
 
 
-mapApiFlagsData(flagData: Observable<any>): Observable<any> {
+mapApiFlagsData(flagData: Observable<Country[]>): Observable<Country[]> {
   // console.log("🔵 Fetching data...");
   this.isLoading=true;
   this.displayed=false;
@@ -87,7 +92,9 @@ mapApiFlagsData(flagData: Observable<any>): Observable<any> {
       return countries ? countries.map((country: any) => ({
         originalName: country.name?.common || "Unknown",
         flags: country.flags || {},
-        languages: country.languages || {}
+        languages: country.languages || {},
+        capital:country.capital || [],
+        name: country.name?.common || "Unknown",
       })) : [];
     }),
     switchMap(countries => {
@@ -97,7 +104,12 @@ mapApiFlagsData(flagData: Observable<any>): Observable<any> {
         // console.log("🟠 No countries found.");
         return of([]);
       }
-              this.isLoading=true;
+      if (this.targetLang === 'en') {
+        this.isLoading = false;
+        this.displayed = false;
+        return of(countries);
+      }
+      this.isLoading=true;
       const translationRequests = countries.map((country: any) =>
         this.__LiveTranslationsService.translateText(country.originalName, this.targetLang).pipe(
           catchError(() => {
@@ -107,9 +119,11 @@ mapApiFlagsData(flagData: Observable<any>): Observable<any> {
           map(translatedName => ({ ...country, name: translatedName }))
         )
       );
-                     this.isLoading=false;
+      this.isLoading=false;
       return forkJoin(translationRequests);
     })
   );
 }
+
+
 }
