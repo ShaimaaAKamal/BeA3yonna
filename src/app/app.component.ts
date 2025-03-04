@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
     this.setLanguageAndStyle(saveLang);
     if(saveLang != 'en')
       this.__LiveTranslationsService.loadTranslations(saveLang); 
-    // else
-    //   this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
+    else
+      this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
     console.log('appLang',this.__PatientReportInfoService.getPatientLanguage().lang);
   }
     setLanguageAndStyle(lang:string){
