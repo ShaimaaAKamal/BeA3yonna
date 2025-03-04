@@ -10,7 +10,7 @@ import { SharedService } from '../../../../Services/Shared/shared.service';
 })
 export class ChooseSymptomsComponent  {
 AllSymptoms:string[]=['Armache','Back Pain','Vomit','Toothache','Diabetic','Dizznies','Sneezing','Blood Pressure','Eye Pain'
-  ,'Pulse Measurment','Nausea','Allgery','HandAche','Weight Scale','Stomach Pain','Heart  Rate','Heart Attack','Shoulder Pain','Temperature'
+  ,'Pulse Measurment','Nausea','Allergy','HandAche','Weight Scale','Stomach Pain','Heart Rate','Heart Attack','Shoulder Pain','Temperature'
 ]
 NextButtonDisabled:boolean=true;
 selectedSymptoms:string[]=[];

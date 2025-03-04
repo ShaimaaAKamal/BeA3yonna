@@ -70,7 +70,7 @@ textsToTranslate: string[] = [
 
     'Patient Pain Level',"Patient's vital signs","yes",'no',
 
-    'years Old'
+    'years Old','Allergy'
 
 ];
   constructor(private http: HttpClient, private __TranslateService: TranslateService) {}
