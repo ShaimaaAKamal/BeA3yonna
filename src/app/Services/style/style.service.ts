@@ -23,8 +23,8 @@ export class StyleService {
 
     head.appendChild(newLink);
     document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
-    document.documentElement.setAttribute('lang', isRTL ? 'ar' : lang);
-
+    // document.documentElement.setAttribute('lang', isRTL ? 'ar' : lang);
+    document.documentElement.setAttribute('lang',lang);
   }
 
   isRtl(lang:string):boolean{
