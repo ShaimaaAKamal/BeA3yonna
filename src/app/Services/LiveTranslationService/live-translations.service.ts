@@ -28,7 +28,7 @@ textsToTranslate: string[] = [
   "Blood_Pressure","Breathe_Rate","Blood_Sugar",
 
   // Pain Assessment
-  "How strong is your pain?", "No pain", "Mild", "Moderate", "Severe", "Very severe", "Worst pain",
+  "How strong is your pain?", "no Pain", "mild", "moderate", "severe", "very Severe", "worst Pain",
   "Identify areas of pain","Do yoy have any of the following symptoms ?","Do you any allergy ?",
   "Do you have any permanent diseases ?","Do you have any Infectious diseases ?",
 
@@ -66,7 +66,11 @@ textsToTranslate: string[] = [
   "More Than 12 Hours","More Than 4 Hours","Case evaluation","How strong is your pain ?",
     // Button Name
     "Done","Finish & Save","Back","Next","Previous"
-    ,'Please Choose your Language' ,'Language','Choose a Language','Choose Country','No Countries Matched for this value :' 
+    ,'Please Choose your Language' ,'Language','Choose a Language','Choose Country','No Countries Matched for this value :' ,
+
+    'Patient Pain Level',"Patient's vital signs","yes",'no',
+
+    'years Old'
 
 ];
   constructor(private http: HttpClient, private __TranslateService: TranslateService) {}

@@ -32,7 +32,8 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
     if (this.isSelect2Active) return; // Prevent duplicate initialization
 
     setTimeout(() => {
-      const currentLang = localStorage.getItem('lang') || 'en';
+      // const currentLang = localStorage.getItem('lang') || 'en';
+       const currentLang =this.__PatientReportInfoService.getPatientLanguage().lang;
       const isRtl = this.isRtlLanguage(currentLang);
 
       this.isSelect2Active = true;

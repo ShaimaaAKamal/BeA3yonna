@@ -31,14 +31,17 @@ export class HomeComponent{
   private __PatientReportInfoService:PatientReportInfoService){}
 
  ngOnInit(): void {
-  
+  console.log('lang',this.__PatientReportInfoService.getPatientLanguage().lang);
   if(this.__PatientReportInfoService.getPatientLanguage().lang == 'en' || !this.__PatientReportInfoService.getPatientLanguage().lang)
+  // if(this.__PatientReportInfoService.getPatientLanguage().lang == 'en')
     this.languages$=this.__LanguageService.getLanguages();
   else
       this.languages$ =this.getLanguagesTranslation(this.__PatientReportInfoService.getPatientLanguage().lang);
  }
 
  onLanguageChoose(event:Selec2){
+  console.log('inChange');
+  console.log(event);
       const selectedLanguage=event.value;
       this.chooseenLanguage=selectedLanguage;
       const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);

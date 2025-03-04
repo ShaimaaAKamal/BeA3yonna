@@ -7,7 +7,7 @@
                     <h4 class="px-3">{{'Patient Report' | translate}}</h4>
                     <div id="patientInfoSection" class="d-flex align-items-start justify-content-between px-3">
                         <app-patient-header></app-patient-header>
-                        <div [ngStyle]="{'background-color':painLevel.color ,'color':painLevel.textColor}" class="px-3 py-4 rounded-3 painLevel">{{painLevel.name | titlecase}}</div>
+                        <div [ngStyle]="{'background-color':painLevel.color ,'color':painLevel.textColor}" class="px-3 py-4 rounded-3 painLevel">{{painLevel.name  | translate | titlecase}}</div>
                     </div>
                      <div class="d-md-flex justify-content-between d-xl-block px-3 py-2">
                         <div class="flex-md-grow-1 ps-md-1 ps-xl-0"> 
@@ -22,8 +22,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                        <td class="p-2"  >{{getTodayDate()}}</td>
-                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullAssesmentData) ;">{{(fullAssesmentData[key] ? fullAssesmentData[key] :'-----') | translate | titlecase}}</td>
+                                        <td class="p-2"  >{{getTodayDate() | translate}}</td>
+                                        <td class="p-2 " *ngFor="let key of getObjectKeys(fullAssesmentData) ;">{{(fullAssesmentData[key] ? (fullAssesmentData[key] | translate) :'-----')  | titlecase}}</td>
                                         </tr>
                                     </tbody>
                                     </table>
@@ -112,9 +112,10 @@
                                                             <tr>
                                                              <td class="p-2" >
                                                                     
-                                                                    <div *ngIf="patientReportData.hasOwnProperty('PermanentDiseases') ; else noDiseases">
+                                                                    <div *ngIf="patientReportData.PermanentDiseases.length > 0 ; else noDiseases">
                                                                         <span *ngFor="let symptom of permanentDiseases ; let last=last;">
-                                                                        {{ symptom ? (symptom | translate) : '----' }}{{ last ? '' : ',' }}
+                                                                        <!-- {{ symptom ? (symptom | translate) : '----' }}{{ last ? '' : ',' }} -->
+                                                                       {{symptom | translate }}{{ last ? '' : ',' }}
                                                                        </span>
                                                                     </div>
                                                                       <ng-template #noDiseases>

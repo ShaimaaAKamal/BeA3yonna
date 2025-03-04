@@ -18,12 +18,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.__TranslateService.setDefaultLang('en'); 
-    const saveLang=this.__SharedService.getSiteLanguage() ? this.__SharedService.getSiteLanguage() : 'en';
+    let saveLang=this.__PatientReportInfoService.getPatientLanguage().lang;
+    console.log('saveLang',saveLang);
+    saveLang=saveLang?saveLang:'en';
     this.setLanguageAndStyle(saveLang);
     if(saveLang != 'en')
-    this.__LiveTranslationsService.loadTranslations(this.__SharedService.getSiteLanguage()); 
-    else
-      this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
+      this.__LiveTranslationsService.loadTranslations(saveLang); 
+    // else
+    //   this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
+    console.log('appLang',this.__PatientReportInfoService.getPatientLanguage().lang);
   }
     setLanguageAndStyle(lang:string){
       this.__TranslateService.use(lang);
