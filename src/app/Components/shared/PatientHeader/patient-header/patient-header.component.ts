@@ -16,7 +16,7 @@ export class PatientHeaderComponent implements OnInit{
   language:string='';
   country!:Country;
   IsFemale:boolean=false;
-  emptyCountry:Country={name:"",flags:{},languages:{}}
+  emptyCountry:Country={name:"",flags:{},languages:{},capital:[]}
 constructor(private __PatientReportInfoService:PatientReportInfoService,private __LiveTranslationsService:LiveTranslationsService){}
 ngOnInit(): void {
   this.patientInfo=this.__PatientReportInfoService.getPatientFieldValueByKey('patientInfo');
