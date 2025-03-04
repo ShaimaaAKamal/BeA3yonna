@@ -1,4 +1,5 @@
 
+
 import { Directive, ElementRef, AfterViewInit, OnDestroy, Output, EventEmitter, NgZone } from '@angular/core';
 import { Selec2 } from '../Interfaces/selec2';
 import { PatientReportInfoService } from '../Services/Shared/PatientReportInfo/patient-report-info.service';
@@ -13,14 +14,15 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
   @Output() valueChange = new EventEmitter<Selec2>(); 
   private isSelect2Active = false; // Track if Select2 is initialized
 
-  constructor(private el: ElementRef, private ngZone: NgZone,private __PatientReportInfoService:PatientReportInfoService) {}
+  constructor(private el: ElementRef, private ngZone: NgZone, private __PatientReportInfoService: PatientReportInfoService) {}
 
   ngAfterViewInit(): void {
     this.ngZone.runOutsideAngular(() => {
       this.initializeSelect2();
 
       setTimeout(() => {
-        const savedValue=this.__PatientReportInfoService.getPatientLanguage().lang;
+        const savedValue = this.__PatientReportInfoService.getPatientLanguage().lang;
+        console.log('Saved Language:', savedValue);
         if (savedValue) {
           this.applyValue(savedValue);
         }
@@ -32,18 +34,20 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
     if (this.isSelect2Active) return; // Prevent duplicate initialization
 
     setTimeout(() => {
-      // const currentLang = localStorage.getItem('lang') || 'en';
-       const currentLang =this.__PatientReportInfoService.getPatientLanguage().lang;
+      const currentLang = this.__PatientReportInfoService.getPatientLanguage().lang;
       const isRtl = this.isRtlLanguage(currentLang);
 
       this.isSelect2Active = true;
       window.$(this.el.nativeElement).select2({ dir: isRtl ? 'rtl' : 'ltr' });
 
-      // Attach change event only if not already attached
+      // Attach change event with proper debugging
       window.$(this.el.nativeElement).off('change').on('change', (event: any) => {
         if (this.isSelect2Active) {
-        const selectedOption = event.target.selectedOptions[0]; 
-        const optionInnerHTML = selectedOption ? selectedOption.innerHTML : '';
+          const selectedOption = event.target.selectedOptions[0]; 
+          const optionInnerHTML = selectedOption ? selectedOption.innerHTML : '';
+          console.log('Change Event - Selected Value:', event.target.value);
+          console.log('Change Event - Selected Text:', optionInnerHTML);
+
           this.ngZone.run(() => {
             this.valueChange.emit({
                 value: event.target.value, 
@@ -57,9 +61,13 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
   }
 
   applyValue(value: string): void {
-    setTimeout(() => {
+    console.log('Applying Value:', value);
+
+    const retryInterval = setInterval(() => {
       if (this.isSelect2Active && window.$(this.el.nativeElement).data('select2')) {
-        window.$(this.el.nativeElement).val(value).trigger('change');
+        clearInterval(retryInterval);
+        window.$(this.el.nativeElement).val(value).trigger('change.select2');
+        console.log('Value Applied:', value);
       }
     }, 200);
   }

@@ -18,9 +18,10 @@ declare var window: any; // Global jQuery
   styleUrl: './home.component.css'
 })
 export class HomeComponent{
- languages:Language[]=[];
+//  languages:Language[]=[];
  disabled:boolean=true;
  languages$!:Observable<Language[]>;
+ AllLanguages$!:Observable<Language[]>; 
  ChooseLanguage: string = 'Choose a Language';
  chooseenLanguage:string='';
  constructor(private __LanguageService:LanguageService,
@@ -31,11 +32,13 @@ export class HomeComponent{
   private __PatientReportInfoService:PatientReportInfoService){}
 
  ngOnInit(): void {
+  this.chooseenLanguage=this.__PatientReportInfoService.getPatientLanguage().lang;
+  this.disabled=this.chooseenLanguage?false:true;
   console.log('lang',this.__PatientReportInfoService.getPatientLanguage().lang);
   if(this.__PatientReportInfoService.getPatientLanguage().lang == 'en' || !this.__PatientReportInfoService.getPatientLanguage().lang)
-  // if(this.__PatientReportInfoService.getPatientLanguage().lang == 'en')
-    this.languages$=this.__LanguageService.getLanguages();
-  else
+{    this.languages$=this.__LanguageService.getLanguages();
+     this.AllLanguages$=this.languages$;
+}  else
       this.languages$ =this.getLanguagesTranslation(this.__PatientReportInfoService.getPatientLanguage().lang);
  }
 
@@ -44,13 +47,14 @@ export class HomeComponent{
   console.log(event);
       const selectedLanguage=event.value;
       this.chooseenLanguage=selectedLanguage;
+      console.log(this.chooseenLanguage);
       const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);
       this.__StyleService.switchStyleToRTL(isRTL,selectedLanguage);
       this.__TranslationService.use(selectedLanguage);
       this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],[selectedLanguage,event.text]);
+      this.languages$ = this.getLanguagesTranslation(selectedLanguage);
       if(selectedLanguage != 'en')
-      {this.languages$ = this.getLanguagesTranslation(selectedLanguage);
-      this.__LiveTranslation.loadTranslations(selectedLanguage);}
+          this.__LiveTranslation.loadTranslations(selectedLanguage);
       this.disabled=false;
       
  }
@@ -71,7 +75,9 @@ export class HomeComponent{
           console.warn('No languages received from API');
           return of([]);
         }
-
+        if (targetLang === 'en') {
+        return of(languages);
+      }
         // Log each language before translation
         // console.log(`Translating ${languages.length} languages to '${targetLang}'...`);
 
