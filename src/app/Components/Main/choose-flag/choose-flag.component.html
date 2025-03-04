@@ -3,7 +3,8 @@
     <h3 class="pb-4 mb-2">{{'Choose your Country' | translate}}</h3>
 
       <form class="d-flex pb-5 px-2" role="search">
-            <input class="form-control me-2" type="search" name="search" placeholder="{{'Search By Name' | translate}}" aria-label="Search" [(ngModel)]="searchKey" (keyup)="searchForCountry()">
+            <input class="form-control me-2" type="search" name="search" [lang]="targetLang " [attr.inputmode]="isRtl ? 'verbatim' : 'latin'"
+             placeholder="{{'Search By Name' | translate}}" aria-label="Search" [(ngModel)]="searchKey" (keyup)="searchForCountry()">
       </form>
 
       <div *ngIf="(Flags$ | async)?.length ;else NoCountries;">
@@ -11,7 +12,7 @@
           <div class="row g-4">
             <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let Flag of( Flags$ | async ) ?? [] | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
               <div>
-                <app-flag-card [Flag]="Flag" (click)="chooseFlag(Flag)" [selected]="!!(Flag.name === selectedFlag.name)"></app-flag-card>
+                <app-flag-card [Flag]="Flag" (click)="chooseFlag(Flag)" [selected]="!!( selectedFlag.capital && Flag.capital && Flag.capital[0] === selectedFlag.capital[0])"></app-flag-card>
               </div>
             </div>
           </div>
