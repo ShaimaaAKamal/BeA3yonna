@@ -15,22 +15,23 @@ import { AssesmentComponent } from './Components/Main/Assessment/assesment/asses
 import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
 import { ReportComponent } from './Components/Main/Report/report/report.component';
 import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-found.component';
+import { NavigationGuard } from './Guards/Navigation/navigation.guard';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent ,pathMatch:'full'},
-    { path: 'Choose_Flag', component: ChooseFlagComponent},
-    { path: 'Patient_Info', component: PatientInfoComponent},
-    { path: 'Addtional_Patient_Info', component: AdditionalPatientInfoComponent},
-    {path:'Patient_Initial_Vitals',component:PatientInitialVitalsComponent},
-    {path:'Patient_Vitals',component:PatientVitalsComponent},
-    {path:'Choose_Symptoms',component:ChooseSymptomsComponent},
-    {path:'Pain_Scale',component:RatePainComponent},
-    {path:'Choose_Pained_Body_Part',component:PainedBodyPartComponent},
-    {path:'Permanent Diseases',component:PermanentDiseasesComponent},
-    {path:'Patient_History',component:PatientComplainDetailsComponent},
-    {path:'Assesment',component:AssesmentComponent},
-    // {path:'Report',component:FinalReportComponent},
-    {path:'Report',component:ReportComponent},
+    { path: '', component: HomeComponent ,pathMatch:'full',canActivate:[NavigationGuard]},
+    { path: 'Choose_Flag', component: ChooseFlagComponent,canActivate:[NavigationGuard]},
+    { path: 'Patient_Info', component: PatientInfoComponent,canActivate:[NavigationGuard]},
+    { path: 'Addtional_Patient_Info', component: AdditionalPatientInfoComponent,canActivate:[NavigationGuard]},
+    {path:'Patient_Initial_Vitals',component:PatientInitialVitalsComponent,canActivate:[NavigationGuard]},
+    {path:'Patient_Vitals',component:PatientVitalsComponent,canActivate:[NavigationGuard]},
+    {path:'Choose_Symptoms',component:ChooseSymptomsComponent,canActivate:[NavigationGuard]},
+    {path:'Pain_Scale',component:RatePainComponent,canActivate:[NavigationGuard]},
+    {path:'Choose_Pained_Body_Part',component:PainedBodyPartComponent,canActivate:[NavigationGuard]},
+    {path:'Permanent Diseases',component:PermanentDiseasesComponent,canActivate:[NavigationGuard]},
+    {path:'Patient_History',component:PatientComplainDetailsComponent,canActivate:[NavigationGuard]},
+    {path:'Assesment',component:AssesmentComponent,canActivate:[NavigationGuard]},
+    // {path:'Report',component:FinalReportComponent,canActivate:[NavigationGuard]},
+    {path:'Report',component:ReportComponent,canActivate:[NavigationGuard]},
     {path:'**',component:NotFoundComponent}
 
 
