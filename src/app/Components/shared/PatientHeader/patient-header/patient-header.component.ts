@@ -14,16 +14,18 @@ import { LiveTranslationsService } from '../../../../Services/LiveTranslationSer
 export class PatientHeaderComponent implements OnInit{
   patientInfo!:PatientInfo;
   language:string='';
-  country!:Country;
+  countryName!:string;
   IsFemale:boolean=false;
   emptyCountry:Country={name:"",flags:{},languages:{},capital:[]}
 constructor(private __PatientReportInfoService:PatientReportInfoService,private __LiveTranslationsService:LiveTranslationsService){}
 ngOnInit(): void {
   this.patientInfo=this.__PatientReportInfoService.getPatientFieldValueByKey('patientInfo');
   this.IsFemale=( this.patientInfo.gender == "female" )? true :false;
-  this.country=this.__PatientReportInfoService.getPatientFieldValueByKey('Country')?this.__PatientReportInfoService.getPatientFieldValueByKey('Country'):this.emptyCountry;
+  // this.country=this.__PatientReportInfoService.getPatientFieldValueByKey('Country')?this.__PatientReportInfoService.getPatientFieldValueByKey('Country'):this.emptyCountry;
+  this.__LiveTranslationsService.translateText(this.__PatientReportInfoService.getPatientFieldValueByKey('Country').name,this.__PatientReportInfoService.getPatientLanguage().lang)
+    .subscribe({next :(translatedCountry:string)=> this.countryName=translatedCountry })
+
   this.__LiveTranslationsService.translateText(this.__PatientReportInfoService.getPatientLanguage().language,this.__PatientReportInfoService.getPatientLanguage().lang)
   .subscribe({next :(translatedLang:string)=> this.language=translatedLang })
-  // this.language=this.__PatientReportInfoService.getPatientLanguage().language;
 }
 }
