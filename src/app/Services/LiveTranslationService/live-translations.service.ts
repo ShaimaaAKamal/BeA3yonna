@@ -71,7 +71,7 @@ textsToTranslate: string[] = [
     'Patient Pain Level',"Patient's vital signs","yes","no",
 
     'years Old','Allergy','Unknown',
-    'Kg','Cm','deg','mmHg','mg/dL','%','Bpm'
+    'Kg','Cm','deg','mmHg','mg/dL','%','bpm'
 ];
   constructor(private http: HttpClient, private __TranslateService: TranslateService) {}
 

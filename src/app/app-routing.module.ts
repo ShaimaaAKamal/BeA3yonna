@@ -18,7 +18,8 @@ import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-fo
 import { NavigationGuard } from './Guards/Navigation/navigation.guard';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent ,pathMatch:'full',canActivate:[NavigationGuard]},
+    // { path: '', component: HomeComponent ,pathMatch:'full',canActivate:[NavigationGuard]},
+    { path: '', component: HomeComponent ,pathMatch:'full'},
     { path: 'Choose_Flag', component: ChooseFlagComponent,canActivate:[NavigationGuard]},
     { path: 'Patient_Info', component: PatientInfoComponent,canActivate:[NavigationGuard]},
     { path: 'Addtional_Patient_Info', component: AdditionalPatientInfoComponent,canActivate:[NavigationGuard]},
@@ -33,11 +34,6 @@ const routes: Routes = [
     // {path:'Report',component:FinalReportComponent,canActivate:[NavigationGuard]},
     {path:'Report',component:ReportComponent,canActivate:[NavigationGuard]},
     {path:'**',component:NotFoundComponent}
-
-
-
-     
-
 ];
 
 @NgModule({
