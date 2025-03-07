@@ -19,8 +19,8 @@ export class SharedService {
   'Blood Pressure': 'mmHg',
   'Oxygen Rate': '%',
   'Blood Sugar': 'mg/dL',
-  'Heart Rate': 'Bpm',
-  'Breathe Rate': 'Bpm'
+  'Heart Rate': 'bpm',
+  'Breathe Rate': 'bpm'
 };
   constructor(private __HttpClient:HttpClient,private __Router:Router,private __LiveTranslationsService:LiveTranslationsService) { }
 
@@ -110,6 +110,7 @@ export class SharedService {
     }
 }
   navigateToPage(pageUrl:string){
+    sessionStorage.setItem('internalNavigation', 'true');
     this.__Router.navigate([pageUrl])
   }
 

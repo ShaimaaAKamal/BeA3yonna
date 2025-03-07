@@ -1,28 +1,20 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, NavigationStart } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
+import { NavigationService } from '../../Services/Navigation/navigation.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NavigationGuard implements CanActivate {
-  private internalNavigation = false;
+  constructor(private router: Router, private navigationService: NavigationService) {}
 
-  constructor(private router: Router) {
-    // Detect internal navigation
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.internalNavigation = true;
-      }
-    });
-  }
-
-  canActivate(): boolean {
-    if (!this.internalNavigation) {
-      this.router.navigate(['/']); // Redirect to home or another safe route
+   canActivate(): boolean {
+    if (this.navigationService.isDirectAccess()) {
+      console.warn('Direct URL access blocked! Redirecting...');
+      this.router.navigate(['/']); // Redirect to home
       return false;
     }
-
+    // console.log('Allowed navigation');
     return true;
   }
 }
-
