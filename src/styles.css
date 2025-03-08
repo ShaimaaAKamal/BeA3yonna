@@ -179,7 +179,7 @@ main{
     background-image:url("/assets/images/doctor.jpg");
     background-blend-mode: overlay;
     background-size: cover;
-    background-position: right top;
+    background-position: center center;
 }
 
 .parentContainer {
