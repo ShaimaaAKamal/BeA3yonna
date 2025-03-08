@@ -11,9 +11,8 @@ import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/
 import { Select2Directive } from './Dirctives/select2.directive';
 import { ButtonWithIconComponent } from './Components/shared/button-with-icon/button-with-icon.component';
 import { BackButtonComponent } from './Components/shared/back-button/back-button.component';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { StyleService } from './Services/style/style.service';
 import { ChooseFlagComponent } from './Components/Main/choose-flag/choose-flag.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,18 +21,17 @@ import { AdditionalPatientInfoComponent } from './Components/Main/additional-pat
 import { PatientInitialVitalsComponent } from './Components/Main/PatientInitialVitals/patient-initial-vitals/patient-initial-vitals.component';
 import { PatientVitalsComponent } from './Components/Main/PatientVitals/patient-vitals/patient-vitals.component';
 import { ChooseSymptomsComponent } from './Components/Main/ChooseSymptoms/choose-symptoms/choose-symptoms.component';
-import { NavigationButtonsComponent } from './Components/Shared/NavigationButtons/navigation-buttons/navigation-buttons.component';
 import { RatePainComponent } from './Components/Main/RatePain/rate-pain/rate-pain.component';
 import { PainedBodyPartComponent } from './Components/Main/PainedBodyPart/pained-body-part/pained-body-part.component';
 import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/permanent-diseases/permanent-diseases.component';
-import { DisplaySymptomsComponent } from './Components/Shared/DisplaySymptoms/display-symptoms/display-symptoms.component';
 import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
 import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
 import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
-import { PatientHeaderComponent } from './Components/Shared/PatientHeader/patient-header/patient-header.component';
 import { ReportComponent } from './Components/Main/Report/report/report.component'; 
-import { SharedService } from './Services/Shared/shared.service';
 import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-found.component';
+import { NavigationButtonsComponent } from './Components/shared/NavigationButtons/navigation-buttons/navigation-buttons.component';
+import { DisplaySymptomsComponent } from './Components/shared/DisplaySymptoms/display-symptoms/display-symptoms.component';
+import { PatientHeaderComponent } from './Components/shared/PatientHeader/patient-header/patient-header.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   // return new TranslateHttpLoader(http, './assets/i18n/', '.json');
