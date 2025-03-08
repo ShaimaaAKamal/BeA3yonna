@@ -63,7 +63,7 @@ textsToTranslate: string[] = [
   "Presubscribed Medications", "Patient History",
   "Last Meal Time", "Prescription", "Symptoms", "More Info",
   "How long has this been troubling you ?","When was your last meal ?",
-  "More Than 12 Hours","More Than 4 Hours","case evaluation","How strong is your pain ?",
+  "More Than 12 Hours","More Than 4 Hours","evaluation","How strong is your pain ?",
     // Button Name
     "Done","Save","Back","Next","Previous"
     ,'Please Choose your Language' ,'Language','Choose a Language','Choose Country','No Countries Matched for this value :' ,

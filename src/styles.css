@@ -33,6 +33,7 @@ button{
     font-size:1rem;
     font-weight: 500;
     border:none;
+    width:250px;
 }
 button:disabled{
     background-color: #E7E7EB !important; 
@@ -209,6 +210,11 @@ html[dir='rtl'] h3{
     font-size: 3rem;
 }
 
+@media screen and (min-width:576px) {
+    button {
+    width: auto;
+    }
+}
 @media screen and (min-width:768px) {
     .parentContainer {
  min-height: 78vh !important;
