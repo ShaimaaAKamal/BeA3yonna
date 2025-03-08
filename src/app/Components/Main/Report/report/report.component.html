@@ -22,7 +22,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                        <td class="p-2"  >{{getTodayDate() | translate}}</td>
+                                        <td class="p-2"  >{{getTodayDate()}}</td>
                                         <td class="p-2 " *ngFor="let key of getObjectKeys(fullAssesmentData) ;">{{(fullAssesmentData[key] ? (fullAssesmentData[key] | translate) :'-----')  | titlecase}}</td>
                                         </tr>
                                     </tbody>

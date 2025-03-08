@@ -19,6 +19,5 @@ export class LanguageService {
           
         })
       );
-        // return this.__HttpClient.get<Language[]>('https://libretranslate.com/languages');
   }
 }

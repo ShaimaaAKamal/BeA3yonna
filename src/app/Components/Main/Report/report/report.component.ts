@@ -87,7 +87,14 @@ export class ReportComponent {
     }
   
   getTodayDate(){
-          return new Intl.DateTimeFormat('en-GB').format(new Date(Date.now()));
+    const lang=this.__PatientReportInfoService.getPatientLanguage().lang;
+  return new Intl.DateTimeFormat(lang, { 
+    day: '2-digit', 
+    month: '2-digit', 
+    year: 'numeric',
+    numberingSystem: lang === 'ar' ? 'arab' : 'latn' // Force Arabic or Western numerals
+  }).format(new Date());
     }
+    
 
 }
