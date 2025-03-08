@@ -1,5 +1,5 @@
- <div [ngClass]="'d-flex align-items-center justify-content-between' + MoreCLasses" > 
-    <app-back-button (click)="BackToPreviousPage()" [disabled]="false"></app-back-button>
-    <app-button-with-icon [btnAction]="actionName" [disabled]="NextButtonDisabled"  (click)="navigateNextPage()"></app-button-with-icon>
+ <div [ngClass]="'d-flex align-items-center flex-column flex-sm-row justify-content-between' + MoreCLasses" > 
+    <app-back-button (click)="BackToPreviousPage()" class="mt-3 order-2 mt-sm-0 order-sm-0 px-4 px-sm-0" [disabled]="false"></app-back-button>
+    <app-button-with-icon [btnAction]="actionName" [disabled]="NextButtonDisabled"  class="order-1 order-sm-0" (click)="navigateNextPage()"></app-button-with-icon>
     <!-- <app-button-with-icon btnAction="{{'Next'}}" [disabled]="NextButtonDisabled"  (click)="navigateNextPage()"></app-button-with-icon> -->
 </div>

@@ -23,6 +23,7 @@ export class ReportComponent {
   patientVitalsKeys!:string[];
   isSmallScreen: boolean = false;
   isLargeScreen: boolean = false;
+  isMediumScreen: boolean = false;
   fullPatientHistory:any;
   fullPatientHistoryBeforeRename:any;
   symptoms!:string[];
@@ -35,7 +36,9 @@ export class ReportComponent {
     @HostListener('window:resize', ['$event'])
      onResize() {
       this.isSmallScreen = window.innerWidth < 1200;
-      this.isLargeScreen = window.innerWidth < 1200 && window.innerWidth < 578;
+      this.isLargeScreen =  window.innerWidth < 578;
+      this.isMediumScreen = window.innerWidth < 768;
+ 
     }
   
   ngOnInit(): void {

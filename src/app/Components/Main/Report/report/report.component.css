@@ -41,28 +41,22 @@ th{
 }
 
 .painLevel{
-  flex-basis: 120px;
+  /* flex-basis: 120px; */
   text-align: center;
 }
 th,td{
   vertical-align: middle;
 }
-/* @media screen and (min-width:992px){
-  #patientVitals,#patientHistory{
-  flex-basis:100% !important;
+
+
+ @media screen and (min-width:576px){
+ .painLevel{
+  flex-basis: 120px;
 }
 }
 
-@media screen and (min-width:1200px){
-  th, td{
-  width:120px !important;
-}
-} */
-@media screen and (min-width:1400px){
-    th, td{
-  width:140px !important;
-}
-}
+
+
 
 
 
