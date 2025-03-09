@@ -32,6 +32,7 @@ import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-fo
 import { NavigationButtonsComponent } from './Components/shared/NavigationButtons/navigation-buttons/navigation-buttons.component';
 import { DisplaySymptomsComponent } from './Components/shared/DisplaySymptoms/display-symptoms/display-symptoms.component';
 import { PatientHeaderComponent } from './Components/shared/PatientHeader/patient-header/patient-header.component';
+import { PaginationComponent } from './Components/Shared/Pagination/pagination/pagination.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   // return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PatientHeaderComponent,
     ReportComponent,
     NotFoundComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

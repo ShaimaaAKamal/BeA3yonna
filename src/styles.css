@@ -185,6 +185,10 @@ main{
 .parentContainer {
  min-height: 75vh !important;
 }
+
+.ngx-pagination ol, ul {
+    padding-right: 0rem !important;
+}
 /* start localization Style */
 
 
@@ -210,11 +214,11 @@ html[dir='rtl'] h3{
     font-size: 3rem;
 }
 
-@media screen and (min-width:576px) {
+/* @media screen and (min-width:576px) {
    button {
     width: 200px;
     }
-}
+} */
 @media screen and (min-width:768px) {
      
     .parentContainer {
