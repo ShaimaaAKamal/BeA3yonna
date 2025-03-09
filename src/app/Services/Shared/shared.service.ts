@@ -137,62 +137,6 @@ getSiteLanguage(){
  return  this.getItemFromLocalStorage('lang');
 }
 
-// formatPatientVitalsValuesByAddingUnits(patientVitals:PatientVitals):PatientVitals{
-// const Units:PatientVitals= {
-//   Weight: ' Kg',
-//   Height: ' Cm',
-//   Temperature: ' deg',
-//   'Blood Pressure': ' mmHg',
-//   'Oxygen Rate': ' %',
-//   'Blood Sugar': ' mg/dL',
-//   'Heart Rate': ' bpm',
-//   'Breathe Rate': ' bpm'
-// };
-
-// // Update values based on the substring mapping
-//   const updatedObj = Object.keys(Units).reduce((acc, key) => {
-//     acc[key as keyof PatientVitals] = patientVitals[key as keyof PatientVitals] 
-//       ? `${patientVitals[key as keyof PatientVitals]}${Units[key as keyof PatientVitals]}`
-//       : '';
-//     return acc;
-//   }, {} as PatientVitals);
-// return updatedObj;
-//  }
-// formatPatientVitalsValuesByAddingUnits(patientVitals: PatientVitals, targetLang: string): Observable<PatientVitals> {
-//   const units: { [key: string]: string } = {
-//     Weight: 'Kg',
-//     Height: 'Cm',
-//     Temperature: 'deg',
-//     'Blood Pressure': 'mmHg',
-//     'Oxygen Rate': '%',
-//     'Blood Sugar': ' mg/dL',
-//     'Heart Rate': ' BPM',
-//     'Breathe Rate': ' BPM'
-//   };
-
-//   const translationObservables = Object.keys(units).map((key) => 
-//     this.__LiveTranslationsService.translateText(units[key], targetLang).pipe(
-//       map((translatedUnit) => ({ key, translatedUnit }))
-//     )
-//   );
-
-//   return forkJoin(translationObservables).pipe(
-//     map((translatedUnitsArray) => {
-//       const translatedUnits: { [key: string]: string } = {};
-//       translatedUnitsArray.forEach(({ key, translatedUnit }) => {
-//         translatedUnits[key] = translatedUnit;
-//       });
-
-//       const formattedVitals: PatientVitals = { ...patientVitals };
-//       for (const key in formattedVitals) {
-//         if (translatedUnits[key] && formattedVitals[key] !== undefined) {
-//           formattedVitals[key] += ` ${translatedUnits[key]}`;
-//         }
-//       }
-//       return formattedVitals;
-//     })
-//   );
-// }
 
 displayStoryedPainedParts(pathsArray:any,Data:any){
   pathsArray.forEach((path:any,index:number) => {
@@ -211,6 +155,25 @@ renameKeys(obj: any, keyMap: { [key: string]: string },ExcludedKeys:string[]): a
       newObj[newKey] = obj[key];
       return newObj;
     }, {});}
+    
+ getPageSize(pageSize:number):number{
+    if(window.innerWidth <576)
+          pageSize=4
+        else  if(window.innerWidth <768)
+          pageSize=6
+        else  if(window.innerWidth <992)
+          pageSize=8
+        else  if(window.innerWidth <1200)
+          pageSize=12
+        else  pageSize=24
+      return pageSize
+ }
+ getCurrentPage(index:number,pageSize:number):number{
+     const pageNumberCalculateDivation = (index + 1) / pageSize;
+        const pageNumberCalculateReminder = (index + 1) %pageSize;
 
-  
+        return pageNumberCalculateReminder > 0 
+          ? Math.ceil(pageNumberCalculateDivation) 
+          : pageNumberCalculateDivation;
+ }
 }
