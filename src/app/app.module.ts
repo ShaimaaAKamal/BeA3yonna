@@ -7,7 +7,7 @@ import { FooterComponent } from './Components/shared/footer/footer.component';
 import { FlagCardComponent } from './Components/Main/flag-card/flag-card.component';
 import { SymptomCardComponent } from './Components/Main/symptom-card/symptom-card.component';
 import { HomeComponent } from './Components/Main/home/home.component';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Select2Directive } from './Dirctives/select2.directive';
 import { ButtonWithIconComponent } from './Components/shared/button-with-icon/button-with-icon.component';
 import { BackButtonComponent } from './Components/shared/back-button/back-button.component';
@@ -33,6 +33,7 @@ import { NavigationButtonsComponent } from './Components/shared/NavigationButton
 import { DisplaySymptomsComponent } from './Components/shared/DisplaySymptoms/display-symptoms/display-symptoms.component';
 import { PatientHeaderComponent } from './Components/shared/PatientHeader/patient-header/patient-header.component';
 import { PaginationComponent } from './Components/shared/Pagination/pagination/pagination.component';
+import { TranslationCacheInterceptor } from './Interceptors/Translation/translation.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
   // return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -86,7 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-      provideHttpClient(withInterceptorsFromDi())
+      provideHttpClient(withInterceptorsFromDi()),
+      { provide: HTTP_INTERCEPTORS, useClass: TranslationCacheInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
