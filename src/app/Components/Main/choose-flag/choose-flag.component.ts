@@ -62,7 +62,6 @@ export class ChooseFlagComponent implements OnInit {
       ),
       map(index => this.__SharedService.getCurrentPage(index, this.pageSize)),
       tap(currentPage => {
-        console.log(currentPage);
         this.currentPage = currentPage;
         this.__PatientReportInfoService.updatePatientDataByKey(
           ['CountrycurrentPage'],

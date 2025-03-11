@@ -21,12 +21,12 @@ export class HomeComponent{
 //  languages:Language[]=[];
  disabled:boolean=true;
  languages$!:Observable<Language[]>;
- AllLanguages$!:Observable<Language[]>; 
+ AllLanguages$!:Observable<Language[]>;
  ChooseLanguage: string = 'Choose a Language';
  chooseenLanguage:string='';
  constructor(private __LanguageService:LanguageService,
   private __TranslationService:TranslateService,
-  private __StyleService:StyleService, 
+  private __StyleService:StyleService,
   private __sharedService:SharedService,
   private __LiveTranslation:LiveTranslationsService,
   private __PatientReportInfoService:PatientReportInfoService){}
@@ -34,7 +34,7 @@ export class HomeComponent{
  ngOnInit(): void {
   this.chooseenLanguage=this.__PatientReportInfoService.getPatientLanguage().lang;
   this.disabled=this.chooseenLanguage?false:true;
-  console.log('lang',this.__PatientReportInfoService.getPatientLanguage().lang);
+  // console.log('lang',this.__PatientReportInfoService.getPatientLanguage().lang);
   if(this.__PatientReportInfoService.getPatientLanguage().lang == 'en' || !this.__PatientReportInfoService.getPatientLanguage().lang)
 {    this.languages$=this.__LanguageService.getLanguages();
      this.AllLanguages$=this.languages$;
@@ -43,11 +43,11 @@ export class HomeComponent{
  }
 
  onLanguageChoose(event:Selec2){
-  console.log('inChange');
-  console.log(event);
+  // console.log('inChange');
+  // console.log(event);
       const selectedLanguage=event.value;
       this.chooseenLanguage=selectedLanguage;
-      console.log(this.chooseenLanguage);
+      // console.log(this.chooseenLanguage);
       const isRTL:boolean=this.__StyleService.isRtl(selectedLanguage);
       this.__StyleService.switchStyleToRTL(isRTL,selectedLanguage);
       this.__TranslationService.use(selectedLanguage);
@@ -56,7 +56,7 @@ export class HomeComponent{
       if(selectedLanguage != 'en')
           this.__LiveTranslation.loadTranslations(selectedLanguage);
       this.disabled=false;
-      
+
  }
 
  navigateToChooseFlag(){
@@ -98,10 +98,11 @@ export class HomeComponent{
             })
           )
         );
-        
-        return forkJoin(translationRequests).pipe(
-          tap(finalData => console.log('Final Translated Languages:', finalData))
-        );
+
+        return forkJoin(translationRequests)
+        // .pipe(
+        //   tap(finalData => console.log('Final Translated Languages:', finalData))
+        // );
       }),
       catchError(error => {
         console.error('Error fetching languages from API:', error);
