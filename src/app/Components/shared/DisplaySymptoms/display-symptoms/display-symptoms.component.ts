@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { PatientReportInfoService } from '../../../../Services/Shared/PatientReportInfo/patient-report-info.service';
+import { SharedService } from '../../../../Services/Shared/shared.service';
 
 @Component({
   selector: 'app-display-symptoms',
   standalone: false,
-  
+
   templateUrl: './display-symptoms.component.html',
   styleUrl: './display-symptoms.component.css'
 })
@@ -25,22 +26,30 @@ storedSymptoms:string[]=[];
 searchKey:string='';
 AllSymptoms:string[]=[];
 
-constructor(private __PatientReportInfoService:PatientReportInfoService){}
+@HostListener('window:resize', ['$event'])
+@HostListener('window:load', ['$event'])
+ onWindowEvent() {
+    this.performAction();
+  }
+
+constructor(private __PatientReportInfoService:PatientReportInfoService,
+  private __SharedService:SharedService){}
 
 ngOnInit(): void {
 
-  this.AllSymptoms=this.symptoms;
+  this.AllSymptoms=this.symptoms.sort();
   this.storedSymptoms=this.__PatientReportInfoService.getPatientFieldValueByKey(this.Key);
-
-   this.NextButtonDisabled=( this.storedSymptoms.length !=0)?false:true;
-   this.selectedSymptoms=this.storedSymptoms;
+  this.NextButtonDisabled=( this.storedSymptoms.length !=0)?false:true;
+  this.selectedSymptoms=this.storedSymptoms.sort();
+  this.performAction();
 }
 chooseSymptom(symptom: string) {
   const index = this.selectedSymptoms.indexOf(symptom);
-  if (index === -1) 
-    this.selectedSymptoms.push(symptom); 
+  if (index === -1)
+    this.selectedSymptoms.push(symptom);
   else
-    this.selectedSymptoms.splice(index, 1); 
+    this.selectedSymptoms.splice(index, 1);
+  this.selectedSymptoms.sort();
   this.NextButtonDisabled=(this.selectedSymptoms.length !=0 ) ?false:true;
   this.NextButtonDisabledChange.emit(this.NextButtonDisabled);
 }
@@ -55,9 +64,17 @@ else this.symptoms=this.filterSymptoms();
 }
 
 filterSymptoms() {
-  const filteredSymptoms = this.AllSymptoms.filter((symptom:string) => 
+  const filteredSymptoms = this.AllSymptoms.filter((symptom:string) =>
     symptom.toLowerCase().includes(this.searchKey.toLowerCase())
   );
   return filteredSymptoms;
+}
+handlePageChange(page: number) {
+    this.currentPage = page;
+  }
+performAction(){
+  const index=this.AllSymptoms.indexOf(this.selectedSymptoms[0]);
+  this.pageSize=this.__SharedService.getPageSize(this.pageSize);
+  this.currentPage=this.__SharedService.getCurrentPage(index,this.pageSize);
 }
 }

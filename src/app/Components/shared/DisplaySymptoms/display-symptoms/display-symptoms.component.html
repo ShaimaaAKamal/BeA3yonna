@@ -8,8 +8,8 @@
 
  <div class="container-fluid">
    <div class="row g-4 justify-content-center align-items-center">
-     <div 
-       class="col-6 col-md-4 col-lg-3 col-xl-2" 
+     <div
+       class="col-6 col-md-4 col-lg-3 col-xl-2"
        *ngFor="let Symptom of symptoms | paginate: { itemsPerPage: pageSize, currentPage: currentPage }"
        (click)="chooseSymptom(Symptom)">
        <div>
@@ -18,11 +18,8 @@
      </div>
    </div>
  </div>
-    <!-- Pagination Controls -->
-    <div class="d-flex justify-content-center mt-5">
-      <pagination-controls (pageChange)="currentPage = $event" class="mb-0"></pagination-controls>
-    </div>
-      <app-navigation-buttons 
+      <app-pagination [currentPage]="currentPage" (pageChange)="handlePageChange($event)"></app-pagination>
+      <app-navigation-buttons
         [PreviousPageUrl]="PreviousPageUrl" [NextPageUrl]="NextPageUrl"
         [MoreCLasses]="' px-3'" [NextButtonDisabled]="NextButtonDisabled"
         [Key]="Key" [value]="selectedSymptoms">

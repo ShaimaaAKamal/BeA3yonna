@@ -4,7 +4,7 @@ import { SharedService } from '../../../../Services/Shared/shared.service';
 @Component({
   selector: 'app-choose-symptoms',
   standalone: false,
-  
+
   templateUrl: './choose-symptoms.component.html',
   styleUrl: './choose-symptoms.component.css'
 })
