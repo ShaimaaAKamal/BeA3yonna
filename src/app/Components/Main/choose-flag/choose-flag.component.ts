@@ -50,7 +50,7 @@ export class ChooseFlagComponent implements OnInit {
       this.currentPage=this.__PatientReportInfoService.getPatientFieldValueByKey('CountrycurrentPage');
       this.selectedFlag=this.storedCountry;
       this.performAction()
-    }
+     }
 
   private performAction() {
     this.pageSize = this.__SharedService.getPageSize(this.pageSize);

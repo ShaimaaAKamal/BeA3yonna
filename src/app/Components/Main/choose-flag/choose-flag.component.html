@@ -17,23 +17,18 @@
             </div>
           </div>
           </div>
-
-          <!-- Pagination Controls -->
-          <!-- <div class="d-flex justify-content-center mt-5">
-            <pagination-controls (pageChange)="currentPage = $event" class="mb-0"></pagination-controls>
-          </div> -->
           <app-pagination [currentPage]="currentPage" (pageChange)="handlePageChange($event)"></app-pagination>
       </div>
 
-  
+
     <ng-template #NoCountries>
-      
+
       <div class="parentContainer justify-content-center align-items-center" *ngIf="!displayed ; else NoSerarchResult ">
           <div class="spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
       </div>
-      
+
       <ng-template #NoSerarchResult>
        <div class="container-fluid">
           <div class="row g-4 justify-content-center">
@@ -44,10 +39,10 @@
         </div>
      </ng-template>
     </ng-template>
-    
 
-   
-     
+
+
+
     <app-navigation-buttons [PreviousPageUrl]="'/'" [NextPageUrl]="'/Patient_Info'" [MoreCLasses]="' px-3'" [NextButtonDisabled]="NextButtondisabled"></app-navigation-buttons>
   </section>
 </main>
