@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import {  catchError, map, switchMap, tap } from 'rxjs/operators';
 import { FlagService } from '../../../Services/Flag/flag.service';
@@ -7,6 +7,7 @@ import { Country } from '../../../Interfaces/country';
 import { LiveTranslationsService } from '../../../Services/LiveTranslationService/live-translations.service';
 import { PatientReportInfoService } from '../../../Services/Shared/PatientReportInfo/patient-report-info.service';
 import { StyleService } from '../../../Services/style/style.service';
+import { SharedService } from '../../../Services/Shared/shared.service';
 
 @Component({
   selector: 'app-choose-flag',
@@ -15,8 +16,8 @@ import { StyleService } from '../../../Services/style/style.service';
   styleUrls: ['./choose-flag.component.css']
 })
 export class ChooseFlagComponent implements OnInit {
-  Flags$!: Observable<Country[]>; 
-  AllFlags$!: Observable<Country[]>; 
+  Flags$!: Observable<Country[]>;
+  AllFlags$!: Observable<Country[]>;
   NextButtondisabled:boolean=true;
   currentPage:number = 1;
   pageSize:number = 24;
@@ -27,10 +28,17 @@ export class ChooseFlagComponent implements OnInit {
   isLoading:boolean=false;
   displayed:boolean=false;
   isRtl!:boolean;
+
+@HostListener('window:load', ['$event'])
+@HostListener('window:resize', ['$event'])
+  onWindowEvent() {
+  this.performAction();
+  }
+
   constructor(private __FlagService: FlagService,
     private __LiveTranslationsService:LiveTranslationsService,
     private __PatientReportInfoService:PatientReportInfoService,
-    private __StyleService:StyleService) {}
+    private __StyleService:StyleService,private __SharedService:SharedService) {}
 
   ngOnInit(): void {
       this.targetLang=this.__PatientReportInfoService.getPatientLanguage().lang;
@@ -41,16 +49,40 @@ export class ChooseFlagComponent implements OnInit {
       this.NextButtondisabled=!this.storedCountry ? true : false;
       this.currentPage=this.__PatientReportInfoService.getPatientFieldValueByKey('CountrycurrentPage');
       this.selectedFlag=this.storedCountry;
+      this.performAction()
     }
 
+  private performAction() {
+    this.pageSize = this.__SharedService.getPageSize(this.pageSize);
+    this.AllFlags$.pipe(
+      map(Flags =>
+        Flags.findIndex(item =>
+          item.name === this.__PatientReportInfoService.getPatientFieldValueByKey('Country').name
+        )
+      ),
+      map(index => this.__SharedService.getCurrentPage(index, this.pageSize)),
+      tap(currentPage => {
+        console.log(currentPage);
+        this.currentPage = currentPage;
+        this.__PatientReportInfoService.updatePatientDataByKey(
+          ['CountrycurrentPage'],
+          [JSON.stringify(currentPage)]
+        );
+      })
+    ).subscribe();
+  }
+
+  handlePageChange(page: number) {
+    this.currentPage = page;
+  }
   searchForCountry(){
       this.currentPage = 1;
     if(this.searchKey)
-            this.Flags$ =this.mapApiFlagsData(this.__FlagService.searchByCountryName(this.searchKey)); 
-    else  
+            this.Flags$ =this.mapApiFlagsData(this.__FlagService.searchByCountryName(this.searchKey));
+    else
             this.Flags$=this.AllFlags$;
   }
-  
+
   chooseFlag(Flag:Country){
     this.selectedFlag=Flag;
     this.NextButtondisabled=false;
@@ -58,20 +90,21 @@ export class ChooseFlagComponent implements OnInit {
     let currentPage:number=this.currentPage;
     if (this.searchKey) {
     this.AllFlags$.pipe(
-      map(Flags => Flags.findIndex(item => item.name === Flag.name)), 
+      map(Flags => Flags.findIndex(item => item.name === Flag.name)),
       map(index => {
-        const pageNumberCalculateDivation = (index + 1) / this.pageSize;
-        const pageNumberCalculateReminder = (index + 1) % this.pageSize;
+        // const pageNumberCalculateDivation = (index + 1) / this.pageSize;
+        // const pageNumberCalculateReminder = (index + 1) % this.pageSize;
 
-        return pageNumberCalculateReminder > 0 
-          ? Math.ceil(pageNumberCalculateDivation) 
-          : pageNumberCalculateDivation;
+        // return pageNumberCalculateReminder > 0
+        //   ? Math.ceil(pageNumberCalculateDivation)
+        //   : pageNumberCalculateDivation;
+        return this.__SharedService.getCurrentPage(index,this.pageSize);
       }),
       tap(currentPage => {
             this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
       })
     ).subscribe();
-  } else 
+  } else
                 this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
   }
 
@@ -81,13 +114,13 @@ mapApiFlagsData(flagData: Observable<Country[]>): Observable<Country[]> {
   this.isLoading=true;
   this.displayed=false;
   return flagData.pipe(
-    // tap(() => console.log("🟡 API call started")), // 
+    // tap(() => console.log("🟡 API call started")), //
     catchError(error => {
       console.error("🔴 API request failed:", error);
-      return of([]); 
+      return of([]);
     }),
     map(countries => {
-      // console.log("🟢 Raw API Response:", countries); 
+      // console.log("🟢 Raw API Response:", countries);
       this.isLoading=false;
       return countries ? countries.map((country: any) => ({
         originalName: country.name?.common || "Unknown",
@@ -124,6 +157,5 @@ mapApiFlagsData(flagData: Observable<Country[]>): Observable<Country[]> {
     })
   );
 }
-
 
 }

@@ -19,9 +19,10 @@
           </div>
 
           <!-- Pagination Controls -->
-          <div class="d-flex justify-content-center mt-5">
+          <!-- <div class="d-flex justify-content-center mt-5">
             <pagination-controls (pageChange)="currentPage = $event" class="mb-0"></pagination-controls>
-          </div>
+          </div> -->
+          <app-pagination [currentPage]="currentPage" (pageChange)="handlePageChange($event)"></app-pagination>
       </div>
 
   
