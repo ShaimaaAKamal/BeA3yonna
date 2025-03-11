@@ -27,12 +27,12 @@ import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/
 import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
 import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
 import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
-import { ReportComponent } from './Components/Main/Report/report/report.component'; 
+import { ReportComponent } from './Components/Main/Report/report/report.component';
 import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-found.component';
 import { NavigationButtonsComponent } from './Components/shared/NavigationButtons/navigation-buttons/navigation-buttons.component';
 import { DisplaySymptomsComponent } from './Components/shared/DisplaySymptoms/display-symptoms/display-symptoms.component';
 import { PatientHeaderComponent } from './Components/shared/PatientHeader/patient-header/patient-header.component';
-import { PaginationComponent } from './Components/Shared/Pagination/pagination/pagination.component';
+import { PaginationComponent } from './Components/shared/Pagination/pagination/pagination.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   // return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -90,5 +90,5 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 }
