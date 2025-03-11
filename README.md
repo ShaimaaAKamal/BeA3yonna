@@ -1,59 +1,59 @@
 # BeA3yonna
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+## Overview
+This project is a frontend web application built using Angular. It integrates ngx-translate for multilingual support, fetching translations dynamically from the Google Translation API. The project is designed for responsiveness, scalability, and performance.
 
-## Development server
+## Features
+- **Frontend:** Angular with Bootstrap for UI design.
+- **Translation Support:** ngx-translate with Google Translation API integration.
+- **Pagination:** ngx-pagination for handling pagination efficiently.
+- **Dropdowns:** Select2 for enhanced dropdown functionality.
+- **Performance Optimization:** Focus on speed and scalability.
 
-To start a local development server, run:
+## Prerequisites
+Make sure you have the following installed:
+- Node.js & npm
+- Angular CLI
 
-```bash
-ng serve
-```
+## Installation
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Frontend (Angular)
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/ShaimaaAKamal/BeA3yonna.git
+   cd BeA3yonna
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the Angular development server:
+   ```sh
+   ng serve
+   ```
 
-## Code scaffolding
+## Usage
+- Access the frontend at `http://localhost:4200`
+- Deployed version available at [bea3yonna.web.app](https://bea3yonna.web.app)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Repository
+GitHub repository available at [BeA3yonna](https://github.com/ShaimaaAKamal/BeA3yonna/actions)
 
-```bash
-ng generate component component-name
-```
+## Configuration
+- **Translation API:** Configure Google Translation API in the Angular service responsible for translations.
+- **Environment Variables:** Ensure proper configuration in the Angular environment.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Deployment
+To deploy the project:
+1. Build the Angular app:
+   ```sh
+   ng build --configuration=production
+   ```
+2. Serve the Angular build with a web server or deploy separately.
 
-```bash
-ng generate --help
-```
+## Contributing
+Feel free to submit issues and pull requests to improve this project.
 
-## Building
+## Contact
+For inquiries, reach me at shaimaakamal039@gmail.com.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
