@@ -4,8 +4,6 @@ import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { PatientReportData } from '../../Interfaces/patient-report-data';
 import { PatientVitals } from '../../Interfaces/patient-vitals';
-import { TranslateService } from '@ngx-translate/core';
-import { LiveTranslationsService } from '../LiveTranslationService/live-translations.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +20,8 @@ export class SharedService {
   'Heart Rate': 'bpm',
   'Breathe Rate': 'bpm'
 };
-  constructor(private __HttpClient:HttpClient,private __Router:Router,private __LiveTranslationsService:LiveTranslationsService) { }
+  constructor(private __HttpClient:HttpClient,
+    private __Router:Router) { }
 
   sendGetRequest(url:string):Observable<any>{
     return this.__HttpClient.get(url);
@@ -57,7 +56,7 @@ export class SharedService {
     return storedData;
   }
 
-  
+
   getDefaultValue(key: string):any {
     switch (key) {
         case 'patientReport':
@@ -68,9 +67,7 @@ export class SharedService {
                     PermanentDiseases:[],
                     Symptoms:[],
                     additionalPatientInfo:{ pregnant: '', havePeriod: '', additionalInfo: '' } ,
-                    // lang:'en', 
-                    // language: 'english',
-                    lang:'', 
+                    lang:'',
                     language: '',
                     painScale:{ name: '', color: '', textColor: '' },
                     painedParts:[],
@@ -119,8 +116,8 @@ getAllLocalStorage(): PatientReportData {
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key && key != 'patientReport') {
-      storageData = { 
-        ...storageData, 
+      storageData = {
+        ...storageData,
         [key]: this.getGenericStoredDataValue(key)
       };
     }
@@ -146,16 +143,16 @@ displayStoryedPainedParts(pathsArray:any,Data:any){
       }
 });}
 
-  
+
 renameKeys(obj: any, keyMap: { [key: string]: string },ExcludedKeys:string[]): any {
     return Object.keys(obj).reduce((newObj: any, key: string) => {
-      const newKey = keyMap[key] || key; 
-      if(ExcludedKeys.includes(newKey)) 
+      const newKey = keyMap[key] || key;
+      if(ExcludedKeys.includes(newKey))
         return newObj;
       newObj[newKey] = obj[key];
       return newObj;
     }, {});}
-    
+
  getPageSize(pageSize:number):number{
     if(window.innerWidth <576)
           pageSize=4
@@ -172,8 +169,9 @@ renameKeys(obj: any, keyMap: { [key: string]: string },ExcludedKeys:string[]): a
      const pageNumberCalculateDivation = (index + 1) / pageSize;
         const pageNumberCalculateReminder = (index + 1) %pageSize;
 
-        return pageNumberCalculateReminder > 0 
-          ? Math.ceil(pageNumberCalculateDivation) 
+        return pageNumberCalculateReminder > 0
+          ? Math.ceil(pageNumberCalculateDivation)
           : pageNumberCalculateDivation;
  }
+
 }

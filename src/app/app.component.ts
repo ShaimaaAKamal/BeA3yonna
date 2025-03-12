@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
     }
  ngOnInit(): void {
     this.__TranslateService.setDefaultLang('en');
-    const savedLang = this.__PatientReportInfoService.getPatientLanguage().lang ?? 'en';
-    this.setLanguageAndStyle(savedLang);
+    const savedLang = this.__PatientReportInfoService.getPatientLanguage().lang  || 'en';
+    this.__StyleService.setLanguageAndStyle(savedLang);
     (savedLang != 'en')
     ? this.__LiveTranslationsService.loadTranslations(savedLang)
     : this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
@@ -33,10 +33,5 @@ export class AppComponent implements OnInit {
        ?sessionStorage.setItem('internalNavigation', 'true')
       :sessionStorage.removeItem('internalNavigation');
   }
-setLanguageAndStyle(lang:string){
-      this.__TranslateService.use(lang);
-      const isRTL:boolean=this.__StyleService.isRtl(lang);
-      this.__StyleService.switchStyleToRTL(isRTL,lang);
-    }
 }
 
