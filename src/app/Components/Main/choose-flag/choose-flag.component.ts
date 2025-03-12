@@ -89,18 +89,16 @@ export class ChooseFlagComponent implements OnInit {
     let currentPage:number=this.currentPage;
     if (this.searchKey) {
     this.AllFlags$.pipe(
-      map(Flags => Flags.findIndex(item => item.name === Flag.name)),
+      map(Flags => Flags.findIndex(item => item.capital === Flag.capital)),
       map(index => {
-        console.log(index);
         return this.__SharedService.getCurrentPage(index,this.pageSize);
       }),
       tap(currentPage => {
-        console.log(currentPage);
             this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
       })
     ).subscribe();
   } else
-                this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
+          this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
   }
 
 
