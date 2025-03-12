@@ -91,15 +91,11 @@ export class ChooseFlagComponent implements OnInit {
     this.AllFlags$.pipe(
       map(Flags => Flags.findIndex(item => item.name === Flag.name)),
       map(index => {
-        // const pageNumberCalculateDivation = (index + 1) / this.pageSize;
-        // const pageNumberCalculateReminder = (index + 1) % this.pageSize;
-
-        // return pageNumberCalculateReminder > 0
-        //   ? Math.ceil(pageNumberCalculateDivation)
-        //   : pageNumberCalculateDivation;
+        console.log(index);
         return this.__SharedService.getCurrentPage(index,this.pageSize);
       }),
       tap(currentPage => {
+        console.log(currentPage);
             this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
       })
     ).subscribe();
