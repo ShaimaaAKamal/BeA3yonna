@@ -23,21 +23,21 @@ export class AppComponent implements OnInit {
       :sessionStorage.removeItem('internalNavigation');
     }
 
-   
+
   ngOnInit(): void {
-  
-    this.__TranslateService.setDefaultLang('en'); 
+
+    this.__TranslateService.setDefaultLang('en');
     let saveLang=this.__PatientReportInfoService.getPatientLanguage().lang;
-    console.log('saveLang',saveLang);
+    // console.log('saveLang',saveLang);
     saveLang=saveLang?saveLang:'en';
     this.setLanguageAndStyle(saveLang);
     if(saveLang != 'en')
-      this.__LiveTranslationsService.loadTranslations(saveLang); 
+      this.__LiveTranslationsService.loadTranslations(saveLang);
     else
       this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
-    console.log('appLang',this.__PatientReportInfoService.getPatientLanguage().lang);
+    // console.log('appLang',this.__PatientReportInfoService.getPatientLanguage().lang);
   }
-    
+
     setLanguageAndStyle(lang:string){
       this.__TranslateService.use(lang);
       const isRTL:boolean=this.__StyleService.isRtl(lang);
@@ -45,4 +45,3 @@ export class AppComponent implements OnInit {
     }
 }
 
- 

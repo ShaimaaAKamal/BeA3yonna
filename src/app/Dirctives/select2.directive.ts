@@ -11,7 +11,7 @@ declare var window: any; // Global jQuery
   standalone: true
 })
 export class Select2Directive implements AfterViewInit, OnDestroy {
-  @Output() valueChange = new EventEmitter<Selec2>(); 
+  @Output() valueChange = new EventEmitter<Selec2>();
   private isSelect2Active = false; // Track if Select2 is initialized
 
   constructor(private el: ElementRef, private ngZone: NgZone, private __PatientReportInfoService: PatientReportInfoService) {}
@@ -22,7 +22,7 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
 
       setTimeout(() => {
         const savedValue = this.__PatientReportInfoService.getPatientLanguage().lang;
-        console.log('Saved Language:', savedValue);
+        // console.log('Saved Language:', savedValue);
         if (savedValue) {
           this.applyValue(savedValue);
         }
@@ -43,15 +43,15 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
       // Attach change event with proper debugging
       window.$(this.el.nativeElement).off('change').on('change', (event: any) => {
         if (this.isSelect2Active) {
-          const selectedOption = event.target.selectedOptions[0]; 
+          const selectedOption = event.target.selectedOptions[0];
           const optionInnerHTML = selectedOption ? selectedOption.innerHTML : '';
-          console.log('Change Event - Selected Value:', event.target.value);
-          console.log('Change Event - Selected Text:', optionInnerHTML);
+          // console.log('Change Event - Selected Value:', event.target.value);
+          // console.log('Change Event - Selected Text:', optionInnerHTML);
 
           this.ngZone.run(() => {
             this.valueChange.emit({
-                value: event.target.value, 
-                text: optionInnerHTML 
+                value: event.target.value,
+                text: optionInnerHTML
             });
             this.updateDirection(event.target.value);
           });
@@ -61,13 +61,13 @@ export class Select2Directive implements AfterViewInit, OnDestroy {
   }
 
   applyValue(value: string): void {
-    console.log('Applying Value:', value);
+    // console.log('Applying Value:', value);
 
     const retryInterval = setInterval(() => {
       if (this.isSelect2Active && window.$(this.el.nativeElement).data('select2')) {
         clearInterval(retryInterval);
         window.$(this.el.nativeElement).val(value).trigger('change.select2');
-        console.log('Value Applied:', value);
+        // console.log('Value Applied:', value);
       }
     }, 200);
   }
