@@ -32,42 +32,42 @@ export class ChooseFlagComponent implements OnInit {
 @HostListener('window:load', ['$event'])
 @HostListener('window:resize', ['$event'])
   onWindowEvent() {
-  this.performAction();
+  this.updatePagination();
   }
 
-  constructor(private __FlagService: FlagService,
+  constructor (private __FlagService: FlagService,
     private __LiveTranslationsService:LiveTranslationsService,
     private __PatientReportInfoService:PatientReportInfoService,
     private __StyleService:StyleService,private __SharedService:SharedService) {}
 
   ngOnInit(): void {
-      this.targetLang=this.__PatientReportInfoService.getPatientLanguage().lang;
-      this.isRtl=this.__StyleService.isRtl(this.targetLang);
-      this.Flags$ =this.mapApiFlagsData(this.__FlagService.getCountries());
-      this.AllFlags$=this.Flags$;
-      this.storedCountry=this.__PatientReportInfoService.getPatientFieldValueByKey('Country');
-      this.NextButtondisabled=!this.storedCountry ? true : false;
-      this.currentPage=this.__PatientReportInfoService.getPatientFieldValueByKey('CountrycurrentPage');
-      this.selectedFlag=this.storedCountry;
-      this.performAction()
+   this.initializeComponent();
      }
 
-  private performAction() {
+  initializeComponent(){
+      this.targetLang=this.__PatientReportInfoService.getPatientLanguage().lang;
+      this.isRtl=this.__StyleService.isRtl(this.targetLang);
+
+      this.Flags$ =this.fetchFlags(this.__FlagService.getCountries());
+      this.AllFlags$=this.Flags$;
+
+      this.storedCountry=this.__PatientReportInfoService.getPatientFieldValueByKey('Country');
+      this.NextButtondisabled=!this.storedCountry ? true : false;
+
+      this.currentPage=this.__PatientReportInfoService.getPatientFieldValueByKey('CountrycurrentPage');
+      this.selectedFlag=this.storedCountry;
+      this.updatePagination()
+    }
+
+  private updatePagination() {
     this.pageSize = this.__SharedService.getPageSize(this.pageSize);
+
     this.AllFlags$.pipe(
-      map(Flags =>
-        Flags.findIndex(item =>
-          item.name === this.__PatientReportInfoService.getPatientFieldValueByKey('Country').name
-        )
-      ),
+      map(Flags => Flags.findIndex(item =>item.name === this.storedCountry.name)),
       map(index => this.__SharedService.getCurrentPage(index, this.pageSize)),
       tap(currentPage => {
         this.currentPage = currentPage;
-        this.__PatientReportInfoService.updatePatientDataByKey(
-          ['CountrycurrentPage'],
-          [JSON.stringify(currentPage)]
-        );
-      })
+        this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)]);})
     ).subscribe();
   }
 
@@ -76,17 +76,15 @@ export class ChooseFlagComponent implements OnInit {
   }
   searchForCountry(){
       this.currentPage = 1;
-    if(this.searchKey)
-            this.Flags$ =this.mapApiFlagsData(this.__FlagService.searchByCountryName(this.searchKey));
-    else
-            this.Flags$=this.AllFlags$;
+       this.Flags$=this.searchKey
+       ?this.fetchFlags(this.__FlagService.searchByCountryName(this.searchKey))
+       :this.AllFlags$;
   }
 
   chooseFlag(Flag:Country){
     this.selectedFlag=Flag;
     this.NextButtondisabled=false;
     this.__PatientReportInfoService.updatePatientDataByKey(['Country'],[JSON.stringify(Flag)])
-    let currentPage:number=this.currentPage;
     if (this.searchKey) {
     this.AllFlags$.pipe(
       map(Flags => Flags.findIndex(item => item.capital === Flag.capital)),
@@ -98,22 +96,20 @@ export class ChooseFlagComponent implements OnInit {
       })
     ).subscribe();
   } else
-          this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)])
+          this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(this.currentPage)])
   }
 
 
-mapApiFlagsData(flagData: Observable<Country[]>): Observable<Country[]> {
-  // console.log("🔵 Fetching data...");
+fetchFlags(flagData: Observable<Country[]>): Observable<Country[]> {
   this.isLoading=true;
   this.displayed=false;
+
   return flagData.pipe(
-    // tap(() => console.log("🟡 API call started")), //
     catchError(error => {
       console.error("🔴 API request failed:", error);
       return of([]);
     }),
     map(countries => {
-      // console.log("🟢 Raw API Response:", countries);
       this.isLoading=false;
       return countries ? countries.map((country: any) => ({
         originalName: country.name?.common || "Unknown",
@@ -123,11 +119,13 @@ mapApiFlagsData(flagData: Observable<Country[]>): Observable<Country[]> {
         name: country.name?.common || "Unknown",
       })) : [];
     }),
-    switchMap(countries => {
-      if (countries.length === 0) {
+    switchMap(countries =>  this.translateCountries(countries)));
+}
+
+  private translateCountries(countries: Country[]): Observable<Country[]> {
+     if (countries.length === 0) {
         this.isLoading=false;
         this.displayed=true;
-        // console.log("🟠 No countries found.");
         return of([]);
       }
       if (this.targetLang === 'en') {
@@ -135,8 +133,10 @@ mapApiFlagsData(flagData: Observable<Country[]>): Observable<Country[]> {
         this.displayed = false;
         return of(countries);
       }
+
       this.isLoading=true;
-      const translationRequests = countries.map((country: any) =>
+
+        const translationRequests = countries.map((country: any) =>
         this.__LiveTranslationsService.translateText(country.originalName, this.targetLang).pipe(
           catchError(() => {
             console.warn(`⚠️ Translation failed for: ${country.originalName}`);
@@ -147,8 +147,5 @@ mapApiFlagsData(flagData: Observable<Country[]>): Observable<Country[]> {
       );
       this.isLoading=false;
       return forkJoin(translationRequests);
-    })
-  );
-}
-
+  }
 }
