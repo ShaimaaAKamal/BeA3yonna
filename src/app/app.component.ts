@@ -13,32 +13,27 @@ import { NavigationTypeService } from './Services/Navigation/navigation-types.se
 })
 export class AppComponent implements OnInit {
   title = 'beA3yonna';
-  constructor(private __LiveTranslationsService:LiveTranslationsService,
+  constructor (private __LiveTranslationsService:LiveTranslationsService,
     private __TranslateService: TranslateService,private __StyleService:StyleService,
     private __PatientReportInfoService:PatientReportInfoService,
-  private __NavigationTypeService:NavigationTypeService){
-      const navigationType = this.__NavigationTypeService.getNavigationType();
+    private __NavigationTypeService:NavigationTypeService){
+     this.handleNavigationType();
+    }
+ ngOnInit(): void {
+    this.__TranslateService.setDefaultLang('en');
+    const savedLang = this.__PatientReportInfoService.getPatientLanguage().lang ?? 'en';
+    this.setLanguageAndStyle(savedLang);
+    (savedLang != 'en')
+    ? this.__LiveTranslationsService.loadTranslations(savedLang)
+    : this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
+  }
+  handleNavigationType():void{
+     const navigationType = this.__NavigationTypeService.getNavigationType();
       (navigationType == 'refresh')
        ?sessionStorage.setItem('internalNavigation', 'true')
       :sessionStorage.removeItem('internalNavigation');
-    }
-
-
-  ngOnInit(): void {
-
-    this.__TranslateService.setDefaultLang('en');
-    let saveLang=this.__PatientReportInfoService.getPatientLanguage().lang;
-    // console.log('saveLang',saveLang);
-    saveLang=saveLang?saveLang:'en';
-    this.setLanguageAndStyle(saveLang);
-    if(saveLang != 'en')
-      this.__LiveTranslationsService.loadTranslations(saveLang);
-    else
-      this.__PatientReportInfoService.updatePatientDataByKey(['lang','language'],['en','english']);
-    // console.log('appLang',this.__PatientReportInfoService.getPatientLanguage().lang);
   }
-
-    setLanguageAndStyle(lang:string){
+setLanguageAndStyle(lang:string){
       this.__TranslateService.use(lang);
       const isRTL:boolean=this.__StyleService.isRtl(lang);
       this.__StyleService.switchStyleToRTL(isRTL,lang);
