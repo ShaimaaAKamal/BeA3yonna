@@ -13,7 +13,6 @@ export class DisplaySymptomsComponent {
 @Input() heading:string='';
 @Input() pageSize:number=12;
 @Input() currentPage:number=1;
-storedSymptoms:string[]=[];
 @Input() PreviousPageUrl:string='';
 @Input() NextPageUrl:string='';
 @Input() MoreCLasses:string='';
@@ -23,56 +22,53 @@ storedSymptoms:string[]=[];
 @Input() symptoms:string[]=[];
 @Input() selectedSymptoms:string[]=[];
 @Output() NextButtonDisabledChange = new EventEmitter<boolean>();
+
 searchKey:string='';
 AllSymptoms:string[]=[];
+storedSymptoms:string[]=[];
 
 @HostListener('window:resize', ['$event'])
 @HostListener('window:load', ['$event'])
  onWindowEvent() {
-    this.performAction();
+    this.updatePagination();
   }
 
-constructor(private __PatientReportInfoService:PatientReportInfoService,
-  private __SharedService:SharedService){}
+constructor(private __PatientReportInfoService:PatientReportInfoService,private __SharedService:SharedService){}
 
 ngOnInit(): void {
-
-  this.AllSymptoms=this.symptoms.sort();
+  this.AllSymptoms=[...this.symptoms].sort();
   this.storedSymptoms=this.__PatientReportInfoService.getPatientFieldValueByKey(this.Key);
-  this.NextButtonDisabled=( this.storedSymptoms.length !=0)?false:true;
-  this.selectedSymptoms=this.storedSymptoms.sort();
-  this.performAction();
+  this.selectedSymptoms=[...this.storedSymptoms].sort();
+  this.updateNextButtonDisabled(this.storedSymptoms);
+  this.updatePagination();
 }
 chooseSymptom(symptom: string) {
   const index = this.selectedSymptoms.indexOf(symptom);
-  if (index === -1)
-    this.selectedSymptoms.push(symptom);
-  else
-    this.selectedSymptoms.splice(index, 1);
+  (index === -1)?this.selectedSymptoms.push(symptom):this.selectedSymptoms.splice(index, 1);
   this.selectedSymptoms.sort();
-  this.NextButtonDisabled=(this.selectedSymptoms.length !=0 ) ?false:true;
+  this.updateNextButtonDisabled(this.selectedSymptoms);
   this.NextButtonDisabledChange.emit(this.NextButtonDisabled);
 }
 
-isSelected(symptom: string): boolean {
+private updateNextButtonDisabled(symptoms:string[]){
+  this.NextButtonDisabled=( symptoms.length !=0)?false:true;
+}
+ isSelected(symptom: string): boolean {
   return this.selectedSymptoms.includes(symptom);
 }
 
-search(){
-if(!this.searchKey) this.symptoms=this.AllSymptoms
-else this.symptoms=this.filterSymptoms();
-}
-
-filterSymptoms() {
-  const filteredSymptoms = this.AllSymptoms.filter((symptom:string) =>
-    symptom.toLowerCase().includes(this.searchKey.toLowerCase())
-  );
-  return filteredSymptoms;
-}
+search() {
+    this.symptoms = this.searchKey ? this.filterSymptoms() : [...this.AllSymptoms];
+  }
+  private filterSymptoms(): string[] {
+    return this.AllSymptoms.filter(symptom =>
+      symptom.toLowerCase().includes(this.searchKey.toLowerCase())
+    );
+  }
 handlePageChange(page: number) {
     this.currentPage = page;
   }
-performAction(){
+updatePagination(){
   const index=this.AllSymptoms.indexOf(this.selectedSymptoms[0]);
   this.pageSize=this.__SharedService.getPageSize(this.pageSize);
   this.currentPage=this.__SharedService.getCurrentPage(index,this.pageSize);
