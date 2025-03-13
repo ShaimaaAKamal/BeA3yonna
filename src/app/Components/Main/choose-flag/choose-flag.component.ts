@@ -60,40 +60,20 @@ export class ChooseFlagComponent implements OnInit {
       this.updatePagination()
     }
 
-  // private updatePagination() {
-  //   this.pageSize = this.__SharedService.getPageSize(this.pageSize);
-  //   this.AllFlags$.pipe(
-  //     map(Flags => Flags.findIndex(item =>item.name === this.storedCountry.name)),
-  //     map(index => this.__SharedService.getCurrentPage(index, this.pageSize)),
-  //     tap(currentPage => {
-  //       this.currentPage = currentPage;
-  //       this.__PatientReportInfoService.updatePatientDataByKey(['CountrycurrentPage'],[JSON.stringify(currentPage)]);})
-  //   ).subscribe();
-  // }
-
   handlePageChange(page: number) {
     this.currentPage = page;
   }
-  // searchForCountry(){
-  //     this.currentPage = 1;
-  //      this.Flags$=this.searchKey
-  //      ?this.fetchFlags(this.__FlagService.searchByCountryName(this.searchKey))
-  //      :this.AllFlags$;
-  // }
   searchForCountry() {
   this.currentPage = 1;
   this.FilteredFlags$ = this.searchKey
     ? this.fetchFlags(this.__FlagService.searchByCountryName(this.searchKey))
     : this.AllFlags$;
-
-  // Assign Flags$ to the filtered or all flags dynamically
   this.Flags$ = this.FilteredFlags$;
   }
 
   private updatePagination() {
   this.pageSize = this.__SharedService.getPageSize(this.pageSize);
 
-  // Ensure we use the correct observable: FilteredFlags$ (if searching) or AllFlags$
   const source$ = this.searchKey ? this.FilteredFlags$ : this.AllFlags$;
 
   source$.pipe(

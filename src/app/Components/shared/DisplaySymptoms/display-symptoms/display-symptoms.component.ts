@@ -26,6 +26,7 @@ export class DisplaySymptomsComponent {
 searchKey:string='';
 AllSymptoms:string[]=[];
 storedSymptoms:string[]=[];
+FilteredSymptoms: string[] = []; // Stores search results
 
 @HostListener('window:resize', ['$event'])
 @HostListener('window:load', ['$event'])
@@ -36,9 +37,11 @@ storedSymptoms:string[]=[];
 constructor(private __PatientReportInfoService:PatientReportInfoService,private __SharedService:SharedService){}
 
 ngOnInit(): void {
-  this.AllSymptoms=[...this.symptoms].sort();
-  this.storedSymptoms=this.__PatientReportInfoService.getPatientFieldValueByKey(this.Key);
-  this.selectedSymptoms=[...this.storedSymptoms].sort();
+  this.symptoms.sort();
+  this.AllSymptoms=[...this.symptoms];
+  this.FilteredSymptoms = this.AllSymptoms;
+  this.storedSymptoms=this.__PatientReportInfoService.getPatientFieldValueByKey(this.Key).sort();
+  this.selectedSymptoms=this.storedSymptoms;
   this.updateNextButtonDisabled(this.storedSymptoms);
   this.updatePagination();
 }
@@ -53,14 +56,19 @@ chooseSymptom(symptom: string) {
 private updateNextButtonDisabled(symptoms:string[]){
   this.NextButtonDisabled=( symptoms.length !=0)?false:true;
 }
+
  isSelected(symptom: string): boolean {
   return this.selectedSymptoms.includes(symptom);
 }
 
+
 search() {
-    this.symptoms = this.searchKey ? this.filterSymptoms() : [...this.AllSymptoms];
+    this.currentPage = 1;
+    this.symptoms = this.searchKey ? this.filterSymptoms() : this.AllSymptoms;
+    this.FilteredSymptoms=this.symptoms;
+    this.updatePagination();
   }
-  private filterSymptoms(): string[] {
+private filterSymptoms(): string[] {
     return this.AllSymptoms.filter(symptom =>
       symptom.toLowerCase().includes(this.searchKey.toLowerCase())
     );
@@ -68,9 +76,14 @@ search() {
 handlePageChange(page: number) {
     this.currentPage = page;
   }
-updatePagination(){
-  const index=this.AllSymptoms.indexOf(this.selectedSymptoms[0]);
-  this.pageSize=this.__SharedService.getPageSize(this.pageSize);
-  this.currentPage=this.__SharedService.getCurrentPage(index,this.pageSize);
-}
+
+
+updatePagination() {
+    const index = this.FilteredSymptoms.indexOf(this.selectedSymptoms[0]);
+    console.log(index);
+    this.pageSize = this.__SharedService.getPageSize(this.pageSize);
+    console.log('pageSize',this.pageSize);
+    this.currentPage = this.__SharedService.getCurrentPage(index, this.pageSize);
+    console.log(  this.currentPage )
+  }
 }
