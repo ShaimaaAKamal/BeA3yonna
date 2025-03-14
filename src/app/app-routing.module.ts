@@ -12,7 +12,6 @@ import { PainedBodyPartComponent } from './Components/Main/PainedBodyPart/pained
 import { PermanentDiseasesComponent } from './Components/Main/PermanentDiseases/permanent-diseases/permanent-diseases.component';
 import { PatientComplainDetailsComponent } from './Components/Main/PatientComplainDetails/patient-complain-details/patient-complain-details.component';
 import { AssesmentComponent } from './Components/Main/Assessment/assesment/assesment.component';
-import { FinalReportComponent } from './Components/Main/FinalReport/final-report/final-report.component';
 import { ReportComponent } from './Components/Main/Report/report/report.component';
 import { NotFoundComponent } from './Components/Errors/NotFound/not-found/not-found.component';
 import { NavigationGuard } from './Guards/Navigation/navigation.guard';
@@ -31,7 +30,6 @@ const routes: Routes = [
     {path:'Permanent Diseases',component:PermanentDiseasesComponent,canActivate:[NavigationGuard]},
     {path:'Patient_History',component:PatientComplainDetailsComponent,canActivate:[NavigationGuard]},
     {path:'Assesment',component:AssesmentComponent,canActivate:[NavigationGuard]},
-    // {path:'Report',component:FinalReportComponent,canActivate:[NavigationGuard]},
     {path:'Report',component:ReportComponent,canActivate:[NavigationGuard]},
     {path:'**',component:NotFoundComponent}
 ];
