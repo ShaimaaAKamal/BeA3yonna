@@ -6,11 +6,9 @@
   flex-direction: row;
   align-items: stretch;
   justify-content: center;
-    background-color: red;
-
 }
 
-.transpose thead, 
+.transpose thead,
 .transpose tbody {
   flex-grow: 1;
   display: flex;
@@ -23,35 +21,80 @@
   flex-direction: column;
 }
 
-.transpose th, 
+.transpose th,
 .transpose td {
   flex-grow: 1;
   border: 1px solid var(--main-darker-color);
   min-width: 100px;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
-  min-height: 50px; 
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
   height:100%;
 }
-#patientAdditionalInfo 
+.transpose th:first-of-type,.transpose td:first-of-type
+{
+  border-top: none;
+}
+.transpose td:last-of-type,.transpose th:last-of-type{
+  border-bottom: none;
+}
+#patientAdditionalInfo
 th{
     vertical-align: middle;
     font-weight: 500;
 }
 
 .painLevel{
-  /* flex-basis: 120px; */
   text-align: center;
 }
 th,td{
   vertical-align: middle;
 }
 
+.untranspose th ,.untranspose td{
+  border:2.5px solid var(--main-darker-color);
+}
+.untranspose td{
+  border-top:none;
+}
+.untranspose th{
+  border-bottom-width: 2px;
+}
 
  @media screen and (min-width:576px){
  .painLevel{
   flex-basis: 120px;
+}
+}
+
+ @media screen and (min-width:768px){
+#emaninationResult{
+  border:2.5px solid var(--main-darker-color);
+}
+#emaninationResult th ,#emaninationResult td{
+  border:2.5px solid var(--main-darker-color);
+}
+#emaninationResult td{
+  border-top:none;
+}
+#emaninationResult th{
+  border-bottom-width: 2px;
+}
+}
+
+ @media screen and (min-width:1200px){
+#patientVitals,#patientHistory{
+  border:2.5px solid var(--main-darker-color);
+}
+#patientVitals th,#patientHistory th ,#patientVitals td,#patientHistory td{
+  border:2.5px solid var(--main-darker-color);
+}
+#patientVitals td,#patientHistory td{
+  border-top:none;
+}
+#patientVitals th,#patientHistory th{
+  border-bottom-width: 2px;
 }
 }
 

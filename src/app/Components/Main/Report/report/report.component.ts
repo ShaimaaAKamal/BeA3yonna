@@ -12,7 +12,7 @@ import { PatientReportInfoService } from '../../../../Services/Shared/PatientRep
 @Component({
   selector: 'app-report',
   standalone: false,
-  
+
   templateUrl: './report.component.html',
   styleUrl: './report.component.css'
 })
@@ -31,70 +31,82 @@ export class ReportComponent {
   painLevel!:PainScale;
   fullAssesmentData:any;
   vitalUnits!:PatientVitals;
+
   constructor(private __SharedService:SharedService,private __PatientReportInfoService:PatientReportInfoService){}
-  
+
     @HostListener('window:resize', ['$event'])
      onResize() {
-      this.isSmallScreen = window.innerWidth < 1200;
-      this.isLargeScreen =  window.innerWidth < 578;
-      this.isMediumScreen = window.innerWidth < 768;
- 
+      this.isMediumScreen = window.innerWidth < 1200 && window.innerWidth > 768 ;
+      this.isSmallScreen = window.innerWidth < 768;
     }
-  
+
   ngOnInit(): void {
     this.vitalUnits=this.__SharedService.vitalUnits;
-    this.onResize(); 
-    this.patientReportData=this.__PatientReportInfoService.getReportData();
-    this.patientVitals=this.patientReportData['patientVitals'];
-    this.painLevel=this.patientReportData['painScale'];
-    this.fullPatientHistory=this.getPatientHistory();
-    this.fullPatientHistoryBeforeRename=this.fullPatientHistory;
-    this.symptoms=this.patientReportData['Symptoms'];
-    this.permanentDiseases=this.patientReportData['PermanentDiseases'];
-    this.fullAssesmentData=this.getAssessmentInfo();
-    const keyMappings: { [key: string]: string } = {
-      complainTime: "Pain Duration",
-      haveAllergy: "Has Allergy",
-      haveInfectiousDiseases: "Contagious Condition",
-      havePeramentDiseases: "Permanent Condition",
-      havePeriod: "In Period",
-      lastMealTime: "Last Meal Time",
-      pregnant: "Pregnancy Status",
-      additionalInfo:"More Info",
-      presubscribedMedication:'Medication'
+    this.onResize();
+    this.loadPatientData();
+    this.renamePatientHistoryKeys();
+    this.__SharedService.displayStoryedPainedParts(
+      Array.from(document.getElementsByTagName('path')),
+      this.patientReportData);
+  }
+
+  private loadPatientData(): void {
+    this.patientReportData = this.__PatientReportInfoService.getReportData();
+    this.patientVitals = this.patientReportData.patientVitals;
+    this.painLevel = this.patientReportData.painScale;
+    this.symptoms = this.patientReportData.Symptoms;
+    this.permanentDiseases = this.patientReportData.PermanentDiseases;
+    this.fullPatientHistory = this.getPatientHistory();
+    this.fullPatientHistoryBeforeRename = { ...this.fullPatientHistory };
+    this.fullAssesmentData = this.getAssessmentInfo();
+  }
+
+
+  private renamePatientHistoryKeys(): void {
+    const keyMappings: Record<string, string> = {
+      complainTime: 'Pain Duration',
+      haveAllergy: 'Has Allergy',
+      haveInfectiousDiseases: 'Contagious Condition',
+      havePeramentDiseases: 'Permanent Condition',
+      havePeriod: 'In Period',
+      lastMealTime: 'Last Meal Time',
+      pregnant: 'Pregnancy Status',
+      additionalInfo: 'More Info',
+      presubscribedMedication: 'Medication',
     };
-    this.fullPatientHistory = this.__SharedService.renameKeys(this.fullPatientHistory, keyMappings,['More Info','Medication']);
-    this.__SharedService.displayStoryedPainedParts(Array.from(document.getElementsByTagName('path')),this.patientReportData);
+    this.fullPatientHistory = this.__SharedService.renameKeys(
+      this.fullPatientHistory,
+      keyMappings,
+      ['More Info', 'Medication']
+    );
   }
-  
-  getPatientHistory(){
-    const patientHistory:PatientHistory=this.patientReportData['patientHistory'];
-    const patientInitialVitals:PatientInitialVitals=this.patientReportData['patientInitialVitals'];
-    const patientAdditionalInfo:PatientAdditionalInfo=this.patientReportData['additionalPatientInfo'];
-    const fullPatientHistory:any={...patientAdditionalInfo,...patientInitialVitals,...patientHistory};
-    return fullPatientHistory;
+
+  private getPatientHistory(){
+    const { patientHistory, patientInitialVitals, additionalPatientInfo } =
+      this.patientReportData;
+    return { ...additionalPatientInfo, ...patientInitialVitals, ...patientHistory };
   }
-  
+
   getAssessmentInfo(){
             const AssessmentInfo:AssessmentInfo=this.__PatientReportInfoService.getPatientFieldValueByKey('AssessmentInfo');
 
       return {...AssessmentInfo,"Patient Pain Level":this.painLevel.name}
   }
-  
-  
+
+
   getObjectKeys(obj:object): string[] {
       return Object.keys(obj);
     }
-  
+
   getTodayDate(){
-    const lang=this.__PatientReportInfoService.getPatientLanguage().lang;
-  return new Intl.DateTimeFormat(lang, { 
-    day: '2-digit', 
-    month: '2-digit', 
+  const lang=this.__PatientReportInfoService.getPatientLanguage().lang;
+  return new Intl.DateTimeFormat(lang, {
+    day: '2-digit',
+    month: '2-digit',
     year: 'numeric',
     numberingSystem: lang === 'ar' ? 'arab' : 'latn' // Force Arabic or Western numerals
   }).format(new Date());
     }
-    
+
 
 }

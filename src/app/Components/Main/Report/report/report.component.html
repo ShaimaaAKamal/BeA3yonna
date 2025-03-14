@@ -10,10 +10,10 @@
                         <div [ngStyle]="{'background-color':painLevel.color ,'color':painLevel.textColor}" class="px-3  py-sm-4 py-2 rounded-3 painLevel">{{painLevel.name  | translate | titlecase}}</div>
                     </div>
                      <div class="d-md-flex justify-content-between d-xl-block px-3 py-2">
-                        <div class="flex-md-grow-1 ps-md-1 ps-xl-0"> 
+                        <div class="flex-md-grow-1  ps-xl-0">
                             <h5>{{'Examination Result' | translate}}</h5>
                             <div class="table-responsive">
-                                <table id="emaninationResult" class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isMediumScreen">
+                                <table id="emaninationResult" class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen">
                                 <thead>
                                         <tr>
                                         <th class="p-2"  >{{"Date" | translate}}</th>
@@ -34,10 +34,10 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12">
-                                         <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='patientVitals'>
+                                         <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" >
                                                 <h5>{{"Patient's vital signs" | translate}}</h5>
                                                 <div class="table-responsive" >
-                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen">
+                                                    <table  id='patientVitals' class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen || isMediumScreen">
                                                     <thead>
                                                             <tr>
                                                             <th class="p-2"   *ngFor="let key of getObjectKeys(patientVitals) ;">{{key.replace("_", " ") | translate | titlecase}}</th>
@@ -51,10 +51,10 @@
                                                         </table>
                                                 </div>
                                           </div>
-                                           <div class="flex-md-grow-1 ps-md-1 ps-xl-0 py-2 py-md-0 py-xl-2"  id="patientHistory"> 
+                                           <div class="flex-md-grow-1 ps-md-1 ps-xl-0 py-2 py-md-0 py-xl-2"  >
                             <h5>{{'Patient History' | translate}}</h5>
                             <div class="table-responsive">
-                                <table  class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen">
+                                <table id="patientHistory" class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isSmallScreen || isMediumScreen">
                                 <thead>
                                         <tr >
                                         <th class="p-2"   *ngFor="let key of getObjectKeys(fullPatientHistory);">{{key.replace("_", " ") | translate | titlecase}}</th>
@@ -81,8 +81,8 @@
                                         <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='symptoms'>
                                                 <h5>{{'Symptoms' | translate}}</h5>
                                                 <div class="table-responsive" >
-                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
-                                                    <thead>
+                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered untranspose">
+                                                      <thead>
                                                             <tr>
                                                             <th class="p-2" >{{'Symptoms' | translate | titlecase}}</th>
                                                             </tr>
@@ -93,7 +93,7 @@
                                                                     <span *ngFor="let symptom of symptoms ; let last=last;">
                                                                         {{ symptom ? (symptom | translate) : '----' }}{{ last ? '' : ','}}
                                                                     </span>
-                                                             </td> 
+                                                             </td>
                                                             </tr>
                                                         </tbody>
                                                         </table>
@@ -102,7 +102,7 @@
                                          <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='permanentDiseases'>
                                                 <h5>{{'Permanent Diseases' | translate}}</h5>
                                                 <div class="table-responsive" >
-                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
+                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered untranspose ">
                                                     <thead>
                                                             <tr>
                                                             <th class="p-2" >{{'Permanent Diseases' | translate | titlecase}}</th>
@@ -111,7 +111,7 @@
                                                         <tbody>
                                                             <tr>
                                                              <td class="p-2" >
-                                                                    
+
                                                                     <div *ngIf="patientReportData.PermanentDiseases.length > 0 ; else noDiseases">
                                                                         <span *ngFor="let symptom of permanentDiseases ; let last=last;">
                                                                         <!-- {{ symptom ? (symptom | translate) : '----' }}{{ last ? '' : ',' }} -->
@@ -124,8 +124,8 @@
                                                                        </span>
 
                                                                     </ng-template>
-                                                                   
-                                                             </td> 
+
+                                                             </td>
                                                             </tr>
                                                         </tbody>
                                                         </table>
@@ -134,8 +134,8 @@
                                           <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='Prescription'>
                                                 <h5>{{'Prescription' | translate}}</h5>
                                                 <div class="table-responsive" >
-                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
-                                                    <thead>
+                                                  <table   class="text-center table-striped  table-hover table table-sm table-bordered untranspose">
+                                                      <thead>
                                                             <tr>
                                                             <th class="p-2" >{{'Prescription' | translate | titlecase}}</th>
                                                             </tr>
@@ -146,17 +146,17 @@
                                                                     <span>
                                                                         {{fullPatientHistoryBeforeRename['presubscribedMedication']? fullPatientHistoryBeforeRename['presubscribedMedication'] : '-----'}}
                                                                     </span>
-                                                             </td> 
+                                                             </td>
                                                             </tr>
                                                         </tbody>
                                                         </table>
                                                 </div>
                                         </div>
-                                          <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2" id='moreInfo'>
+                                        <div class="flex-md-grow-1 pe-md-1 pe-xl-0 pb-2 pb-md-0 pb-xl-2 untranspose" id='moreInfo'>
                                                 <h5>{{'More Info' | translate}}</h5>
                                                 <div class="table-responsive" >
-                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered" [class.transpose]="isLargeScreen">
-                                                    <thead>
+                                                    <table   class="text-center table-striped  table-hover table table-sm table-bordered">
+                                                      <thead>
                                                             <tr>
                                                             <th class="p-2" >{{'More Info' | translate | titlecase}}</th>
                                                             </tr>
@@ -167,7 +167,7 @@
                                                                     <span>
                                                                         {{fullPatientHistoryBeforeRename['additionalInfo']? fullPatientHistoryBeforeRename['additionalInfo'] : '-----'}}
                                                                     </span>
-                                                             </td> 
+                                                             </td>
                                                             </tr>
                                                         </tbody>
                                                         </table>
@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="bg-svg-body rounded-3">
-                                         <svg  
+                                         <svg
                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
                      version="1.1" style="pointer-events: all;"
                       x="0px" y="0px" width="95%" height="550px" viewBox="-117.262 -46.714 800 600"
@@ -310,18 +310,18 @@
                                          </svg>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    <app-navigation-buttons 
+                    <app-navigation-buttons
                             [PreviousPageUrl]="'/Assesment'" [NextPageUrl]="'/'"
-                            [NextButtonDisabled]="false"   [MoreCLasses]="' pt-4'" 
+                            [NextButtonDisabled]="false"   [MoreCLasses]="' pt-4'"
                             [Key]="'patientReportAssessment'" [value]="patientReportData" [actionName]="'Done'">
                     </app-navigation-buttons>
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
   </section>
 </main>
